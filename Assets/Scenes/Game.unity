@@ -239,10 +239,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab1: {fileID: 4329303402749056334, guid: e7b4dae048340b24286e5c5aa53c1201,
     type: 3}
-  spawnChangeMeteor1: 0.9
-  spawnChangeMeteor2: 0.1
   meteorPrefab2: {fileID: 4329303402749056334, guid: ad7be2963697ff84081411b54936828f,
     type: 3}
+  spawnChangeMeteor1: 0.9
+  spawnChangeMeteor2: 0.1
   spawnInterval: 1
   offset: 15
   timeTillSpawn: 0
