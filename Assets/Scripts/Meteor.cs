@@ -7,6 +7,7 @@ public class Meteor : MonoBehaviour {
     [SerializeField]
     private bool isGrounded = false;
     public bool containsResource = false;
+    public ParticleSystem vfxImpact;
 
     private void Start() {
         worldBody = GetComponent<WorldBody>();
@@ -18,6 +19,11 @@ public class Meteor : MonoBehaviour {
             isGrounded = true;
             //TODO: play meteor impact sound
             //TODO: show impact particles
+            if (vfxImpact != null) {
+                vfxImpact.transform.parent = null;
+                vfxImpact.Play();
+                vfxImpact.GetComponent<ParticleDestroyer>().DestroyWhenDone();
+            }
 
             if (!containsResource) {
                 Destroy(this.gameObject);
@@ -25,4 +31,6 @@ public class Meteor : MonoBehaviour {
             }
         }
     }
+
+  
 }
