@@ -21,9 +21,10 @@ public class MeteorSpawner : MonoBehaviour {
     private void Start() {
         totalSpawnChange = spawnChangeMeteor1 + spawnChangeMeteor2;
     }
-
-    // Update is called once per frame
+	
     void Update() {
+		if (!GameManager.Instance.IsPlaying) { return; }
+
         timeTillSpawn -= Time.deltaTime;
 
         if (timeTillSpawn <= 0) {

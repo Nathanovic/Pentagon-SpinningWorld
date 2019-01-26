@@ -56,7 +56,7 @@ public class PlayerCollision : MonoBehaviour {
 		Gizmos.color = Color.grey;
 		Gizmos.DrawWireSphere(deadCheckOrigin.position, deadCheckRadius);
 
-		if (resourceGatherer.holdResource) {
+		if (Application.IsPlaying(transform) && resourceGatherer.holdResource) {
 			Gizmos.color = Color.black;
 			CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
 			Gizmos.DrawWireSphere(myResourceCollider.transform.position, myResourceCollider.radius * myResourceCollider.transform.localScale.x);

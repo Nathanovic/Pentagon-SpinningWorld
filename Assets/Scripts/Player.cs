@@ -21,6 +21,16 @@ public class Player : MonoBehaviour {
 		collisionScript.onFallHit += OnFallHit;
 	}
 
+	private void Start() {
+		GameManager.Instance.InitializePlayer(this);
+	}
+
+	public void Revive() {
+		isDead = false;
+		carVisual.SetActive(true);
+		currentSpeed = 0f;
+	}
+
 	private void Update() {
 		if (isDead) { return; }
 
@@ -66,12 +76,16 @@ public class Player : MonoBehaviour {
 	}
 
 	private void OnFallHit(Transform meteor) {
+		if (isDead) { return; }
+
 		isDead = true;
 		carVisual.SetActive(false);
 		Screenshake.instance.StartShakeHorizontal(2, 0.5f, 0.05f);
 		foreach (ParticleSystem deadEffect in deadVFX) {
 			deadEffect.Play();
 		}
+
+		GameManager.Instance.NotifyPlayerDeath();
 	}
 
 }
