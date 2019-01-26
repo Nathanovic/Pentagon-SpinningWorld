@@ -25,7 +25,9 @@ public class Meteor : MonoBehaviour {
     }
 
     private void Update() {
-        if (!isGrounded && World.Instance.GetGrounded(worldBody)) {
+		if (isGrounded) { return; }
+
+        if (World.Instance.GetGrounded(worldBody)) {
             isGrounded = true;
             //TODO: play meteor impact sound
             //TODO: show impact particles
@@ -33,8 +35,8 @@ public class Meteor : MonoBehaviour {
 
             if (!containsResource) {
                 Destroy(this.gameObject);
-                //TODO: show destroy meteor particles
-            }
+				//TODO: show destroy meteor particles
+			}
         }
         
         if(!isGrounded)
