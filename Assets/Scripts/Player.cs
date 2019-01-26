@@ -78,7 +78,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	private void OnFallHit(Transform meteor) {
+	private void OnFallHit(Meteor meteor) {
 		if (isDead) { return; }
 
 		isDead = true;

@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
 public class ResourceGatherer : MonoBehaviour {
-    public bool hasResource = false;    
-    public Transform holdResource { private set; get; }
+    public Resource currentResource { private set; get; }
+    public bool hasResource {
+        get { return currentResource != null; }
+    }
     public CircleCollider2D holdResourceCollider { private set; get; }
     private Player player;
     
@@ -23,36 +25,30 @@ public class ResourceGatherer : MonoBehaviour {
         }
     }
 
-    void ResourceHit(Transform resourceTransform) {
+    void ResourceHit(Meteor meteor) {
         if (hasResource) { return; }
 
-        Resource resource = resourceTransform.GetComponent<Resource>();
+        Resource resource = meteor.GetComponent<Resource>();
         if (resource.isHeld) { return; }
         
-        resource.PickUp();
-        resourceTransform.parent = this.transform;
-        resourceTransform.GetComponent<WorldBody>().enabled = false;
-        holdResource = resourceTransform;
-        holdResourceCollider = holdResource.GetComponent<CircleCollider2D>();
-        hasResource = true;
+        currentResource = resource;
+        currentResource.PickUp(transform);
+        holdResourceCollider = currentResource.GetComponent<CircleCollider2D>();
     }
 
     private void DropResource() {
-        holdResource.SetParent(null);
-        holdResource.GetComponent<WorldBody>().enabled = true;
-        holdResource.GetComponent<Resource>().Drop();
-        holdResource = null;
-        hasResource = false;
+        currentResource.Drop();
+        currentResource = null;
     }
 
     void OnRocketChargePlateHit(Transform transform) {
         if(!hasResource) return;
         
-        Destroy(holdResource.gameObject);
-        holdResource = null;
+        Destroy(currentResource.gameObject);
+        currentResource = null;
     }
     
-    private void OnFallHit(Transform meteor) {
+    private void OnFallHit(Meteor meteor) {
         if (hasResource) {
             DropResource();
         }
