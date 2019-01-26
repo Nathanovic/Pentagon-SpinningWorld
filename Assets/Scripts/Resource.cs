@@ -7,4 +7,8 @@ public class Resource : MonoBehaviour {
     public void PickUp() {
         isHeld = true;
     }
+
+    public void Drop() {
+        isHeld = false;
+    }
 }

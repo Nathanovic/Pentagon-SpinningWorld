@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Meteor : MonoBehaviour {
     private WorldBody worldBody;
-    [SerializeField]
-    private bool isGrounded = false;
     public bool containsResource;
     public ParticleSystem vfxImpact;
     public GameObject visuals;
@@ -14,10 +12,14 @@ public class Meteor : MonoBehaviour {
     public event ImpactFunction onImpact;
 
     private Vector3 rotation;
+    public float rotationMultiplier = 1.0f;
+
+    public bool canDamage;// { private set; get; }
         
     private void Start() {
+        canDamage = true;
         worldBody = GetComponent<WorldBody>();
-        isGrounded = World.Instance.GetGrounded(worldBody);
+        worldBody.onTouchGround += OnWorldImpact;
         onImpact += ShowImpactParticles;
         containsResource = GetComponent<Resource>() != null;
         
@@ -25,25 +27,26 @@ public class Meteor : MonoBehaviour {
         rotation = new Vector3(randomRotation.x, randomRotation.y, randomRotation.z);
     }
 
-    private void Update() {
-		if (isGrounded) { return; }
-
-        if (worldBody && World.Instance.GetGrounded(worldBody)) {
-            isGrounded = true;
-            //TODO: play meteor impact sound
-            //TODO: show impact particles
-            onImpact?.Invoke();
-
-            if (!containsResource) {
-                Destroy(this.gameObject);
-				//TODO: show destroy meteor particles
-			}
-        }
-        
-        if(!isGrounded)
-            visuals.transform.Rotate(rotation);
+    private void OnDisable() {
+        worldBody.onTouchGround -= OnWorldImpact;
     }
 
+    private void Update() {
+        if(!worldBody.isGrounded)
+            visuals.transform.Rotate(rotation * rotationMultiplier);
+    }
+
+    private void OnWorldImpact() {
+        canDamage = false;
+        //TODO: play meteor impact sound
+        //TODO: show impact particles
+        onImpact?.Invoke();
+
+        if (!containsResource) {
+            Destroy(this.gameObject);
+            //TODO: show destroy meteor particles
+        }
+    }
 
     private void ShowImpactParticles() {
         if (vfxImpact != null) {
@@ -52,6 +55,4 @@ public class Meteor : MonoBehaviour {
             vfxImpact.GetComponent<ParticleDestroyer>().DestroyWhenDone();
         }
     }
-
-  
 }

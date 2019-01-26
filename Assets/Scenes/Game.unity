@@ -219,15 +219,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3681697756142808402, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 652419782869966204, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 3681697756142808402, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+    - target: {fileID: 7141378799432911054, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 2
+      propertyPath: noseCollisionOffset
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1679609697869018888, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
@@ -379,12 +384,14 @@ MonoBehaviour:
   meteorPrefab2: {fileID: 4329303402749056334, guid: ad7be2963697ff84081411b54936828f,
     type: 3}
   spawnChangeMeteor1: 0.9
-  spawnChangeMeteor2: 1
-  spawnInterval: 1
+  spawnChangeMeteor2: 0.1
+  spawnInterval: 2
   offset: 25
   timeTillSpawn: 0
   maxMeteorFallingSpeed: 8
   minMeteorFallingSpeed: 3
+  minMeteorRotationMultiplier: 1
+  maxMeteorRotationMultiplier: 4
   minMeteorScale: 0.75
   maxMeteorScale: 1.5
 --- !u!1 &254548525
@@ -1204,7 +1211,7 @@ PrefabInstance:
     - target: {fileID: 646482690251351482, guid: d8ceb212fdd658f49bf40c3852226017,
         type: 3}
       propertyPath: m_Name
-      value: 'GameManager '
+      value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 646482690251351460, guid: d8ceb212fdd658f49bf40c3852226017,
         type: 3}
@@ -1330,25 +1337,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: 7913547616771107981, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+    - target: {fileID: 7141378799432911054, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
-      propertyPath: maxSpeed
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7913547616771107981, guid: 70d6a3f5d74fe4d40bba923900e243c2,
-        type: 3}
-      propertyPath: moveForce
-      value: 220
-      objectReference: {fileID: 0}
-    - target: {fileID: 7913547616771107980, guid: 70d6a3f5d74fe4d40bba923900e243c2,
-        type: 3}
-      propertyPath: maxSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7913547616771107980, guid: 70d6a3f5d74fe4d40bba923900e243c2,
-        type: 3}
-      propertyPath: acceleration
-      value: 40
+      propertyPath: noseCollisionOffset
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}

@@ -12,7 +12,10 @@ public class Player : MonoBehaviour {
 	private bool isFacingLeft = true;
 	private bool isDead;
 
-	private PlayerCollision collisionScript;
+	[SerializeField]
+	private bool isCollidingInFront = false;
+
+	public PlayerCollision collisionScript { get; private set; }
 	[SerializeField] private GameObject carVisual;
 	[SerializeField] private ParticleSystem[] deadVFX;
 
@@ -53,7 +56,7 @@ public class Player : MonoBehaviour {
 			currentSpeed = absSpeed;
 		}
 		
-		if (collisionScript.isCollidingFront) {
+		if (isCollidingInFront) {
 			currentSpeed = 0f;
 		} else {
 			if (input != 0f) {

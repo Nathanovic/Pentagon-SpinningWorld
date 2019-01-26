@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  maxSpeed: 40
+  maxSpeed: 60
   currentSpeed: 0
   moveForce: 220
   slowDownForce: 75
@@ -124,7 +124,7 @@ MonoBehaviour:
   noseTransform: {fileID: 652419782869966204}
   deadCheckOrigin: {fileID: 8092534040808351838}
   deadCheckRadius: 0.65
-  collideFront: 0
+  isCollidingFront: 0
 --- !u!114 &1340473793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasResource: 0
-  noseTransform: {fileID: 652419782869966204}
 --- !u!1 &8913174389688338954
 GameObject:
   m_ObjectHideFlags: 0

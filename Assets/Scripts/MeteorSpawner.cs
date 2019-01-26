@@ -15,6 +15,8 @@ public class MeteorSpawner : MonoBehaviour {
     
     public float maxMeteorFallingSpeed = 50;
     public float minMeteorFallingSpeed = 2;
+    public float minMeteorRotationMultiplier = 1.0f;
+    public float maxMeteorRotationMultiplier = 4.0f;
     public float minMeteorScale = 0.5f;
     public float maxMeteorScale = 2;
 
@@ -49,8 +51,10 @@ public class MeteorSpawner : MonoBehaviour {
         float size = Random.Range(minMeteorScale, maxMeteorScale);
         meteor.transform.localScale *= size;
         
-        meteor.GetComponent<Meteor>().onImpact += () => {
+        Meteor meteorComponent = meteor.GetComponent<Meteor>();
+        meteorComponent.onImpact += () => {
             Screenshake.instance.StartShakeVertical(2, 0.02f * size * (speed2 + 5), 0.003f * size * (speed2 + 5));
         };
+        meteorComponent.rotationMultiplier = Random.Range(minMeteorRotationMultiplier, maxMeteorRotationMultiplier);
     }
 }

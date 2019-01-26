@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WorldBody : MonoBehaviour {
 	
@@ -14,9 +15,17 @@ public class WorldBody : MonoBehaviour {
 	public Vector3 velocity;
 	public bool keepStanding;
 	public float bodyWorldOffset;
+	public bool isGrounded;// { private set; get; }
 
+	public Action onTouchGround;
+	
 	public void LateUpdate() {
-		bool isGrounded = World.Instance.GetGrounded(this);
+		bool newGrounded = World.Instance.GetGrounded(this);
+		if (newGrounded != isGrounded && newGrounded) {
+			onTouchGround?.Invoke();
+		}
+		isGrounded = newGrounded;
+
 		if (isGrounded) {
 			GravityGrowTime = 0f;
 			velocity = Vector3.zero;
