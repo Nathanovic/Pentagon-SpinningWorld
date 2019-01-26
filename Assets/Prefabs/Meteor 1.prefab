@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6475220861741824478}
   - component: {fileID: 7369126461944842816}
   m_Layer: 8
-  m_Name: Meteor
+  m_Name: Meteor 1
   m_TagString: Meteor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f4c89d48f6c7de46b74e273e00be94f, type: 2}
+  - {fileID: 2100000, guid: e6ae5a919eda53149aaf3c549f13a2c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,5 +137,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288c06a1b47650047a24c12f9ffd01f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
-  containsResource: 0
+  containsResource: 1
