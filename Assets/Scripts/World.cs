@@ -9,6 +9,8 @@ public class World : MonoBehaviour {
 	public float gravityGrowDuration = 1f;// How long it takes to reach max gravity
 	public AnimationCurve gravityGrowCurve;
 
+	public float radius = 15;
+
 	private void Awake() {
 		Instance = this;
 	}
@@ -17,18 +19,31 @@ public class World : MonoBehaviour {
 		transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime);
     }
 
-	public Vector3 GetGravity(Vector3 position, float growDuration) {
-		float gravityGrowFactor = gravityGrowCurve.Evaluate(growDuration);
+	public Vector3 GetGravity(WorldBody worldBody) {
+		float gravityGrowFactor = gravityGrowCurve.Evaluate(worldBody.GravityGrowTime);
 		if (gravityGrowFactor > 1f) {
 			gravityGrowFactor = 1f;
 		}
 
-		Vector3 gravity = (transform.position - position).normalized * gravityForce * Time.deltaTime * gravityGrowFactor;
+		Vector3 gravityDirection = transform.position - worldBody.Position;
+		float gravityMagnitude = gravityDirection.magnitude;
+
+		Vector3 gravity = (gravityDirection / gravityMagnitude) * gravityForce * Time.deltaTime * gravityGrowFactor;
 		return gravity;
+	}
+
+	public bool GetGrounded(WorldBody worldBody) {
+		float distance = Vector3.Distance(transform.position, worldBody.Position);
+		return distance < (radius + worldBody.bodyWorldOffset);
 	}
 
 	public void RotateAroundMe(Transform target) {
 		target.RotateAround(transform.position, Vector3.forward, rotateSpeed * Time.deltaTime);
+	}
+
+	private void OnDrawGizmos() {
+		Gizmos.color = Color.green;
+		Gizmos.DrawWireSphere(transform.position, radius);
 	}
 
 }
