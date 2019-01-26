@@ -15,7 +15,7 @@ public class WorldBody : MonoBehaviour {
 	public bool keepStanding;
 	public float bodyWorldOffset;
 
-	public void Update() {
+	public void LateUpdate() {
 		bool isGrounded = World.Instance.GetGrounded(this);
 		if (isGrounded) {
 			GravityGrowTime = 0f;
