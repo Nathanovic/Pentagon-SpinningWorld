@@ -5,27 +5,32 @@ public class Player : MonoBehaviour {
 	public int playerNumber = 1;
 	public float maxSpeed = 3f;
 
-	public float reachMaxSpeedDuration = 0.8f;
-	public float moveInputDuration;
-	public AnimationCurve acceleration;
-	public AnimationCurve deceleration;
+	public float currentSpeed;
+	public float moveForce = 5f;
+	public float slowDownForce = 10f;
 
 	private void Update() {
 		float input = Input.GetAxis("Horizontal_" + playerNumber.ToString());
-		float moveSpeed = 0f;
-		if (input != 0f) {
-			moveInputDuration += Time.deltaTime;
-			moveInputDuration = Mathf.Min(moveInputDuration, reachMaxSpeedDuration);
-			float curveFactor = 1f / reachMaxSpeedDuration * moveInputDuration;
-			float curveValue = acceleration.Evaluate(curveFactor);
-			moveSpeed = maxSpeed * curveValue;
-		} else if(input == 0f) {
-			moveInputDuration = 0f;
+
+		// Slow car down
+		float absSpeed = Mathf.Abs(currentSpeed);
+		absSpeed -= slowDownForce * Time.deltaTime;
+		if (absSpeed < 0) {
+			absSpeed = 0f;
+		}
+		if (currentSpeed < 0) {
+			currentSpeed = -absSpeed;
+		} else {
+			currentSpeed = absSpeed;
 		}
 
-		moveSpeed *= input * Time.deltaTime;
-		transform.RotateAround(World.Position, Vector3.forward, moveSpeed);
+		// Accelerate
+		if (input != 0f) {
+			currentSpeed += moveForce * -input * Time.deltaTime;
+			currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
+		} 
+		
+		transform.RotateAround(World.Position, Vector3.forward, currentSpeed * Time.deltaTime);
 	}
-
 
 }

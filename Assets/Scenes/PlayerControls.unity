@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944eefb619336fb4b890bd61842551f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 5
+  rotateSpeed: 15
   gravityForce: 9.81
   gravityGrowDuration: 1
   gravityGrowCurve:
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 4329303402749056334, guid: e7b4dae048340b24286e5c5aa53c1201,
     type: 3}
-  spawnInterval: 1
+  spawnInterval: 110
   offset: 15
   timeTillSpawn: 0
   maxMeteorFallingSpeed: 50
@@ -821,7 +821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1935834458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,10 +853,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  maxSpeed: 40
+  maxSpeed: 3
   currentSpeed: 0
-  moveForce: 220
-  slowDownForce: 75
+  moveForce: 50
+  slowDownForce: 10
 --- !u!4 &1935834460
 Transform:
   m_ObjectHideFlags: 0
