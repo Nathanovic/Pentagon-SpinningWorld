@@ -184,6 +184,11 @@ PrefabInstance:
       propertyPath: playerNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7913547616771107981, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: carVisual
+      value: 
+      objectReference: {fileID: 745468392}
     - target: {fileID: 7913547616771107980, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
       propertyPath: bodyWorldOffset
@@ -203,6 +208,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679609697869018888, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092534040808351838, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}
@@ -581,6 +596,12 @@ Transform:
   m_Father: {fileID: 1829910170}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &745468392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100024, guid: 4aacd977383d1aa45b9ce2afd992435f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625062624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &752440567
 PrefabInstance:
   m_ObjectHideFlags: 0

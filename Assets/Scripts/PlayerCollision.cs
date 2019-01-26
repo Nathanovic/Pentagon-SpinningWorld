@@ -8,8 +8,8 @@ public class PlayerCollision : MonoBehaviour {
     public event CollisionFunction onResourceHit;
 	public event CollisionFunction onFallHit;
 
-	public Vector2 boxSize = new Vector2(2, 1);
-	public float boxYOffset = 1f;
+	public Transform deadCheckOrigin; 
+	public float deadCheckRadius = 1f;
 
     public bool collideFront;
 
@@ -18,21 +18,37 @@ public class PlayerCollision : MonoBehaviour {
         Debug.DrawRay(noseTransform.transform.position, noseDir.normalized * noseCollisionOffset, Color.red);
         RaycastHit2D hitInfo = Physics2D.Raycast(noseTransform.transform.position, noseDir, noseCollisionOffset);
         collideFront = false;
-        if (hitInfo.collider != null && hitInfo.collider.CompareTag("Meteor")) {
-            Meteor meteor = hitInfo.collider.GetComponent<Meteor>();
-            if (meteor.containsResource) {
-                collideFront = true;
-                onResourceHit?.Invoke(hitInfo.collider.transform);
-            }
+		Transform resource = HitInfoMeteor(hitInfo, true);
+		if(resource != null) { 
+            collideFront = true;
+            onResourceHit?.Invoke(hitInfo.collider.transform);
         }
-
-		Vector2 boxCastPos = transform.position + transform.up * boxYOffset;
-		RaycastHit2D boxCast = Physics2D.BoxCast(boxCastPos, boxSize, 0f, transform.forward);
+		
+		RaycastHit2D boxCast = Physics2D.CircleCast(deadCheckOrigin.position, deadCheckRadius, Vector2.zero);
+		Transform meteor = HitInfoMeteor(boxCast, false);
+		if (meteor != null) {
+			onFallHit?.Invoke(meteor);
+		}
     }
 
 	private void OnDrawGizmos() {
 		Gizmos.color = Color.grey;
-		Vector3 cubeSize = boxSize;
-		Gizmos.DrawWireCube(transform.position - cubeSize * 0.5f, cubeSize);
+		Gizmos.DrawWireSphere(deadCheckOrigin.position, deadCheckRadius);
+	}
+
+	private Transform HitInfoMeteor(RaycastHit2D hitInfo, bool resourceOnly) {
+		if (hitInfo.collider != null && hitInfo.collider.CompareTag("Meteor")) {
+			if (!resourceOnly) {
+				return hitInfo.collider.transform;
+			}
+
+			Meteor meteor = hitInfo.collider.GetComponent<Meteor>();
+
+			if (meteor.containsResource && resourceOnly) {
+				return meteor.transform;
+			}
+		}
+
+		return null;
 	}
 }
