@@ -11,6 +11,10 @@ public class World : MonoBehaviour {
 
 	public float radius = 15;
 
+	public static Vector3 Position {
+		get { return Instance.transform.position; }
+	}
+
 	private void Awake() {
 		Instance = this;
 	}

@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 6112919277030185875}
   - component: {fileID: 8163495193659152506}
   - component: {fileID: 6475220861741824478}
+  - component: {fileID: 7369126461944842816}
   m_Layer: 8
-  m_Name: Metior
-  m_TagString: Untagged
+  m_Name: Meteor 1
+  m_TagString: Meteor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e6ae5a919eda53149aaf3c549f13a2c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,3 +125,15 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   keepStanding: 1
   bodyWorldOffset: 0.4
+--- !u!114 &7369126461944842816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4329303402749056334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288c06a1b47650047a24c12f9ffd01f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
