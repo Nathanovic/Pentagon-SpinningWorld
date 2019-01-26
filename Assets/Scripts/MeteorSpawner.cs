@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MeteorSpawner : MonoBehaviour {
     public GameObject meteorPrefab1;
@@ -15,6 +17,7 @@ public class MeteorSpawner : MonoBehaviour {
     public float minMeteorFallingSpeed = 2;
     public float minMeteorScale = 0.5f;
     public float maxMeteorScale = 2;
+    public float minMeteorSizeForScreenShake = 1.2f;
 
     private void Start() {
         totalSpawnChange = spawnChangeMeteor1 + spawnChangeMeteor2;
@@ -45,5 +48,11 @@ public class MeteorSpawner : MonoBehaviour {
 
         float size = Random.Range(minMeteorScale, maxMeteorScale);
         meteor.transform.localScale *= size;
+
+        if (size > minMeteorSizeForScreenShake) {
+            meteor.GetComponent<Meteor>().onImpact += () => {
+                Screenshake.instance.StartShakeVertical((int) Math.Round(2 * size), 0.33f * size, 0.01f * worldBody.maxSpeed);
+            };
+        }
     }
 }
