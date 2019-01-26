@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6475220861741824478}
   - component: {fileID: 7369126461944842816}
   m_Layer: 8
-  m_Name: Meteor 1
+  m_Name: MeteorWithResource
   m_TagString: Meteor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.49
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8163495193659152506
 MonoBehaviour:
