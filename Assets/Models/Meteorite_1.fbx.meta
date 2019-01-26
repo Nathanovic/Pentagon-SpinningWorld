@@ -1,26 +1,16 @@
 fileFormatVersion: 2
-guid: b8bd1c9a2eaf31549b87865ff34b780d
+guid: 89bfe07b102ce1947895b976e086e3bc
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: pCylinder16
-    100002: pCylinder17
-    100004: pCylinder18
-    100006: //RootNode
-    400000: pCylinder16
-    400002: pCylinder17
-    400004: pCylinder18
-    400006: //RootNode
+    100000: //RootNode
+    100002: meteorite_decimated:Group29216
+    400000: //RootNode
+    400002: meteorite_decimated:Group29216
     2100000: lambert2
-    2300000: pCylinder16
-    2300002: pCylinder17
-    2300004: pCylinder18
-    3300000: pCylinder16
-    3300002: pCylinder17
-    3300004: pCylinder18
-    4300000: pCylinder17
-    4300002: pCylinder16
-    4300004: pCylinder18
+    2300000: meteorite_decimated:Group29216
+    3300000: meteorite_decimated:Group29216
+    4300000: meteorite_decimated:Group29216
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -52,7 +42,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 20
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
