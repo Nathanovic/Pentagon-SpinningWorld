@@ -2,11 +2,11 @@
 
 public class MeteorSpawner : MonoBehaviour {
     public GameObject meteorPrefab1;
+    public GameObject meteorPrefab2;
     public float spawnChangeMeteor1 = 0.9f;
     public float spawnChangeMeteor2 = 0.1f;
     private float totalSpawnChange = 1;
-    public GameObject meteorPrefab2;
-    
+
     public float spawnInterval = 1;
     public float offset = 15.0f;
     public float timeTillSpawn = 0.0f;

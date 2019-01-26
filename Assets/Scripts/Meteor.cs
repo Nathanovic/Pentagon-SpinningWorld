@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Meteor : MonoBehaviour {
     private WorldBody worldBody;
+    [SerializeField]
     private bool isGrounded = false;
+    public bool containsResource = false;
+    public ParticleSystem vfxImpact;
 
     private void Start() {
         worldBody = GetComponent<WorldBody>();
@@ -13,8 +16,21 @@ public class Meteor : MonoBehaviour {
 
     private void Update() {
         if (!isGrounded && World.Instance.GetGrounded(worldBody)) {
-            //TODO: play meteor impact sound
             isGrounded = true;
+            //TODO: play meteor impact sound
+            //TODO: show impact particles
+            if (vfxImpact != null) {
+                vfxImpact.transform.parent = null;
+                vfxImpact.Play();
+                vfxImpact.GetComponent<ParticleDestroyer>().DestroyWhenDone();
+            }
+
+            if (!containsResource) {
+                Destroy(this.gameObject);
+                //TODO: show destroy meteor particles
+            }
         }
     }
+
+  
 }
