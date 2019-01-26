@@ -224,7 +224,7 @@ MonoBehaviour:
   metiorPrefab: {fileID: 4329303402749056334, guid: e7b4dae048340b24286e5c5aa53c1201,
     type: 3}
   spawnInterval: 1
-  offset: 7.5
+  offset: 15
   timeTillSpawn: 0
 --- !u!1 &249704975
 GameObject:
