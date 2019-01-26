@@ -43,7 +43,7 @@ public class Player : MonoBehaviour {
 			currentSpeed = absSpeed;
 		}
 		
-		if (collisionScript.collideFront) {
+		if (collisionScript.isCollidingFront) {
 			currentSpeed = 0f;
 		} else {
 			if (input != 0f) {

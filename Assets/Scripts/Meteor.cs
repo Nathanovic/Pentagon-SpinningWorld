@@ -6,7 +6,7 @@ public class Meteor : MonoBehaviour {
     private WorldBody worldBody;
     [SerializeField]
     private bool isGrounded = false;
-    public bool containsResource = false;
+    public bool containsResource;
     public ParticleSystem vfxImpact;
     public GameObject visuals;
     
@@ -14,11 +14,12 @@ public class Meteor : MonoBehaviour {
     public event ImpactFunction onImpact;
 
     private Vector3 rotation;
-
+        
     private void Start() {
         worldBody = GetComponent<WorldBody>();
         isGrounded = World.Instance.GetGrounded(worldBody);
         onImpact += ShowImpactParticles;
+        containsResource = GetComponent<Resource>() != null;
         
         Quaternion randomRotation = Random.rotation;
         rotation = new Vector3(randomRotation.x, randomRotation.y, randomRotation.z);
@@ -27,7 +28,7 @@ public class Meteor : MonoBehaviour {
     private void Update() {
 		if (isGrounded) { return; }
 
-        if (World.Instance.GetGrounded(worldBody)) {
+        if (worldBody && World.Instance.GetGrounded(worldBody)) {
             isGrounded = true;
             //TODO: play meteor impact sound
             //TODO: show impact particles
