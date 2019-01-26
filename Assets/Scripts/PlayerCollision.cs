@@ -11,6 +11,7 @@ public class PlayerCollision : MonoBehaviour {
     public event CollisionFunction onFallHit;
 
     public delegate void CollisionTransformFunction(Transform transform);
+
     public event CollisionTransformFunction onRocketChargePlateHit;
 
 	public delegate void ColliderDelegate(Collider2D collider);
@@ -30,7 +31,7 @@ public class PlayerCollision : MonoBehaviour {
 		}
 	}
 
-    private ResourceGatherer resourceGatherer;
+    private ResourceGatherer resourceGatherer; 
 
     private void Start() {
         resourceGatherer = GetComponent<ResourceGatherer>();
@@ -39,9 +40,8 @@ public class PlayerCollision : MonoBehaviour {
     public void EarlyUpdate() {
 		isCollidingFront = false;
         Meteor collidingMeteor = null;
-
+		
 		List<Collider2D> allColliders = new List<Collider2D>();
-        
         // Check if we can pick up resources
         if (!resourceGatherer.hasResource) {
             Vector2 noseDir = transform.right * -transform.localScale.x;

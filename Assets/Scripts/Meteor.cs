@@ -7,20 +7,26 @@ public class Meteor : MonoBehaviour {
     public bool containsResource;
     public ParticleSystem vfxImpact;
     public GameObject visuals;
-    
+
+    public Light light;
     public delegate void ImpactFunction();
     public event ImpactFunction onImpact;
 
     private Vector3 rotation;
     public float rotationMultiplier = 1.0f;
+    public float velocityMultiplier = 1.0f;
 
     public bool canDamage;// { private set; get; }
         
     private void Start() {
         canDamage = true;
         worldBody = GetComponent<WorldBody>();
+        worldBody.minSpeed *= velocityMultiplier;
+        worldBody.maxSpeed *= velocityMultiplier;
+
         worldBody.onTouchGround += OnWorldImpact;
         onImpact += ShowImpactParticles;
+        onImpact += DestroyLight;
         containsResource = GetComponent<Resource>() != null;
         
         Quaternion randomRotation = Random.rotation;
@@ -42,6 +48,8 @@ public class Meteor : MonoBehaviour {
         //TODO: show impact particles
         onImpact?.Invoke();
 
+        
+
         if (!containsResource) {
             Destroy(this.gameObject);
             //TODO: show destroy meteor particles
@@ -53,6 +61,12 @@ public class Meteor : MonoBehaviour {
             vfxImpact.transform.parent = null;
             vfxImpact.Play();
             vfxImpact.GetComponent<ParticleDestroyer>().DestroyWhenDone();
+        }
+    }
+
+    private void DestroyLight() {
+        if(light != null) {
+            Destroy(light);
         }
     }
 }
