@@ -194,6 +194,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3681697756142808402, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}
 --- !u!4 &12192130 stripped
@@ -334,7 +339,7 @@ MonoBehaviour:
   spawnChangeMeteor1: 0.9
   spawnChangeMeteor2: 0.1
   spawnInterval: 1
-  offset: 15
+  offset: 25
   timeTillSpawn: 0
   maxMeteorFallingSpeed: 12
   minMeteorFallingSpeed: 3
