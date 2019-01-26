@@ -31,7 +31,6 @@ public class WorldBody : MonoBehaviour {
 				velocity += gravity * acceleration * Time.deltaTime;
 				velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 			}
-			Debug.Log(velocity.magnitude);
 		}
 
 		transform.position = transform.position + velocity * Time.deltaTime;
