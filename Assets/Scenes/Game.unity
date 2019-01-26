@@ -237,11 +237,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af49a06771f116749bdaa00977db10b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metiorPrefab: {fileID: 4329303402749056334, guid: e7b4dae048340b24286e5c5aa53c1201,
+  meteorPrefab: {fileID: 4329303402749056334, guid: e7b4dae048340b24286e5c5aa53c1201,
     type: 3}
   spawnInterval: 1
   offset: 15
   timeTillSpawn: 0
+  maxMeteorFallingSpeed: 50
+  minMeteorFallingSpeed: 2
+  minMeteorScale: 0.5
+  maxMeteorScale: 2
 --- !u!1 &254548525
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +550,7 @@ MonoBehaviour:
   playerNumber: 2
   maxSpeed: 3
   reachMaxSpeedDuration: 0.8
+  moveInputDuration: 0
   acceleration:
     serializedVersion: 2
     m_Curve: []
@@ -861,6 +866,7 @@ MonoBehaviour:
   playerNumber: 1
   maxSpeed: 3
   reachMaxSpeedDuration: 0.8
+  moveInputDuration: 0
   acceleration:
     serializedVersion: 2
     m_Curve: []
