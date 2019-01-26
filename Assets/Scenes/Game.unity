@@ -199,6 +199,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 652419782869966204, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}
 --- !u!4 &12192130 stripped
@@ -1220,5 +1225,16 @@ PrefabInstance:
       propertyPath: bodyWorldOffset
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 652419782869966204, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.594
+      objectReference: {fileID: 0}
+    - target: {fileID: 652419782869966204, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.252
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2305635168425758964, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}

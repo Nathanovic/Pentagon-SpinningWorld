@@ -11,10 +11,15 @@ public class Player : MonoBehaviour {
 
 	private bool isFacingLeft = true;
 
-	public float noseCollisionOffset = 0.2f;
-	public Transform noseTransform;
+	private PlayerCollision collisionScript;
+
+	private void Awake() {
+		collisionScript = GetComponent<PlayerCollision>();
+	}
 
 	private void Update() {
+		collisionScript.EarlyUpdate();
+		
 		float input = -Input.GetAxis("Horizontal_" + playerNumber.ToString());
 		if (input != 0f) {
 			SetFacingDirection(input);
@@ -31,11 +36,8 @@ public class Player : MonoBehaviour {
 		} else {
 			currentSpeed = absSpeed;
 		}
-
-		Vector3 noseDir = transform.right * -transform.localScale.x;
-		Debug.DrawRay(noseTransform.transform.position, noseDir.normalized * noseCollisionOffset, Color.red);
-		bool collideFront = Physics.Raycast(noseTransform.transform.position, noseDir, noseCollisionOffset);
-		if (collideFront) {
+		
+		if (collisionScript.collideFront) {
 			currentSpeed = 0f;
 		} else {
 			if (input != 0f) {
