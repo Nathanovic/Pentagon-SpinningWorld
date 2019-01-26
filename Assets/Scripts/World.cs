@@ -23,8 +23,12 @@ public class World : MonoBehaviour {
 			gravityGrowFactor = 1f;
 		}
 
-		Vector3 gravity = (position - transform.position).normalized * gravityForce * Time.deltaTime * gravityGrowFactor;
+		Vector3 gravity = (transform.position - position).normalized * gravityForce * Time.deltaTime * gravityGrowFactor;
 		return gravity;
+	}
+
+	public void RotateAroundMe(Transform target) {
+		target.RotateAround(transform.position, Vector3.forward, rotateSpeed * Time.deltaTime);
 	}
 
 }
