@@ -10,6 +10,9 @@ public class Player : MonoBehaviour {
 		float input = Input.GetAxis("Horizontal_" + playerNumber.ToString());
 		float movement = input * Time.deltaTime * moveSpeed;
 		transform.RotateAround(world.position, Vector3.forward, movement);
+
+		//ApplyGravity(transform);// This should be moved to the World script
 	}
+
 
 }
