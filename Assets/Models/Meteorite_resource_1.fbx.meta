@@ -1,16 +1,21 @@
 fileFormatVersion: 2
-guid: efafa9caa4d99864eac680f9ee077f2c
+guid: bf60b80a061070846b98e11eea054182
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: meteorite_decimated:Group29216
-    400000: //RootNode
-    400002: meteorite_decimated:Group29216
+    100000: Group29216
+    100002: //RootNode
+    100004: pCylinder90
+    400000: Group29216
+    400002: //RootNode
+    400004: pCylinder90
     2100000: lambert2
-    2300000: meteorite_decimated:Group29216
-    3300000: meteorite_decimated:Group29216
-    4300000: meteorite_decimated:Group29216
+    2300000: Group29216
+    2300002: pCylinder90
+    3300000: Group29216
+    3300002: pCylinder90
+    4300000: Group29216
+    4300002: pCylinder90
   externalObjects: {}
   materials:
     importMaterials: 1
