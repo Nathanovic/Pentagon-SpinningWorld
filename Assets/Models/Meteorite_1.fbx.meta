@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 6afef61fd33ebf74580e150d4e6b7d6d
+guid: efafa9caa4d99864eac680f9ee077f2c
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: earth_decimated:Group59254
+    100002: meteorite_decimated:Group29216
     400000: //RootNode
-    400002: earth_decimated:Group59254
+    400002: meteorite_decimated:Group29216
     2100000: lambert2
-    2300000: earth_decimated:Group59254
-    3300000: earth_decimated:Group59254
-    4300000: earth_decimated:Group59254
+    2300000: meteorite_decimated:Group29216
+    3300000: meteorite_decimated:Group29216
+    4300000: meteorite_decimated:Group29216
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -42,7 +42,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 12
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1

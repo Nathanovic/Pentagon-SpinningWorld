@@ -1,16 +1,21 @@
 fileFormatVersion: 2
-guid: 6afef61fd33ebf74580e150d4e6b7d6d
+guid: bf60b80a061070846b98e11eea054182
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: earth_decimated:Group59254
-    400000: //RootNode
-    400002: earth_decimated:Group59254
+    100000: Group29216
+    100002: //RootNode
+    100004: pCylinder90
+    400000: Group29216
+    400002: //RootNode
+    400004: pCylinder90
     2100000: lambert2
-    2300000: earth_decimated:Group59254
-    3300000: earth_decimated:Group59254
-    4300000: earth_decimated:Group59254
+    2300000: Group29216
+    2300002: pCylinder90
+    3300000: Group29216
+    3300002: pCylinder90
+    4300000: Group29216
+    4300002: pCylinder90
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -42,7 +47,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 12
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
