@@ -8,6 +8,7 @@ public class Meteor : MonoBehaviour {
     private bool isGrounded = false;
     public bool containsResource = false;
     public ParticleSystem vfxImpact;
+    public Light pointLight;
     
     public delegate void ImpactFunction();
     public event ImpactFunction onImpact;
@@ -16,6 +17,7 @@ public class Meteor : MonoBehaviour {
         worldBody = GetComponent<WorldBody>();
         isGrounded = World.Instance.GetGrounded(worldBody);
         onImpact += ShowImpactParticles;
+        onImpact += ShowPointLight;
     }
 
     private void Update() {
@@ -39,6 +41,12 @@ public class Meteor : MonoBehaviour {
             vfxImpact.Play();
             vfxImpact.GetComponent<ParticleDestroyer>().DestroyWhenDone();
         }
+    }
+
+    private void ShowPointLight() {
+        pointLight.transform.parent = null;
+        pointLight.enabled = true;
+        pointLight.GetComponent<LightDestroyer>().DestroyWhenDone();
     }
 
   
