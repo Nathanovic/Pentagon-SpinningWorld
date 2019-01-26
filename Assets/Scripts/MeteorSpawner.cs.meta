@@ -4,7 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - meteorPrefab: {fileID: 4329303402749056334, guid: e7b4dae048340b24286e5c5aa53c1201,
+  - meteorPrefab1: {fileID: 4329303402749056334, guid: e7b4dae048340b24286e5c5aa53c1201,
+      type: 3}
+  - meteorPrefab2: {fileID: 4329303402749056334, guid: e7b4dae048340b24286e5c5aa53c1201,
       type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
