@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerCollision : MonoBehaviour {
     public float noseCollisionOffset = 0.2f;
@@ -12,10 +13,22 @@ public class PlayerCollision : MonoBehaviour {
     public delegate void CollisionTransformFunction(Transform transform);
     public event CollisionTransformFunction onRocketChargePlateHit;
 
+	public delegate void ColliderDelegate(Collider2D collider);
+	public event ColliderDelegate onCollisionEnter;
+	public event ColliderDelegate onCollisionExit;
+
+	private List<Collider2D> currentColliders = new List<Collider2D>();
+
     public Transform deadCheckOrigin;
     public float deadCheckRadius = 1f;
 
-    public bool isCollidingFront;
+	private bool isCollidingFront;
+    public bool IsCollidingFront {
+		get {
+			if (Rocket.IsTouchedByTwoPlayers()) { return true; }
+			return isCollidingFront;
+		}
+	}
 
     private ResourceGatherer resourceGatherer;
 
@@ -24,8 +37,10 @@ public class PlayerCollision : MonoBehaviour {
     }
 
     public void EarlyUpdate() {
-        isCollidingFront = false;
+		isCollidingFront = false;
         Meteor collidingMeteor = null;
+
+		List<Collider2D> allColliders = new List<Collider2D>();
         
         // Check if we can pick up resources
         if (!resourceGatherer.hasResource) {
@@ -35,8 +50,13 @@ public class PlayerCollision : MonoBehaviour {
             collidingMeteor = GetMeteor(hitInfo, true);
             if (collidingMeteor != null) {
                 onResourceHit?.Invoke(collidingMeteor);
-            }
-        }
+			}
+
+			if (hitInfo.collider != null && hitInfo.collider.tag == "Rocket") {
+				allColliders.Add(hitInfo.collider);
+				TryCollisionEnter(hitInfo.collider);
+			}
+		}
         // Check if we hit something with our carried resource
         else {
             CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
@@ -44,11 +64,16 @@ public class PlayerCollision : MonoBehaviour {
             RaycastHit2D[] circleCasts =
                 Physics2D.CircleCastAll(myResourceCollider.transform.position, circleCastRadius, Vector2.zero);
             foreach (RaycastHit2D circleCast in circleCasts) {
-                collidingMeteor = GetMeteor(circleCast, true);
-                if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
-					Debug.Log("meteor collision with: " + collidingMeteor.name);
-                    isCollidingFront = true;
-                }
+				collidingMeteor = GetMeteor(circleCast, true);
+				if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
+					isCollidingFront = true;
+					continue;
+				}
+
+				if (circleCast.collider != null && circleCast.collider.tag == "Rocket") {
+					allColliders.Add(circleCast.collider);
+					TryCollisionEnter(circleCast.collider);
+				}
             }
         }
 
@@ -59,6 +84,14 @@ public class PlayerCollision : MonoBehaviour {
                 onFallHit?.Invoke(meteor);
             }
         }
+
+		for(int i = currentColliders.Count - 1; i > -1; i --) {
+			Collider2D collider = currentColliders[i];
+			if (!allColliders.Contains(collider)) {
+				onCollisionExit?.Invoke(collider);
+				currentColliders.Remove(collider);
+			}
+		}
     }
 
     private void OnDrawGizmos() {
@@ -83,4 +116,14 @@ public class PlayerCollision : MonoBehaviour {
 
         return null;
     }
+
+	private bool TryCollisionEnter(Collider2D collider) {
+		if (currentColliders.Contains(collider)){
+			return false;
+		}
+
+		currentColliders.Add(collider);
+		onCollisionEnter?.Invoke(collider);
+		return true;
+	}
 }

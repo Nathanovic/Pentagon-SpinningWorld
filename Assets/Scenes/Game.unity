@@ -383,8 +383,8 @@ MonoBehaviour:
     type: 3}
   meteorPrefab2: {fileID: 4329303402749056334, guid: ad7be2963697ff84081411b54936828f,
     type: 3}
-  spawnChangeMeteor1: 0.9
-  spawnChangeMeteor2: 0.1
+  spawnChangeMeteor1: 1
+  spawnChangeMeteor2: 0
   spawnInterval: 2
   offset: 25
   timeTillSpawn: 0
@@ -404,9 +404,10 @@ GameObject:
   m_Component:
   - component: {fileID: 254548526}
   - component: {fileID: 254548527}
+  - component: {fileID: 254548528}
   m_Layer: 0
   m_Name: Rocket
-  m_TagString: Untagged
+  m_TagString: Rocket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,6 +444,32 @@ MonoBehaviour:
   liftOffAccelerateFactor: 10
   standardAccelerateFactor: 1
   finishLiftOffSpeed: 30
+--- !u!61 &254548528
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254548525}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 2}
+  m_EdgeRadius: 0
 --- !u!4 &300711359 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: b8bd1c9a2eaf31549b87865ff34b780d,
@@ -1152,15 +1179,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.226
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.139
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1362,11 +1389,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 7141378799432911054, guid: 70d6a3f5d74fe4d40bba923900e243c2,
-        type: 3}
-      propertyPath: noseCollisionOffset
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}

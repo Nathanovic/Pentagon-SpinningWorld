@@ -5,6 +5,8 @@ public class Player : MonoBehaviour {
 	public int playerNumber = 1;
 	public float maxSpeed = 3f;
 
+	public float rocketMoveSpeedFactor = 0.7f;
+
 	public float currentSpeed;
 	public float moveForce = 5f;
 	public float slowDownForce = 10f;
@@ -16,9 +18,13 @@ public class Player : MonoBehaviour {
 	[SerializeField] private GameObject carVisual;
 	[SerializeField] private ParticleSystem[] deadVFX;
 
+	private Rocket collidingRocket;
+
 	private void Awake() {
 		collisionScript = GetComponent<PlayerCollision>();
 		collisionScript.onFallHit += OnFallHit;
+		collisionScript.onCollisionEnter += OnFrontColliderEnter;
+		collisionScript.onCollisionExit += OnFrontColliderExit;
 	}
 
 	private void Start() {
@@ -53,16 +59,37 @@ public class Player : MonoBehaviour {
 			currentSpeed = absSpeed;
 		}
 		
-		if (collisionScript.isCollidingFront) {
+		if (collisionScript.IsCollidingFront) {
 			currentSpeed = 0f;
 		} else {
 			if (input != 0f) {
 				currentSpeed += moveForce * input * Time.deltaTime;
 				currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
 			}
+
+			float moveSpeed = currentSpeed;
+			if (collidingRocket != null) {
+				moveSpeed = currentSpeed * rocketMoveSpeedFactor;
+				collidingRocket.transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);
+			}
+			transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);
 		}
-		
-		transform.RotateAround(World.Position, Vector3.forward, currentSpeed * Time.deltaTime);
+	}
+
+	private void OnFrontColliderEnter(Collider2D collider) {
+		if (collider.tag == "Rocket") {
+			Debug.Log("Rocket touched!");
+			collidingRocket = collider.GetComponent<Rocket>();
+			collidingRocket.StartPlayerTouch(this);
+		}
+	}
+
+	private void OnFrontColliderExit(Collider2D collider) {
+		if(collider.tag == "Rocket") {
+			Debug.Log("Rocket lost!");
+			collidingRocket.StopPlayerTouch(this);
+			collidingRocket = null;
+		}
 	}
 
 	private void SetFacingDirection(float input) {
@@ -83,6 +110,10 @@ public class Player : MonoBehaviour {
 		Screenshake.instance.StartShakeHorizontal(2, 0.5f, 0.05f);
 		foreach (ParticleSystem deadEffect in deadVFX) {
 			deadEffect.Play();
+		}
+
+		if (collidingRocket != null) {
+			collidingRocket.StopPlayerTouch(this);
 		}
 
 		GameManager.Instance.NotifyPlayerDeath();

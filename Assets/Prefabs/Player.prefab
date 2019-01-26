@@ -82,6 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 1
   maxSpeed: 60
+  rocketMoveSpeedFactor: 0.7
   currentSpeed: 0
   moveForce: 220
   slowDownForce: 75
@@ -108,6 +109,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   keepStanding: 1
   bodyWorldOffset: 0
+  isGrounded: 0
 --- !u!114 &7141378799432911054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,11 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dda4e08706690e4ab074ef45aebb19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noseCollisionOffset: 0.2
+  noseCollisionOffset: 0.1
   noseTransform: {fileID: 652419782869966204}
   deadCheckOrigin: {fileID: 8092534040808351838}
   deadCheckRadius: 0.65
-  isCollidingFront: 0
 --- !u!114 &1340473793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f5bbec6886d444d9bcba42e3920f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasResource: 0
 --- !u!1 &8913174389688338954
 GameObject:
   m_ObjectHideFlags: 0
