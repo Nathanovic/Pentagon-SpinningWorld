@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class RocketMeter : MonoBehaviour {
+
+	private bool isActive;
 
     private void Start() {
         
     }
 	
-    void Update() {
+    private void Update() {
         
     }
+
+	public void ActivateMeter() {
+
+	}
 
 }

@@ -33,14 +33,14 @@ public class WorldBody : MonoBehaviour {
 			}
 		}
 
-		transform.position = transform.position + velocity * Time.deltaTime;
-
 		if (keepStanding) {
 			Vector3 vectorToTarget = World.Instance.transform.position - transform.position;
 			float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
 			Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 			transform.rotation = targetRotation;
 		}
+
+		transform.position = transform.position + velocity * Time.deltaTime;
 	}
 
 	private void OnDrawGizmos() {
