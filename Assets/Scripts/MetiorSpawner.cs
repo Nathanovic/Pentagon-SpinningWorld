@@ -3,7 +3,7 @@
 public class MetiorSpawner : MonoBehaviour {
     public GameObject metiorPrefab;
     public float spawnInterval = 1;
-    public float offset = 7.5f;
+    public float offset = 15.0f;
     public float timeTillSpawn = 0.0f;
 
     // Update is called once per frame
