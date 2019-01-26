@@ -8,7 +8,11 @@ public class Meteor : MonoBehaviour {
     private bool isGrounded = false;
     public bool containsResource = false;
     public ParticleSystem vfxImpact;
+<<<<<<< HEAD
+    public Light pointLight;
+=======
     public GameObject visuals;
+>>>>>>> 2c5964bc371d53ac0eeaed2031aa25b10f6494b3
     
     public delegate void ImpactFunction();
     public event ImpactFunction onImpact;
@@ -19,9 +23,13 @@ public class Meteor : MonoBehaviour {
         worldBody = GetComponent<WorldBody>();
         isGrounded = World.Instance.GetGrounded(worldBody);
         onImpact += ShowImpactParticles;
+<<<<<<< HEAD
+        onImpact += ShowPointLight;
+=======
         
         Quaternion randomRotation = Random.rotation;
         rotation = new Vector3(randomRotation.x, randomRotation.y, randomRotation.z);
+>>>>>>> 2c5964bc371d53ac0eeaed2031aa25b10f6494b3
     }
 
     private void Update() {
@@ -48,6 +56,12 @@ public class Meteor : MonoBehaviour {
             vfxImpact.Play();
             vfxImpact.GetComponent<ParticleDestroyer>().DestroyWhenDone();
         }
+    }
+
+    private void ShowPointLight() {
+        pointLight.transform.parent = null;
+        pointLight.enabled = true;
+        pointLight.GetComponent<LightDestroyer>().DestroyWhenDone();
     }
 
   
