@@ -46,15 +46,8 @@ public class PlayerCollision : MonoBehaviour {
             foreach (RaycastHit2D circleCast in circleCasts) {
                 collidingMeteor = GetMeteor(circleCast, true);
                 if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
-                    if(collidingMeteor.transform.CompareTag("Meteor"))
-                        isCollidingFront = true;
-                    else if (circleCast.collider.CompareTag("ChargeRocketPlate")) {
-                        Debug.Log("Resources inleveren.");
-                        onRocketChargePlateHit?.Invoke(circleCast.collider.transform);
-                    }
-                    else {
-                        Debug.Log("Colliding with something else");
-                    }
+					Debug.Log("meteor collision with: " + collidingMeteor.name);
+                    isCollidingFront = true;
                 }
             }
         }
@@ -83,11 +76,7 @@ public class PlayerCollision : MonoBehaviour {
     private Meteor GetMeteor(RaycastHit2D hitInfo, bool resourceOnly) {
         if (hitInfo.collider != null && hitInfo.collider.CompareTag("Meteor")) {
             Meteor meteor = hitInfo.collider.GetComponent<Meteor>();
-            if (!resourceOnly) {
-                return meteor;
-            }
-
-            if (meteor.containsResource && resourceOnly) {
+            if (!resourceOnly || meteor.containsResource) {
                 return meteor;
             }
         }

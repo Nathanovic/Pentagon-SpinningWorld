@@ -53,7 +53,11 @@ public class WorldBody : MonoBehaviour {
 	}
 
 	private void OnDrawGizmos() {
-		Gizmos.color = Color.red;
+		if (!isGrounded) {
+			Gizmos.color = Color.red;
+		} else {
+			Gizmos.color = Color.blue;
+		}
 		Gizmos.DrawWireSphere(transform.position, bodyWorldOffset);
 	}
 
