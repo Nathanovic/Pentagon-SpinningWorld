@@ -10,6 +10,7 @@ public class PlayerCollision : MonoBehaviour {
     public event CollisionFunction onFallHit;
 
     public delegate void CollisionTransformFunction(Transform transform);
+
     public event CollisionTransformFunction onRocketChargePlateHit;
 
     public Transform deadCheckOrigin;
@@ -26,7 +27,7 @@ public class PlayerCollision : MonoBehaviour {
     public void EarlyUpdate() {
         isCollidingFront = false;
         Meteor collidingMeteor = null;
-        
+
         // Check if we can pick up resources
         if (!resourceGatherer.hasResource) {
             Vector2 noseDir = transform.right * -transform.localScale.x;
@@ -44,11 +45,24 @@ public class PlayerCollision : MonoBehaviour {
             RaycastHit2D[] circleCasts =
                 Physics2D.CircleCastAll(myResourceCollider.transform.position, circleCastRadius, Vector2.zero);
             foreach (RaycastHit2D circleCast in circleCasts) {
-                collidingMeteor = GetMeteor(circleCast, true);
-                if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
+                if (circleCast.transform.CompareTag("Meteor")) {
+                    collidingMeteor = GetMeteor(circleCast, true);
+                    if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
+                        isCollidingFront = true;
+                    }
+                }
+                else  if (circleCast.collider.CompareTag("ChargeRocketPlate")) {
+                    Debug.Log("Resources inleveren.");
+                    onRocketChargePlateHit?.Invoke(circleCast.collider.transform);
+                }
+                else {
+                    Debug.Log("Collision with " + circleCast.collider.tag);
+                }
+
+                /*if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
 					Debug.Log("meteor collision with: " + collidingMeteor.name);
                     isCollidingFront = true;
-                }
+                }*/
             }
         }
 
