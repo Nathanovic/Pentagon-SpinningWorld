@@ -352,6 +352,12 @@ MonoBehaviour:
   minMeteorFallingSpeed: 3
   minMeteorScale: 0.5
   maxMeteorScale: 2
+--- !u!4 &219643719 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 652419782869966204, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7913547617020514774}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &254548525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1071,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1340473788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7913547616771107983, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7913547617020514774}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1340473793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340473788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f5bbec6886d444d9bcba42e3920f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasResource: 0
+  noseTransform: {fileID: 219643719}
 --- !u!1001 &1625062624
 PrefabInstance:
   m_ObjectHideFlags: 0

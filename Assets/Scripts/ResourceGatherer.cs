@@ -1,23 +1,24 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ResourceGatherer : MonoBehaviour {
-    public bool hasResource = false;
-    private BoxCollider collider;
-    
+    public bool hasResource = false;    
+    public Transform noseTransform;
     
     // Start is called before the first frame update
     void Start() {
-        collider = GetComponent<BoxCollider>();
+        PlayerCollision collision = GetComponent<PlayerCollision>();
+        collision.onResourceHit += ResourceHit;
     }
 
     // Update is called once per frame
     void Update() {
-        Vector3 noseDir = transform.right * -transform.localScale.x;
+        
     }
 
-    private void OnTriggerEnter(Collider other) {
-        Debug.Log("collision!");
-        other.transform.parent = this.transform;
+    void ResourceHit(Transform resourceTransform) {
+        noseTransform.transform.position = resourceTransform.position + resourceTransform.transform.localScale * 0.5f;
+        resourceTransform.parent = this.transform;
+        Destroy(resourceTransform.GetComponent<WorldBody>());
+        hasResource = true;
     }
 }
