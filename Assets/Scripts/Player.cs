@@ -10,14 +10,20 @@ public class Player : MonoBehaviour {
 	public float slowDownForce = 10f;
 
 	private bool isFacingLeft = true;
+	private bool isDead;
 
 	private PlayerCollision collisionScript;
+	[SerializeField] private GameObject carVisual;
+	[SerializeField] private ParticleSystem[] deadVFX;
 
 	private void Awake() {
 		collisionScript = GetComponent<PlayerCollision>();
+		collisionScript.onFallHit += OnFallHit;
 	}
 
 	private void Update() {
+		if (isDead) { return; }
+
 		collisionScript.EarlyUpdate();
 		
 		float input = -Input.GetAxis("Horizontal_" + playerNumber.ToString());
@@ -37,7 +43,7 @@ public class Player : MonoBehaviour {
 			currentSpeed = absSpeed;
 		}
 		
-		if (collisionScript.collideFront) {
+		if (collisionScript.isCollidingFront) {
 			currentSpeed = 0f;
 		} else {
 			if (input != 0f) {
@@ -49,7 +55,6 @@ public class Player : MonoBehaviour {
 		transform.RotateAround(World.Position, Vector3.forward, currentSpeed * Time.deltaTime);
 	}
 
-
 	private void SetFacingDirection(float input) {
 		if (input < 0f && isFacingLeft) {
 			isFacingLeft = false;
@@ -57,6 +62,15 @@ public class Player : MonoBehaviour {
 		} else if (input > 0f && !isFacingLeft) {
 			isFacingLeft = true;
 			transform.localScale = new Vector3(1, 1, 1);
+		}
+	}
+
+	private void OnFallHit(Transform meteor) {
+		isDead = true;
+		carVisual.SetActive(false);
+		Screenshake.instance.StartShakeHorizontal(2, 0.5f, 0.05f);
+		foreach (ParticleSystem deadEffect in deadVFX) {
+			deadEffect.Play();
 		}
 	}
 

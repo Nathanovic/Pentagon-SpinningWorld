@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8782018019960662877}
-  - component: {fileID: 6112919277030185875}
   - component: {fileID: 8163495193659152506}
   - component: {fileID: 6475220861741824478}
   - component: {fileID: 7369126461944842816}
+  - component: {fileID: 7498615683803427980}
+  - component: {fileID: 9017881451012415348}
   m_Layer: 8
   m_Name: MeteorWithResource
   m_TagString: Meteor
@@ -36,19 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &6112919277030185875
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4329303402749056334}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8163495193659152506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +84,35 @@ MonoBehaviour:
   containsResource: 1
   vfxImpact: {fileID: 8065630773809296080}
   visuals: {fileID: 3521407606061281190}
+--- !u!58 &7498615683803427980
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4329303402749056334}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.7
+--- !u!114 &9017881451012415348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4329303402749056334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023a263c9bec1d44eb12c39fe16abb8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 1
 --- !u!1 &6950275215134920897
 GameObject:
   m_ObjectHideFlags: 0
