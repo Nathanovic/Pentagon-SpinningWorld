@@ -68,6 +68,18 @@ public class GameManager : MonoBehaviour {
         }        
     }
 
+    public void StartCameraMotion() {
+        StartCoroutine(CameraMotionDelay());
+    }
+
+    private IEnumerator CameraMotionDelay() {
+        Animator cameraAnimator = GameObject.Find("CameraParent").GetComponent<Animator>();
+        cameraAnimator.SetTrigger("startCameraMotion");
+        menuScreen.Deactivate();
+        yield return new WaitForSeconds(4f);
+        StartGame();
+    }
+
     public void StartGame() {
 		deadPlayerCount = 0;
 		gameState = GameState.Playing;
