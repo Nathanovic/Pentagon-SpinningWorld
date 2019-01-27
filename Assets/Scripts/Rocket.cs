@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEditor;
 using UnityEngine;
@@ -25,11 +26,24 @@ public class Rocket : MonoBehaviour {
 	public delegate void HealthChanged(int newHealth);
 	public event HealthChanged onHealthChanged;
 	public int rocketMaxHealth = 100;
-	public int rocketHealth = 50;
-	public int meteorDamage = 35;
+	public int rocketStartHealth = 50;
+	public int rocketHealth { get; private set; }
+	public int meteorDamage = 50;
+
+	public Transform deadVFXParent;
+	private ParticleSystem[] deadVFX;
+
+	public Action onInitialize;
 
 	private void Awake() {
 		instance = this;
+		deadVFX = deadVFXParent.GetComponentsInChildren<ParticleSystem>();
+	}
+
+	public void Initialize() {
+		gameObject.SetActive(true);
+		rocketHealth = rocketStartHealth;
+		ChangeHealth(0);
 	}
 
 	private void Start() {
@@ -43,6 +57,7 @@ public class Rocket : MonoBehaviour {
 			if (hit2D.transform.CompareTag("Meteor")) {
 				Resource resource = hit2D.collider.GetComponent<Resource>();
 				if (resource == null || !resource.isHeld) {
+					hit2D.collider.GetComponent<Meteor>().CollideRocket();
 					ChangeHealth(-meteorDamage);
 				}
 			}
@@ -93,9 +108,18 @@ public class Rocket : MonoBehaviour {
 			Launch();
 		} else if (rocketHealth <= 0) {
 			rocketHealth = 0;
+			LoseGame();
 		}
 
 		onHealthChanged?.Invoke(rocketHealth);
+	}
+
+	private void LoseGame() {
+		deadVFXParent.SetParent(null);GameManager.Instance.NotifyRocketDestroyed();
+		foreach (ParticleSystem deadEffect in deadVFX) {
+			deadEffect.Play();
+		}
+		gameObject.SetActive(false);
 	}
 
 	private void OnDrawGizmos() {

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 
 	private List<Player> players = new List<Player>();
 	private int deadPlayerCount;
-	public float restartDuration = 1f;
+	public float fadeDuration = 1f;
 
 	private void Awake() {
 		Instance = this;
@@ -91,14 +91,36 @@ public class GameManager : MonoBehaviour {
 	    foreach (Player player in players) {
 			player.Revive();
 		}
+
+		Rocket.instance.Initialize();
 	}
 
 	public void NotifyPlayerDeath() {
 		deadPlayerCount++;
 		if (deadPlayerCount >= players.Count) {
-			gameState = GameState.Restart;
-			restartScreen.Activate();
+			StartCoroutine(EnterRestartState());
 		}
+	}
+
+	public void NotifyRocketDestroyed() {
+		StartCoroutine(EnterRestartState());
+	}
+
+	private IEnumerator EnterRestartState() {
+		Meteor[] allMeteors = FindObjectsOfType<Meteor>();
+		foreach(Meteor meteor in allMeteors) {
+			Destroy(meteor.gameObject);
+		}
+
+		gameState = GameState.Restart;
+		float t = 0f;
+		while (t < 1f) {
+			t += Time.deltaTime / fadeDuration;
+			restartCanvasGroup.alpha = t;
+			yield return null;
+		}
+
+		restartScreen.Activate();
 	}
 
 	public void RestartGame() {
@@ -108,7 +130,7 @@ public class GameManager : MonoBehaviour {
 	private IEnumerator RestartOverTime() {
 		float t = 0f;
 		while (t < 1f) {
-			t += Time.deltaTime / restartDuration;
+			t += Time.deltaTime / fadeDuration;
 			restartCanvasGroup.alpha = 1f - t;
 			yield return null;
 		}

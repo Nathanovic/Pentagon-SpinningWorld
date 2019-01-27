@@ -3,6 +3,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class MeteorSpawner : MonoBehaviour {
+
     public GameObject meteorPrefab1;
     public GameObject meteorPrefab2;
     public float spawnChangeMeteor1 = 0.9f;
@@ -20,7 +21,7 @@ public class MeteorSpawner : MonoBehaviour {
     public float minMeteorScale = 0.5f;
     public float maxMeteorScale = 2;
 
-    private void Start() {
+	private void Start() {
         totalSpawnChange = spawnChangeMeteor1 + spawnChangeMeteor2;
     }
 	
