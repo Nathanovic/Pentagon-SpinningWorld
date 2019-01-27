@@ -1,6 +1,8 @@
 ﻿using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System;
 
 public class MenuScreen : MonoBehaviour {
 
@@ -9,7 +11,11 @@ public class MenuScreen : MonoBehaviour {
 	private Text[] textItems;
 	private int selectedButtonIndex;
 
+	private CanvasGroup canvasGroup;
+	public float fadeDuration = 1f;
+
 	private void Awake() {
+		canvasGroup = GetComponent<CanvasGroup>();
 		buttons = GetComponentsInChildren<CustomButton>();
 		textItems = new Text[buttons.Length];
 		for (int i = 0; i < buttons.Length; i ++) {
@@ -25,6 +31,21 @@ public class MenuScreen : MonoBehaviour {
 	public void Deactivate() {
 		isActive = false;
 		GetComponent<CanvasGroup>().alpha = 0f;
+	}
+
+	public void Fade(float startA, float endA, Action onDone) {
+		StartCoroutine(FadeCanvasGroup(startA, endA, onDone));
+	}
+
+	private IEnumerator FadeCanvasGroup(float startA, float endA, Action onDone) {
+		canvasGroup.alpha = startA;
+		float t = 0f;
+		while (t < 1f) {
+			t += Time.deltaTime / fadeDuration;
+			canvasGroup.alpha = Mathf.Lerp(startA, endA, t);
+			yield return null;
+		}
+		onDone?.Invoke();
 	}
 
 	private void Update() {
