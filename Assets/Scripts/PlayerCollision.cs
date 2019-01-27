@@ -7,7 +7,7 @@ public class PlayerCollision : MonoBehaviour {
 
     public delegate void CollisionFunction(Meteor meteor);
 
-    public event CollisionFunction onResourceHit;
+    public event CollisionFunction onFrontResourceHit;
     public event CollisionFunction onFallHit;
 
     public delegate void CollisionTransformFunction(Transform transform);
@@ -40,25 +40,25 @@ public class PlayerCollision : MonoBehaviour {
         Meteor meteor = GetMeteor(meteorCast, false);
         if (meteor != null) {
             if (meteor.canDamage) {
-				Debug.Log("Damage by : " + meteor.name);
                 onFallHit?.Invoke(meteor);
             }
         }
     }
 
 	public bool IsCollidingFront(Transform frontChecker) {
+		bool isCheckingFront = frontChecker.name.Contains("front");
 		bool isCollidingFront = false;
 		Meteor collidingMeteor = null;
 
 		List<Collider2D> allColliders = new List<Collider2D>();
 		// Check if we can pick up resources
-		if (!resourceGatherer.hasResource) {
+		if (!resourceGatherer.hasResource || !isCheckingFront) {
 			Vector2 noseDir = frontChecker.up;
 			Debug.DrawRay(frontChecker.position, noseDir.normalized * noseCollisionOffset, Color.red);
 			RaycastHit2D hitInfo = Physics2D.Raycast(frontChecker.position, noseDir, noseCollisionOffset, defaultLM);
 			collidingMeteor = GetMeteor(hitInfo, true);
-			if (collidingMeteor != null) {
-				onResourceHit?.Invoke(collidingMeteor);
+			if (collidingMeteor != null && isCheckingFront) {
+				onFrontResourceHit?.Invoke(collidingMeteor);
 			}
 
 			bool hasRocket = false;
@@ -80,17 +80,16 @@ public class PlayerCollision : MonoBehaviour {
 			CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
 			float circleCastRadius = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
 			RaycastHit2D[] circleCasts =
-				Physics2D.CircleCastAll(myResourceCollider.transform.position, circleCastRadius, Vector2.zero, 100f, defaultLM);
+				Physics2D.RaycastAll(myResourceCollider.transform.position, transform.right, circleCastRadius, defaultLM);
+			Debug.DrawRay(myResourceCollider.transform.position, transform.right * circleCastRadius, Color.black);
 			foreach (RaycastHit2D circleCast in circleCasts) {
 				collidingMeteor = GetMeteor(circleCast, true);
 				if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
 					isCollidingFront = true;
-					continue;
-				}
-
-				if (circleCast.collider != null && circleCast.collider.tag == "Rocket") {
+				}else if (circleCast.collider != null && circleCast.collider.tag == "Rocket") {
 					allColliders.Add(circleCast.collider);
 					TryCollisionEnter(circleCast.collider);
+					resourceGatherer.DeliverResource();
 				}
 			}
 		}

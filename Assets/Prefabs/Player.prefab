@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 1221620875076146051}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  maxSpeed: 40
+  maxSpeed: 60
   rocketMoveSpeedFactor: 0.7
   currentSpeed: 0
   moveForce: 220
