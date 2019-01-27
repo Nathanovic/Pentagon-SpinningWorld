@@ -21,6 +21,7 @@ public class RocketHealthUI : MonoBehaviour {
 	private void OnHealthChanged(int newHealth) {
 		healthText.text = newHealth.ToString() + "%";
 		if(newHealth <= 0 || newHealth >= 100) {
+			healthText.enabled = false;
 			gameEnded = true;
 		} else {
 			gameEnded = false;

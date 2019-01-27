@@ -323,6 +323,11 @@ PrefabInstance:
       propertyPath: moveForce
       value: 220
       objectReference: {fileID: 0}
+    - target: {fileID: 7913547616771107981, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: rocketMoveSpeedFactor
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7913547616771107980, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
       propertyPath: bodyWorldOffset

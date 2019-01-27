@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 1
   maxSpeed: 60
-  rocketMoveSpeedFactor: 0.7
+  rocketMoveSpeedFactor: 0.6
   currentSpeed: 0
   moveForce: 220
   slowDownForce: 75
