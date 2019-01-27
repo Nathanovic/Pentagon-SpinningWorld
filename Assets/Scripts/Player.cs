@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	public float maxSpeed = 3f;
 
 	public float rocketMoveSpeedFactor = 0.7f;
+	public float resourceWalkSpeedFactor = 0.8f;
 
 	public float currentSpeed;
 	public float moveForce = 5f;
@@ -81,6 +82,9 @@ public class Player : MonoBehaviour {
 			}
 
 			float moveSpeed = currentSpeed;
+			if (GetComponent<ResourceGatherer>().hasResource) {
+				moveSpeed *= resourceWalkSpeedFactor;
+			}
 			if (collidingRocket != null) {
 				moveSpeed = currentSpeed * rocketMoveSpeedFactor;
 				collidingRocket.transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);

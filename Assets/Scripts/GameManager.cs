@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour {
 
 	public int selectedItem = 0; //Debug public
 
+	public Image ugleGGJImage;
+	public float uglyGGJImageShowDuration = 1.5f;
+	public float uglyGGJImageFadeDuration = 0.5f;
+
 	public CanvasGroup blackCanvasGroup;
 	public MenuScreen menuScreen;
 	public CanvasGroup restartCanvasGroup;
@@ -21,10 +25,12 @@ public class GameManager : MonoBehaviour {
 	public enum GameState {
 		Menu,
 		Playing,
-		Restart
+		Restart,
+		FadeInGame
 	}
 	private GameState gameState;
 	public bool IsPlaying { get { return gameState == GameState.Playing; } }
+	private bool isFading;
 
 	private List<Player> players = new List<Player>();
 	private int deadPlayerCount;
@@ -43,10 +49,21 @@ public class GameManager : MonoBehaviour {
 		players.Add(player);
 	}
 
-    private void Start() {
-        StartCoroutine(FadeBlackGroup());
-		menuScreen.Activate();
+    private IEnumerator Start() {
+		yield return new WaitForSeconds(uglyGGJImageShowDuration);
+		float t = 0f;
+		while (t < 1f) {
+			t += Time.deltaTime / uglyGGJImageFadeDuration;
+			ugleGGJImage.color = new Color(1,1,1, 1f - t);
+			yield return null;
+		}
+		EnterMenu();
     }
+
+	private void EnterMenu() {
+		StartCoroutine(FadeBlackGroup());
+		menuScreen.Activate();
+	}
 
     private IEnumerator FadeBlackGroup() {
         while (true) {
@@ -69,16 +86,20 @@ public class GameManager : MonoBehaviour {
     }
 
     public void StartCameraMotion() {
-        StartCoroutine(CameraMotionDelay());
+		if (gameState != GameState.Menu) { return; }
+		gameState = GameState.FadeInGame;
+		StartCoroutine(CameraMotionDelay());
     }
 
-    private IEnumerator CameraMotionDelay() {
-        Animator cameraAnimator = GameObject.Find("CameraParent").GetComponent<Animator>();
-        cameraAnimator.SetTrigger("startCameraMotion");
-        menuScreen.Deactivate();
-        yield return new WaitForSeconds(4f);
-        StartGame();
-    }
+	private IEnumerator CameraMotionDelay() {
+		Animator cameraAnimator = GameObject.Find("CameraParent").GetComponent<Animator>();
+		cameraAnimator.SetTrigger("startCameraMotion");
+		menuScreen.Deactivate();
+		yield return new WaitForSeconds(4f);
+		menuScreen.Fade(1f, 0f, () => {
+			StartGame();
+		});
+	}
 
     public void StartGame() {
 		deadPlayerCount = 0;
@@ -87,55 +108,50 @@ public class GameManager : MonoBehaviour {
 		restartScreen.Deactivate();
 	    
 		//AkSoundEngine.Postevent("Restart", gameobject);
-	    print("Sound effect: Restart");		
-	    foreach (Player player in players) {
+		print("Sound effect: Restart");		
+		foreach (Player player in players) {
 			player.Revive();
 		}
 
 		Rocket.instance.Initialize();
 	}
 
+	public void QuitGame() {
+		Application.Quit();
+	}
+
 	public void NotifyPlayerDeath() {
+		if(gameState != GameState.Playing) { return; }
 		deadPlayerCount++;
 		if (deadPlayerCount >= players.Count) {
-			StartCoroutine(EnterRestartState());
+			EnterRestartState();
 		}
 	}
 
 	public void NotifyRocketDestroyed() {
-		StartCoroutine(EnterRestartState());
+		EnterRestartState();
 	}
 
-	private IEnumerator EnterRestartState() {
-		Meteor[] allMeteors = FindObjectsOfType<Meteor>();
-		foreach(Meteor meteor in allMeteors) {
-			Destroy(meteor.gameObject);
-		}
-
+	private void EnterRestartState() {
+		if (gameState == GameState.Restart) { return; }
 		gameState = GameState.Restart;
-		float t = 0f;
-		while (t < 1f) {
-			t += Time.deltaTime / fadeDuration;
-			restartCanvasGroup.alpha = t;
-			yield return null;
-		}
-
-		restartScreen.Activate();
+		restartScreen.Fade(0f, 1f, () => {
+			restartScreen.Activate();
+		});
 	}
 
 	public void RestartGame() {
-		StartCoroutine(RestartOverTime());
-	}
+		if(gameState == GameState.FadeInGame) { return; }
+		gameState = GameState.FadeInGame;
 
-	private IEnumerator RestartOverTime() {
-		float t = 0f;
-		while (t < 1f) {
-			t += Time.deltaTime / fadeDuration;
-			restartCanvasGroup.alpha = 1f - t;
-			yield return null;
+		Meteor[] allMeteors = FindObjectsOfType<Meteor>();
+		foreach (Meteor meteor in allMeteors) {
+			Destroy(meteor.gameObject);
 		}
 
-		StartGame();
+		restartScreen.Fade(1f, 0f, () => {
+			StartGame();
+		});
 	}
 
 }

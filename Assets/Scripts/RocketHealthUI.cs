@@ -24,6 +24,7 @@ public class RocketHealthUI : MonoBehaviour {
 			healthText.enabled = false;
 			gameEnded = true;
 		} else {
+			healthText.enabled = true;
 			gameEnded = false;
 		}
 	}
