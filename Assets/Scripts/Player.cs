@@ -23,6 +23,8 @@ public class Player : MonoBehaviour {
 	private new Collider2D collider;
 	[SerializeField] private ParticleSystem[] deadVFX;
 
+	public Transform frontColliderCheck;
+	public Transform backColliderCheck;
 	public Rocket collidingRocket { get; private set; }
 
 	private void Awake() {
@@ -65,8 +67,12 @@ public class Player : MonoBehaviour {
 		} else {
 			currentSpeed = absSpeed;
 		}
-		
-		if (collisionScript.IsCollidingFront) {
+
+		Transform colliderCheckTransform = frontColliderCheck;
+		if (transform.localScale.x > 0 && currentSpeed < 0 || transform.localScale.x < 0 && currentSpeed > 0) {
+			colliderCheckTransform = backColliderCheck;
+		}
+		if (collisionScript.IsCollidingFront(colliderCheckTransform)) {
 			currentSpeed = 0f;
 		} else {
 			if (input != 0f) {
