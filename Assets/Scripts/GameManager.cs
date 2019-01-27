@@ -95,6 +95,10 @@ public class GameManager : MonoBehaviour {
 		Rocket.instance.Initialize();
 	}
 
+	public void QuitGame() {
+		Application.Quit();
+	}
+
 	public void NotifyPlayerDeath() {
 		deadPlayerCount++;
 		if (deadPlayerCount >= players.Count) {
