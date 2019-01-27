@@ -114,7 +114,6 @@ public class Player : MonoBehaviour {
 
 	private void OnFrontColliderEnter(Collider2D collider) {
 		if (collider.tag == "Rocket") {
-			Debug.Log("Rocket touched!");
 			collidingRocket = collider.GetComponent<Rocket>();
 			collidingRocket.StartPlayerTouch(this);
 		}
@@ -122,7 +121,6 @@ public class Player : MonoBehaviour {
 
 	private void OnFrontColliderExit(Collider2D collider) {
 		if(collider.tag == "Rocket") {
-			Debug.Log("Rocket lost!");
 			collidingRocket.StopPlayerTouch(this);
 			collidingRocket = null;
 		}
