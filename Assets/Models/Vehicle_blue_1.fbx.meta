@@ -16,6 +16,7 @@ ModelImporter:
     100020: polySurface6
     100022: polySurface7
     100024: //RootNode
+    100026: Vehicle_blue_1_pCylinder11
     400000: pCube3
     400002: pCylinder11
     400004: pCylinder12
@@ -29,6 +30,7 @@ ModelImporter:
     400020: polySurface6
     400022: polySurface7
     400024: //RootNode
+    400026: Vehicle_blue_1_pCylinder11
     2100000: lambert2
     2300000: pCube3
     2300002: pCylinder11
@@ -42,6 +44,7 @@ ModelImporter:
     2300018: polySurface4
     2300020: polySurface6
     2300022: polySurface7
+    2300024: Vehicle_blue_1_pCylinder11
     3300000: pCube3
     3300002: pCylinder11
     3300004: pCylinder12
@@ -54,6 +57,7 @@ ModelImporter:
     3300018: polySurface4
     3300020: polySurface6
     3300022: polySurface7
+    3300024: Vehicle_blue_1_pCylinder11
     4300000: pCylinder5
     4300002: polySurface6
     4300004: pCylinder11
@@ -66,6 +70,7 @@ ModelImporter:
     4300018: pCylinder13
     4300020: pCylinder7
     4300022: polySurface7
+    4300024: Vehicle_blue_1_pCylinder11
   externalObjects: {}
   materials:
     importMaterials: 1
