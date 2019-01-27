@@ -51,6 +51,9 @@ public class Rocket : MonoBehaviour {
 	}
 
 	private void Launch() {
+		//AkSoundEngine.Postevent("Rocket_Launch", gameobject);
+		print("Sound effect: Rocket_Launch");
+		
 		isLaunched = true;
 		transform.SetParent(null);
 	}

@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Meteor : MonoBehaviour {
     private WorldBody worldBody;
@@ -17,7 +17,8 @@ public class Meteor : MonoBehaviour {
     public float velocityMultiplier = 1.0f;
 
     public bool canDamage;// { private set; get; }
-        
+    public String impactSoundTrigger = "Meteor_Impact";
+    
     private void Start() {
         canDamage = true;
         worldBody = GetComponent<WorldBody>();
@@ -47,8 +48,9 @@ public class Meteor : MonoBehaviour {
         //TODO: play meteor impact sound
         //TODO: show impact particles
         onImpact?.Invoke();
-
         
+        //AkSoundEngine.Postevent("Meteor_Impact", gameobject);
+        print("Sound effect: " + impactSoundTrigger);
 
         if (!containsResource) {
             Destroy(this.gameObject);

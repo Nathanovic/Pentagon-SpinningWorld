@@ -158,6 +158,7 @@ MonoBehaviour:
   rotationMultiplier: 1
   velocityMultiplier: 7
   canDamage: 0
+  impactSoundTrigger: Meteor_Impact_Special
 --- !u!58 &7498615683803427980
 CircleCollider2D:
   m_ObjectHideFlags: 0

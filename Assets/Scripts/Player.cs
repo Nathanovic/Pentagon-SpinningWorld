@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using DefaultNamespace;
+using UnityEngine;
 
 public class Player : MonoBehaviour {
 	
@@ -13,6 +15,8 @@ public class Player : MonoBehaviour {
 
 	private bool isFacingLeft = true;
 	private bool isDead;
+
+	private bool drivingSoundIsPlaying = false;
 
 	public PlayerCollision collisionScript { get; private set; }
 	[SerializeField] private GameObject carVisual;
@@ -52,6 +56,11 @@ public class Player : MonoBehaviour {
 		absSpeed -= slowDownForce * Time.deltaTime;
 		if (absSpeed < 0) {
 			absSpeed = 0f;
+			/*if (drivingSoundIsPlaying) {
+				print("Afremmen: Stop_Wagen_" + playerNumber);
+				//AkSoundEngine.Postevent("Stop_Wagen_" + playerNumber, gameobject);
+				drivingSoundIsPlaying = false;
+			}*/
 		}
 		if (currentSpeed < 0) {
 			currentSpeed = -absSpeed;
@@ -61,10 +70,23 @@ public class Player : MonoBehaviour {
 		
 		if (collisionScript.IsCollidingFront) {
 			currentSpeed = 0f;
+			print("Stop_Wagen_" + playerNumber);
+			/*if (drivingSoundIsPlaying) {
+				print("Stop_Wagen_" + playerNumber);
+				//AkSoundEngine.Postevent("Stop_Wagen_" + playerNumber, gameobject);
+				drivingSoundIsPlaying = false;
+			}*/
 		} else {
 			if (input != 0f) {
+			
 				currentSpeed += moveForce * input * Time.deltaTime;
 				currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
+				
+				/*if (!drivingSoundIsPlaying) {
+					print("Rijden_Wagen_" + playerNumber);
+					//AkSoundEngine.Postevent("Rijden_Wagen_" + playerNumber, gameobject);
+					drivingSoundIsPlaying = true;
+				}*/
 			}
 
 			float moveSpeed = currentSpeed;
@@ -74,6 +96,20 @@ public class Player : MonoBehaviour {
 			}
 			transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);
 		}
+
+		if (Math.Abs(currentSpeed) > 0.001f) { // we rijden
+			if (!drivingSoundIsPlaying) {
+				print("Rijden_Wagen_" + playerNumber);
+				//AkSoundEngine.Postevent("Rijden_Wagen_" + playerNumber, gameobject);
+				drivingSoundIsPlaying = true;
+			}
+		} else if (drivingSoundIsPlaying) {
+			print("Stop_Wagen_" + playerNumber);
+			//AkSoundEngine.Postevent("Stop_Wagen_" + playerNumber, gameobject);
+			drivingSoundIsPlaying = false;
+		}
+		
+		transform.RotateAround(World.Position, Vector3.forward, currentSpeed * Time.deltaTime);
 	}
 
 	private void OnFrontColliderEnter(Collider2D collider) {
@@ -115,7 +151,8 @@ public class Player : MonoBehaviour {
 		if (collidingRocket != null) {
 			collidingRocket.StopPlayerTouch(this);
 		}
-
+		
+		AkSoundEngine.PostEvent("Wagen_Destroyed", gameObject);
 		GameManager.Instance.NotifyPlayerDeath();
 	}
 

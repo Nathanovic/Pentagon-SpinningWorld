@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DefaultNamespace;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuScreen : MonoBehaviour {
@@ -35,6 +36,7 @@ public class MenuScreen : MonoBehaviour {
 			} else if (selectedButtonIndex == 0) {
 				selectedButtonIndex = buttons.Length - 1;
 			}
+			AkSoundEngine.PostEvent("Scroll", gameObject);
 		}
 		if (Input.GetKeyDown(KeyCode.DownArrow)) {
 			if (selectedButtonIndex < (buttons.Length - 1)) {
@@ -42,10 +44,12 @@ public class MenuScreen : MonoBehaviour {
 			} else if (selectedButtonIndex == (buttons.Length - 1)) {
 				selectedButtonIndex = 0;
 			}
+			AkSoundEngine.PostEvent("Scroll", gameObject);
 		}
 
 		if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Return)) {
 			buttons[selectedButtonIndex].InvokeAction();
+			AkSoundEngine.PostEvent("Select", gameObject);
 		}
 
 		for (int i = 0; i < buttons.Length; i++) {

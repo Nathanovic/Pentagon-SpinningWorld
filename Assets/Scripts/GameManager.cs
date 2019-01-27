@@ -73,8 +73,10 @@ public class GameManager : MonoBehaviour {
 		gameState = GameState.Playing;
 		menuScreen.Deactivate();
 		restartScreen.Deactivate();
-
-		foreach (Player player in players) {
+	    
+		//AkSoundEngine.Postevent("Restart", gameobject);
+	    print("Sound effect: Restart");		
+	    foreach (Player player in players) {
 			player.Revive();
 		}
 	}
