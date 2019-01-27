@@ -6,7 +6,7 @@ public class Meteor : MonoBehaviour {
     private WorldBody worldBody;
     public bool containsResource;
     public ParticleSystem vfxImpact;
-    public Light pointLight;
+    public new Light pointLight;
     public GameObject visuals;
 
     public Light light;

@@ -1,8 +1,16 @@
 ﻿using UnityEngine;
 
 public class Resource : MonoBehaviour {
-    public int amount = 1;
-    public bool isHeld { get; private set; }
+	public int repairPower = 10;
+	public bool isHeld { get; private set; }
+	private bool isDelivered;
+	public bool canPickUp {
+		get {
+			if (isDelivered) { return false; }
+			if (isHeld) { return false; }
+			return true;
+		}
+	}
 
     private WorldBody worldBody;
 
@@ -21,4 +29,10 @@ public class Resource : MonoBehaviour {
         transform.SetParent(null);
         isHeld = false;
     }
+
+	public void Deliver() {
+		Drop();
+		isDelivered = true;
+		Destroy(gameObject);
+	}
 }

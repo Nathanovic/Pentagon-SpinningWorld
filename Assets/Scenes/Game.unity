@@ -376,12 +376,10 @@ GameObject:
   m_Component:
   - component: {fileID: 161172661}
   - component: {fileID: 161172660}
-  - component: {fileID: 161172662}
-  - component: {fileID: 161172663}
   - component: {fileID: 161172664}
   m_Layer: 9
   m_Name: World
-  m_TagString: Untagged
+  m_TagString: World
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,43 +441,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!58 &161172662
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161172659}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 3
---- !u!50 &161172663
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161172659}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &161172664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,12 +453,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af49a06771f116749bdaa00977db10b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meteorPrefab1: {fileID: 4329303402749056334, guid: e7b4dae048340b24286e5c5aa53c1201,
+  meteorPrefab1: {fileID: 8308253850022020214, guid: 400d2913b0aec8442ac08fcb6bb8bf3f,
     type: 3}
   meteorPrefab2: {fileID: 4329303402749056334, guid: ad7be2963697ff84081411b54936828f,
     type: 3}
-  spawnChangeMeteor1: 1
-  spawnChangeMeteor2: 0
+  spawnChangeMeteor1: 0.8
+  spawnChangeMeteor2: 0.2
   spawnInterval: 1
   offset: 25
   timeTillSpawn: 0
@@ -587,6 +548,7 @@ GameObject:
   - component: {fileID: 254548526}
   - component: {fileID: 254548527}
   - component: {fileID: 254548528}
+  - component: {fileID: 254548529}
   m_Layer: 11
   m_Name: Rocket
   m_TagString: Rocket
@@ -631,6 +593,8 @@ MonoBehaviour:
   collisionLM:
     serializedVersion: 2
     m_Bits: 1025
+  rocketMaxHealth: 100
+  rocketHealth: 50
 --- !u!61 &254548528
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -657,6 +621,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 2}
   m_EdgeRadius: 0
+--- !u!58 &254548529
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254548525}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1001 &287056228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -950,7 +930,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1829910170}
@@ -1385,7 +1365,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829910169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519420032}

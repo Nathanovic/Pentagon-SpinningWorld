@@ -11,7 +11,7 @@ public class ResourceGatherer : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         player = GetComponent<Player>();
-        player.collisionScript.onResourceHit += ResourceHit;
+        player.collisionScript.onFrontResourceHit += ResourceHit;
         player.collisionScript.onRocketChargePlateHit += OnRocketChargePlateHit;
         player.collisionScript.onFallHit += OnFallHit;
     }
@@ -27,9 +27,9 @@ public class ResourceGatherer : MonoBehaviour {
 
     void ResourceHit(Meteor meteor) {
         if (hasResource) { return; }
-
+		
         Resource resource = meteor.GetComponent<Resource>();
-        if (resource.isHeld) { return; }
+        if (resource == null || !resource.canPickUp) { return; }
         
         currentResource = resource;
         currentResource.PickUp(transform);
@@ -53,4 +53,12 @@ public class ResourceGatherer : MonoBehaviour {
             DropResource();
         }
     }
+
+	public void DeliverResource() {
+		Debug.Log("Deliver resource; " + currentResource.name);
+		Rocket.instance.DeliverResource(currentResource);
+		currentResource.Deliver();
+		currentResource = null;
+	}
+
 }
