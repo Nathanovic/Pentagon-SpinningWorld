@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WorldBody : MonoBehaviour {
 	
@@ -14,9 +15,17 @@ public class WorldBody : MonoBehaviour {
 	public Vector3 velocity;
 	public bool keepStanding;
 	public float bodyWorldOffset;
+	public bool isGrounded;// { private set; get; }
 
+	public Action onTouchGround;
+	
 	public void LateUpdate() {
-		bool isGrounded = World.Instance.GetGrounded(this);
+		bool newGrounded = World.Instance.GetGrounded(this);
+		if (newGrounded != isGrounded && newGrounded) {
+			onTouchGround?.Invoke();
+		}
+		isGrounded = newGrounded;
+
 		if (isGrounded) {
 			GravityGrowTime = 0f;
 			velocity = Vector3.zero;
@@ -33,18 +42,22 @@ public class WorldBody : MonoBehaviour {
 			}
 		}
 
-		transform.position = transform.position + velocity * Time.deltaTime;
-
 		if (keepStanding) {
 			Vector3 vectorToTarget = World.Instance.transform.position - transform.position;
 			float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90;
 			Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 			transform.rotation = targetRotation;
 		}
+
+		transform.position = transform.position + velocity * Time.deltaTime;
 	}
 
 	private void OnDrawGizmos() {
-		Gizmos.color = Color.red;
+		if (!isGrounded) {
+			Gizmos.color = Color.red;
+		} else {
+			Gizmos.color = Color.blue;
+		}
 		Gizmos.DrawWireSphere(transform.position, bodyWorldOffset);
 	}
 

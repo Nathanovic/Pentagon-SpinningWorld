@@ -13,17 +13,20 @@ public class MeteorSpawner : MonoBehaviour {
     public float offset = 15.0f;
     public float timeTillSpawn = 0.0f;
     
-    public float maxMeteorFallingSpeed = 25;
-    public float minMeteorFallingSpeed = 10;
+    public float maxMeteorFallingSpeed = 50;
+    public float minMeteorFallingSpeed = 2;
+    public float minMeteorRotationMultiplier = 1.0f;
+    public float maxMeteorRotationMultiplier = 4.0f;
     public float minMeteorScale = 0.5f;
     public float maxMeteorScale = 2;
 
     private void Start() {
         totalSpawnChange = spawnChangeMeteor1 + spawnChangeMeteor2;
     }
-
-    // Update is called once per frame
+	
     void Update() {
+		if (!GameManager.Instance.IsPlaying) { return; }
+
         timeTillSpawn -= Time.deltaTime;
 
         if (timeTillSpawn <= 0) {
@@ -48,8 +51,10 @@ public class MeteorSpawner : MonoBehaviour {
         float size = Random.Range(minMeteorScale, maxMeteorScale);
         meteor.transform.localScale *= size;
         
-        meteor.GetComponent<Meteor>().onImpact += () => {
-            Screenshake.instance.StartShakeVertical(2, 0.005f * size * (speed2 + 20), 0.001f * size * (speed2 + 20));
+        Meteor meteorComponent = meteor.GetComponent<Meteor>();
+        meteorComponent.onImpact += () => {
+            Screenshake.instance.StartShakeVertical(2, 0.02f * size * (speed2 + 5), 0.003f * size * (speed2 + 5));
         };
+        meteorComponent.rotationMultiplier = Random.Range(minMeteorRotationMultiplier, maxMeteorRotationMultiplier);
     }
 }

@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558895791117563591}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.35, z: 0}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8782018019960662877}
@@ -305,7 +305,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.5943396, g: 0.26330543, b: 0.10933607, a: 1}
-      maxColor: {r: 0.6037736, g: 0.19749604, b: 0, a: 1}
+      maxColor: {r: 0.30588236, g: 0.30980393, b: 0.31764707, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4757,7 +4757,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4803,11 +4803,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8782018019960662877}
   - component: {fileID: 3526107711770293822}
-  - component: {fileID: 6112919277030185875}
   - component: {fileID: 8163495193659152506}
   - component: {fileID: 6475220861741824478}
   - component: {fileID: 7369126461944842816}
-  m_Layer: 8
+  - component: {fileID: 4376940719354062227}
+  m_Layer: 0
   m_Name: Meteor
   m_TagString: Meteor
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ Transform:
   m_GameObject: {fileID: 4329303402749056334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 8445804398533580877}
 <<<<<<< HEAD
@@ -4842,19 +4842,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4329303402749056334}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &6112919277030185875
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4329303402749056334}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.49
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8163495193659152506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4886,6 +4873,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   keepStanding: 1
   bodyWorldOffset: 0.4
+  isGrounded: 0
 --- !u!114 &7369126461944842816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4898,13 +4886,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288c06a1b47650047a24c12f9ffd01f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
   containsResource: 0
   vfxImpact: {fileID: 4758649111897336687}
 <<<<<<< HEAD
   pointLight: {fileID: 2050219441}
 =======
   visuals: {fileID: 3804425814197327900}
+  light: {fileID: 0}
+  rotationMultiplier: 1
+  velocityMultiplier: 1
+  canDamage: 0
+  impactSoundTrigger: Meteor_Impact
+--- !u!58 &4376940719354062227
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4329303402749056334}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
 --- !u!1001 &3804425814197362364
 PrefabInstance:
   m_ObjectHideFlags: 0

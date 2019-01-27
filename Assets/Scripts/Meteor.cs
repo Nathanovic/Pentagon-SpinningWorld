@@ -1,54 +1,66 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Meteor : MonoBehaviour {
     private WorldBody worldBody;
-    [SerializeField]
-    private bool isGrounded = false;
-    public bool containsResource = false;
+    public bool containsResource;
     public ParticleSystem vfxImpact;
 <<<<<<< HEAD
     public Light pointLight;
 =======
     public GameObject visuals;
->>>>>>> 2c5964bc371d53ac0eeaed2031aa25b10f6494b3
-    
+
+    public Light light;
     public delegate void ImpactFunction();
     public event ImpactFunction onImpact;
 
     private Vector3 rotation;
+    public float rotationMultiplier = 1.0f;
+    public float velocityMultiplier = 1.0f;
 
+    public bool canDamage;// { private set; get; }
+    public String impactSoundTrigger = "Meteor_Impact";
+    
     private void Start() {
+        canDamage = true;
         worldBody = GetComponent<WorldBody>();
-        isGrounded = World.Instance.GetGrounded(worldBody);
+        worldBody.minSpeed *= velocityMultiplier;
+        worldBody.maxSpeed *= velocityMultiplier;
+
+        worldBody.onTouchGround += OnWorldImpact;
         onImpact += ShowImpactParticles;
-<<<<<<< HEAD
-        onImpact += ShowPointLight;
-=======
+        onImpact += DestroyLight;
+        containsResource = GetComponent<Resource>() != null;
         
         Quaternion randomRotation = Random.rotation;
         rotation = new Vector3(randomRotation.x, randomRotation.y, randomRotation.z);
 >>>>>>> 2c5964bc371d53ac0eeaed2031aa25b10f6494b3
     }
 
-    private void Update() {
-        if (!isGrounded && World.Instance.GetGrounded(worldBody)) {
-            isGrounded = true;
-            //TODO: play meteor impact sound
-            //TODO: show impact particles
-            onImpact?.Invoke();
-
-            if (!containsResource) {
-                Destroy(this.gameObject);
-                //TODO: show destroy meteor particles
-            }
-        }
-        
-        if(!isGrounded)
-            visuals.transform.Rotate(rotation);
+    private void OnDisable() {
+        worldBody.onTouchGround -= OnWorldImpact;
     }
 
+    private void Update() {
+        if(!worldBody.isGrounded)
+            visuals.transform.Rotate(rotation * rotationMultiplier);
+    }
+
+    private void OnWorldImpact() {
+        canDamage = false;
+        //TODO: play meteor impact sound
+        //TODO: show impact particles
+        onImpact?.Invoke();
+        
+        //AkSoundEngine.Postevent("Meteor_Impact", gameobject);
+        print("Sound effect: " + impactSoundTrigger);
+
+        if (!containsResource) {
+            Destroy(this.gameObject);
+            //TODO: show destroy meteor particles
+        }
+    }
 
     private void ShowImpactParticles() {
         if (vfxImpact != null) {
@@ -58,11 +70,9 @@ public class Meteor : MonoBehaviour {
         }
     }
 
-    private void ShowPointLight() {
-        pointLight.transform.parent = null;
-        pointLight.enabled = true;
-        pointLight.GetComponent<LightDestroyer>().DestroyWhenDone();
+    private void DestroyLight() {
+        if(light != null) {
+            Destroy(light);
+        }
     }
-
-  
 }
