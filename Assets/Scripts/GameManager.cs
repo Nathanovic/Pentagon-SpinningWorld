@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private IEnumerator CameraMotionDelay() {
+		AkSoundEngine.PostEvent("Zoom_Uit", gameObject);
 		Animator cameraAnimator = GameObject.Find("CameraParent").GetComponent<Animator>();
 		cameraAnimator.SetTrigger("startCameraMotion");
 		menuScreen.Deactivate();
@@ -117,9 +118,10 @@ public class GameManager : MonoBehaviour {
 		menuScreen.Deactivate();
 		restartScreen.Deactivate();
 	    
-		//AkSoundEngine.Postevent("Restart", gameobject);
-		print("Sound effect: Restart");		
-		foreach (Player player in players) {
+		//AkSoundEngine.PostEvent("Restart", gameObject);
+		AkSoundEngine.SetState("Muziek", "Start");
+
+	    foreach (Player player in players) {
 			player.Revive();
 		}
 
@@ -146,8 +148,10 @@ public class GameManager : MonoBehaviour {
 		if (gameState == GameState.Completed) { return; }
 		if (gameState == GameState.Restart) { return; }
 		gameState = GameState.Restart;
+		AkSoundEngine.SetState("Muziek", "Dood");
 		restartScreen.Fade(0f, 1f, () => {
 			restartScreen.Activate();
+			AkSoundEngine.PostEvent("Stop_Geluid", gameObject);
 		});
 	}
 

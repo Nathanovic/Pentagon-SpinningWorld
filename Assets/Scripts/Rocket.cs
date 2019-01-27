@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEditor;
@@ -87,9 +88,13 @@ public class Rocket : MonoBehaviour {
     }
 
 	private void Launch() {
-		//AkSoundEngine.Postevent("Rocket_Launch", gameobject);
-		print("Sound effect: Rocket_Launch");
-		
+		AkSoundEngine.PostEvent("Rocket_Launch", gameObject);
+		StartCoroutine(launchAfterSeconds(2));
+	}
+
+
+	private IEnumerator launchAfterSeconds(float seconds) {
+		yield return new WaitForSeconds(seconds);
 		isLaunched = true;
 		transform.SetParent(null);
 		GameManager.Instance.FinishGame();
@@ -109,6 +114,7 @@ public class Rocket : MonoBehaviour {
 	public void DeliverResource(Resource resource) {
 		if(resource == null) { return; }
 		ChangeHealth(resource.repairPower);
+		AkSoundEngine.PostEvent("Rocket_Repair", gameObject);
 	}
 
 	private void ChangeHealth(int change) {
@@ -121,6 +127,10 @@ public class Rocket : MonoBehaviour {
 		} else if (rocketHealth <= 0) {
 			rocketHealth = 0;
 			LoseGame();
+		}
+
+		if (change < 0) {
+			AkSoundEngine.PostEvent("Wagen_Destroyed", gameObject);
 		}
 
 		onHealthChanged?.Invoke(rocketHealth);

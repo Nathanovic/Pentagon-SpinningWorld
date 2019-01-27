@@ -22,6 +22,7 @@ public class Resource : MonoBehaviour {
         worldBody.enabled = false;
         transform.SetParent(newParent);
         isHeld = true;
+	    AkSoundEngine.PostEvent("Pickup", gameObject);
     }
 
     public void Drop() {

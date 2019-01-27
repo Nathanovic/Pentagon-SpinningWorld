@@ -28,6 +28,8 @@ public class PlayerCollision : MonoBehaviour {
 	public LayerMask defaultLM;
 	public LayerMask deathLM;
 
+	private bool isPlayingRocketLaunchSound = false;
+
 	private void Start() {
         resourceGatherer = GetComponent<ResourceGatherer>();
 		myCollider = GetComponent<CircleCollider2D>();
@@ -66,6 +68,8 @@ public class PlayerCollision : MonoBehaviour {
 				hasRocket = true;
 				allColliders.Add(hitInfo.collider);
 				TryCollisionEnter(hitInfo.collider);
+				
+				playRocketPushSound();
 			}
 
 			if (hasRocket) {
@@ -86,10 +90,12 @@ public class PlayerCollision : MonoBehaviour {
 				collidingMeteor = GetMeteor(circleCast, true);
 				if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
 					isCollidingFront = true;
-				}else if (circleCast.collider != null && circleCast.collider.tag == "Rocket") {
+				} else if (circleCast.collider != null && circleCast.collider.tag == "Rocket") {
 					allColliders.Add(circleCast.collider);
 					TryCollisionEnter(circleCast.collider);
 					resourceGatherer.DeliverResource();
+					
+					playRocketPushSound();
 				}
 			}
 		}
@@ -103,6 +109,13 @@ public class PlayerCollision : MonoBehaviour {
 		}
 
 		return isCollidingFront;
+	}
+
+	private void playRocketPushSound() {
+		if (!isPlayingRocketLaunchSound) {
+			AkSoundEngine.PostEvent("Push_Rocket", gameObject);
+			isPlayingRocketLaunchSound = true;
+		}
 	}
 
     private void OnDrawGizmos() {

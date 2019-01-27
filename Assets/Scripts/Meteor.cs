@@ -50,7 +50,7 @@ public class Meteor : MonoBehaviour {
         //TODO: show impact particles
         onImpact?.Invoke();
         
-        //AkSoundEngine.Postevent("Meteor_Impact", gameobject);
+        AkSoundEngine.PostEvent(impactSoundTrigger, gameObject);
         print("Sound effect: " + impactSoundTrigger);
 
         if (!containsResource) {
