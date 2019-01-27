@@ -82,6 +82,7 @@ public class Rocket : MonoBehaviour {
 		
 		isLaunched = true;
 		transform.SetParent(null);
+		GameManager.Instance.FinishGame();
 	}
 
 	public Collider2D CollideOther(Vector3 checkingPlayerPos, float checkDistance) {
@@ -96,6 +97,7 @@ public class Rocket : MonoBehaviour {
 	}
 
 	public void DeliverResource(Resource resource) {
+		if(resource == null) { return; }
 		ChangeHealth(resource.repairPower);
 	}
 
