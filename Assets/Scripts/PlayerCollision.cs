@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class PlayerCollision : MonoBehaviour {
 	private Player player;
     public float noseCollisionOffset = 0.2f;
-    public Transform noseTransform;
 
     public delegate void CollisionFunction(Meteor meteor);
 
@@ -24,13 +23,6 @@ public class PlayerCollision : MonoBehaviour {
 	private CircleCollider2D myCollider;
 	public float deathCastYOffset = 0.5f;
 
-	private bool isCollidingFront;
-    public bool IsCollidingFront {
-		get {
-			return isCollidingFront;
-		}
-	}
-
     private ResourceGatherer resourceGatherer;
 
 	public LayerMask defaultLM;
@@ -43,18 +35,30 @@ public class PlayerCollision : MonoBehaviour {
 	}
 
     public void EarlyUpdate() {
-		isCollidingFront = false;
-        Meteor collidingMeteor = null;
-		
+		Vector2 deadCheckPosition = transform.position + transform.up * deathCastYOffset;
+		RaycastHit2D meteorCast = Physics2D.CircleCast(deadCheckPosition, myCollider.radius, Vector2.zero, 100f, deathLM);
+        Meteor meteor = GetMeteor(meteorCast, false);
+        if (meteor != null) {
+            if (meteor.canDamage) {
+				Debug.Log("Damage by : " + meteor.name);
+                onFallHit?.Invoke(meteor);
+            }
+        }
+    }
+
+	public bool IsCollidingFront(Transform frontChecker) {
+		bool isCollidingFront = false;
+		Meteor collidingMeteor = null;
+
 		List<Collider2D> allColliders = new List<Collider2D>();
-        // Check if we can pick up resources
-        if (!resourceGatherer.hasResource) {
-            Vector2 noseDir = transform.right * -transform.localScale.x;
-            Debug.DrawRay(noseTransform.transform.position, noseDir.normalized * noseCollisionOffset, Color.red);
-            RaycastHit2D hitInfo = Physics2D.Raycast(noseTransform.transform.position, noseDir, noseCollisionOffset, defaultLM);
-            collidingMeteor = GetMeteor(hitInfo, true);
-            if (collidingMeteor != null) {
-                onResourceHit?.Invoke(collidingMeteor);
+		// Check if we can pick up resources
+		if (!resourceGatherer.hasResource) {
+			Vector2 noseDir = frontChecker.up;
+			Debug.DrawRay(frontChecker.position, noseDir.normalized * noseCollisionOffset, Color.red);
+			RaycastHit2D hitInfo = Physics2D.Raycast(frontChecker.position, noseDir, noseCollisionOffset, defaultLM);
+			collidingMeteor = GetMeteor(hitInfo, true);
+			if (collidingMeteor != null) {
+				onResourceHit?.Invoke(collidingMeteor);
 			}
 
 			bool hasRocket = false;
@@ -71,13 +75,13 @@ public class PlayerCollision : MonoBehaviour {
 				}
 			}
 		}
-        // Check if we hit something with our carried resource
-        else {
-            CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
-            float circleCastRadius = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
-            RaycastHit2D[] circleCasts =
-                Physics2D.CircleCastAll(myResourceCollider.transform.position, circleCastRadius, Vector2.zero, 100f, defaultLM);
-            foreach (RaycastHit2D circleCast in circleCasts) {
+		// Check if we hit something with our carried resource
+		else {
+			CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
+			float circleCastRadius = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
+			RaycastHit2D[] circleCasts =
+				Physics2D.CircleCastAll(myResourceCollider.transform.position, circleCastRadius, Vector2.zero, 100f, defaultLM);
+			foreach (RaycastHit2D circleCast in circleCasts) {
 				collidingMeteor = GetMeteor(circleCast, true);
 				if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
 					isCollidingFront = true;
@@ -88,27 +92,19 @@ public class PlayerCollision : MonoBehaviour {
 					allColliders.Add(circleCast.collider);
 					TryCollisionEnter(circleCast.collider);
 				}
-            }
-        }
+			}
+		}
 
-		Vector2 deadCheckPosition = transform.position + transform.up * deathCastYOffset;
-		RaycastHit2D meteorCast = Physics2D.CircleCast(deadCheckPosition, myCollider.radius, Vector2.zero, 100f, deathLM);
-        Meteor meteor = GetMeteor(meteorCast, false);
-        if (meteor != null) {
-            if (meteor.canDamage) {
-				Debug.Log("Damage by : " + meteor.name);
-                onFallHit?.Invoke(meteor);
-            }
-        }
-
-		for(int i = currentColliders.Count - 1; i > -1; i --) {
+		for (int i = currentColliders.Count - 1; i > -1; i--) {
 			Collider2D collider = currentColliders[i];
 			if (!allColliders.Contains(collider)) {
 				onCollisionExit?.Invoke(collider);
 				currentColliders.Remove(collider);
 			}
 		}
-    }
+
+		return isCollidingFront;
+	}
 
     private void OnDrawGizmos() {
 		if (!Application.isPlaying) { return; }
