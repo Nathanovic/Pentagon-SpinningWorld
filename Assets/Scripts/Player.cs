@@ -44,7 +44,7 @@ public class Player : MonoBehaviour {
 		startDir = World.Instance.transform.InverseTransformDirection(transform.forward);
 	}
 
-	private void Start() {
+	private void Start(){
 		GameManager.Instance.InitializePlayer(this);
 	}
 
