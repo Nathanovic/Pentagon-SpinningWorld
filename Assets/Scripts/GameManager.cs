@@ -86,8 +86,9 @@ public class GameManager : MonoBehaviour {
 		menuScreen.Deactivate();
 		restartScreen.Deactivate();
 	    
-		//AkSoundEngine.Postevent("Restart", gameobject);
-	    print("Sound effect: Restart");		
+		//AkSoundEngine.PostEvent("Restart", gameObject);
+	    AkSoundEngine.SetState("Muziek", "Start");
+
 	    foreach (Player player in players) {
 			player.Revive();
 		}
@@ -96,8 +97,10 @@ public class GameManager : MonoBehaviour {
 	public void NotifyPlayerDeath() {
 		deadPlayerCount++;
 		if (deadPlayerCount >= players.Count) {
+			AkSoundEngine.SetState("Muziek", "Dood");
 			gameState = GameState.Restart;
 			restartScreen.Activate();
+			AkSoundEngine.PostEvent("Stop_Geluid", gameObject);
 		}
 	}
 

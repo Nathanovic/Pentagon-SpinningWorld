@@ -44,9 +44,8 @@ public class Rocket : MonoBehaviour {
 			if (hit2D.transform.CompareTag("Meteor")) {
 				Resource resource = hit2D.collider.GetComponent<Resource>();
 				if (resource == null || !resource.isHeld) {
-					Debug.Log("Collision with: " + hit2D.transform.tag + "!!!", hit2D.collider);
-					Time.timeScale = 0;
-					EditorApplication.isPaused = false;
+					/*Time.timeScale = 0;
+					EditorApplication.isPaused = false;*/
 				}
 			}
 		}
@@ -65,8 +64,7 @@ public class Rocket : MonoBehaviour {
     }
 
 	private void Launch() {
-		//AkSoundEngine.Postevent("Rocket_Launch", gameobject);
-		print("Sound effect: Rocket_Launch");
+		AkSoundEngine.PostEvent("Rocket_Launch", gameObject);
 		
 		isLaunched = true;
 		transform.SetParent(null);

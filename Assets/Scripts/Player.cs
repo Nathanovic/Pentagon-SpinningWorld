@@ -27,6 +27,8 @@ public class Player : MonoBehaviour {
 	public Transform backColliderCheck;
 	public Rocket collidingRocket { get; private set; }
 
+	private bool rocketPushShoundIsPlaying = false;
+
 	private void Awake() {
 		collisionScript = GetComponent<PlayerCollision>();
 		collider = GetComponent<Collider2D>();
@@ -76,10 +78,16 @@ public class Player : MonoBehaviour {
 			currentSpeed = 0f;
 		} else {
 			if (input != 0f) {
-			
 				currentSpeed += moveForce * input * Time.deltaTime;
 				currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
 				
+				if (!drivingSoundIsPlaying) {
+					AkSoundEngine.PostEvent("Rijden_Wagen_" + playerNumber, gameObject);
+					drivingSoundIsPlaying = true;
+				}
+			} else if (drivingSoundIsPlaying) {
+				AkSoundEngine.PostEvent("Stop_Wagen_" + playerNumber, gameObject);
+				drivingSoundIsPlaying = false;
 			}
 
 			float moveSpeed = currentSpeed;
@@ -89,19 +97,22 @@ public class Player : MonoBehaviour {
 			}
 			transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);
 		}
-
-		if (Math.Abs(currentSpeed) > 0.001f) { // we rijden
-			if (!drivingSoundIsPlaying) {
-				print("Rijden_Wagen_" + playerNumber);
-				//AkSoundEngine.Postevent("Rijden_Wagen_" + playerNumber, gameobject);
-				drivingSoundIsPlaying = true;
-			}
-		} else if (drivingSoundIsPlaying) {
-			print("Stop_Wagen_" + playerNumber);
-			//AkSoundEngine.Postevent("Stop_Wagen_" + playerNumber, gameObject);
-			drivingSoundIsPlaying = false;
-		}
 		
+		playPushRocketSound();
+	}
+
+	private void playPushRocketSound() {
+		if (rocketPushShoundIsPlaying) {
+			if (collidingRocket == null) {
+				AkSoundEngine.PostEvent("Los_Rocket", gameObject);
+				rocketPushShoundIsPlaying = false;
+			}
+		} else {
+			if (collidingRocket != null) {
+				AkSoundEngine.PostEvent("Push_Rocket", gameObject);
+				rocketPushShoundIsPlaying = true;
+			}
+		}
 	}
 
 	private void OnFrontColliderEnter(Collider2D collider) {
@@ -129,6 +140,8 @@ public class Player : MonoBehaviour {
 	private void OnFallHit(Meteor meteor) {
 		if (isDead) { return; }
 
+		AkSoundEngine.PostEvent("Los_Rocket", gameObject);
+		AkSoundEngine.PostEvent("Stop_Wagen_" + playerNumber, gameObject);
 		isDead = true;
 		carVisual.SetActive(false);
 		collider.enabled = false;

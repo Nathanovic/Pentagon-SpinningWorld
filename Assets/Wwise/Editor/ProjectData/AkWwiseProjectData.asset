@@ -1,0 +1,460 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f0d35f476db8c40a090c68ed674784, type: 3}
+  m_Name: AkWwiseProjectData
+  m_EditorClassIdentifier: 
+  AcousticTextureWwu:
+  - PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: b4158905cbe0ac429daaacded37873be
+    m_lastTime: -8586542061430926761
+    List: []
+  AuxBusWwu:
+  - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: 6c96fa1bd9a5eb47acc1a85df1840336
+    m_lastTime: -8586542061431101252
+    List: []
+  BankWwu:
+  - PhysicalPath: SoundBanks\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: cce74153e005a14096037b2cb6e40c06
+    m_lastTime: -8586530175620770250
+    List:
+    - name: Soundbank
+      guid: f91c14b70a4c6d4d833f24cc60261fd0
+      id: 1661994096
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Soundbank
+        ObjectType: 7
+      Path: Default Work Unit\Soundbank
+  EventWwu:
+  - PhysicalPath: Events\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: 4b75ee209db13a4b993fe3ab3daf6f35
+    m_lastTime: -8586530175620669801
+    List:
+    - name: Back
+      guid: ee37e15ad7acd246bef8e4722aa7e24a
+      id: 1559875400
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Back
+        ObjectType: 3
+      Path: Default Work Unit\Back
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Bots_wagens
+      guid: f27a9b276e003c4ea69bd6e8a800ff2f
+      id: 233794319
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bots_wagens
+        ObjectType: 3
+      Path: Default Work Unit\Bots_wagens
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Los_Rocket
+      guid: 6acf946c2f7bfe49bed6d8ccc02628ee
+      id: 2482867748
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Los_Rocket
+        ObjectType: 3
+      Path: Default Work Unit\Los_Rocket
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Meteor_Impact
+      guid: abdff7f583e32b4faaeeacb0a27309f3
+      id: 1107847914
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Meteor_Impact
+        ObjectType: 3
+      Path: Default Work Unit\Meteor_Impact
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Meteor_Impact_Special
+      guid: 251bcec9b7491e44adc42f2ba1622ae9
+      id: 2579260206
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Meteor_Impact_Special
+        ObjectType: 3
+      Path: Default Work Unit\Meteor_Impact_Special
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Muziek_start
+      guid: 05766f38082dff43a371ad1195173f6f
+      id: 345920297
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Muziek_start
+        ObjectType: 3
+      Path: Default Work Unit\Muziek_start
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Pickup
+      guid: 53cca946f5bc014d9540e537f252a396
+      id: 3978245845
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Pickup
+        ObjectType: 3
+      Path: Default Work Unit\Pickup
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Push_Rocket
+      guid: 7027efe4086b8c42936ac124b8ccd24c
+      id: 850173340
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Push_Rocket
+        ObjectType: 3
+      Path: Default Work Unit\Push_Rocket
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Restart
+      guid: 594ead280b586f40810fd57f420a7c50
+      id: 1203400786
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Restart
+        ObjectType: 3
+      Path: Default Work Unit\Restart
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Revive
+      guid: 18fbe34ad0d01c47b06004dcc8973ba1
+      id: 282544866
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Revive
+        ObjectType: 3
+      Path: Default Work Unit\Revive
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Rijden_Wagen_1
+      guid: ffcc7670f8dd0e4cbc05d61f5ffe8e21
+      id: 835864954
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rijden_Wagen_1
+        ObjectType: 3
+      Path: Default Work Unit\Rijden_Wagen_1
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Rijden_Wagen_2
+      guid: 6edfe68f5c887b4db3611cae5eaa97ad
+      id: 835864953
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rijden_Wagen_2
+        ObjectType: 3
+      Path: Default Work Unit\Rijden_Wagen_2
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Rocket_launch
+      guid: c3c34ba4f00eac439d83de993e885a3b
+      id: 2984764225
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rocket_launch
+        ObjectType: 3
+      Path: Default Work Unit\Rocket_launch
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Scroll
+      guid: 7db2d7617f70124797bfed520f407c0b
+      id: 454121546
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Scroll
+        ObjectType: 3
+      Path: Default Work Unit\Scroll
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Select
+      guid: bac4a335a5ae7748b346c79890375f33
+      id: 1432588725
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Select
+        ObjectType: 3
+      Path: Default Work Unit\Select
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Geluid
+      guid: 634e49b2ab2e16478b13527f6d4d82dd
+      id: 1824197426
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Stop_Geluid
+        ObjectType: 3
+      Path: Default Work Unit\Stop_Geluid
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Wagen_1
+      guid: 93a42353dd4834498796fdd207f64b00
+      id: 3295674258
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Stop_Wagen_1
+        ObjectType: 3
+      Path: Default Work Unit\Stop_Wagen_1
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Wagen_2
+      guid: 249c600524402c47b0dd4bf1bdb1d5cf
+      id: 3295674257
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Stop_Wagen_2
+        ObjectType: 3
+      Path: Default Work Unit\Stop_Wagen_2
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Wagen_Destroyed
+      guid: f3549b5f55a8594aab7d1737b620c0df
+      id: 230320961
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Wagen_Destroyed
+        ObjectType: 3
+      Path: Default Work Unit\Wagen_Destroyed
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+  RtpcWwu:
+  - PhysicalPath: Game Parameters\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: 36f27944d3bd184b8320137295319b9d
+    m_lastTime: -8586530929567326184
+    List:
+    - name: Missed_planet
+      guid: 9ff440e0ad9538418bed8c28ec304ef4
+      id: 3641159011
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Missed_planet
+        ObjectType: 13
+      Path: Default Work Unit\Missed_planet
+    - name: Rijden
+      guid: e505a145c58574469169ba46ff52a72f
+      id: 744209813
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rijden
+        ObjectType: 13
+      Path: Default Work Unit\Rijden
+  - PhysicalPath: Game Parameters\Factory SoundSeed Air Game Syncs.wwu
+    ParentPhysicalPath: 
+    guid: 5577163b42fb8b4598bf96f557afb3b9
+    m_lastTime: -8586626082850826431
+    List:
+    - name: SS_Air_Fear
+      guid: 59062ef746431c4ea1b1dab46a05101e
+      id: 1351367891
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Fear
+        ObjectType: 13
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Fear
+    - name: SS_Air_Freefall
+      guid: 37fe2d2f9e4f944d83d853cca39781ad
+      id: 3002758120
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Freefall
+        ObjectType: 13
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Freefall
+    - name: SS_Air_Fury
+      guid: dc79aea23acaba4696529986c322a87b
+      id: 1029930033
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Fury
+        ObjectType: 13
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Fury
+    - name: SS_Air_Month
+      guid: 45b4e209a3c47f44b3ca818a1d925ef7
+      id: 2648548617
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Month
+        ObjectType: 13
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Month
+    - name: SS_Air_Presence
+      guid: 1a81b7e32f7b0f49b44f5fe51b468041
+      id: 3847924954
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Presence
+        ObjectType: 13
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Presence
+    - name: SS_Air_RPM
+      guid: ab9048a3d5b92645a64d5290c43ef2dc
+      id: 822163944
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_RPM
+        ObjectType: 13
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_RPM
+    - name: SS_Air_Size
+      guid: efeb291393a12e47a38c64668b494879
+      id: 3074696722
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Size
+        ObjectType: 13
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Size
+    - name: SS_Air_Storm
+      guid: db8c3fe9d1063747acaf7cd44bbed783
+      id: 3715662592
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Storm
+        ObjectType: 13
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Storm
+    - name: SS_Air_TimeOfDay
+      guid: 2ca76f537e8c8b4cae03ef34fdadc314
+      id: 3203397129
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_TimeOfDay
+        ObjectType: 13
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_TimeOfDay
+    - name: SS_Air_Turbulence
+      guid: 197ba8edaa73a0409f192073606db710
+      id: 4160247818
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Turbulence
+        ObjectType: 13
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Turbulence
+  StateWwu:
+  - PhysicalPath: States\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: a59631b1fb971e468927083e20e37772
+    m_lastTime: -8586530196062486119
+    List:
+    - name: Muziek
+      guid: 875f33a8ade8b548a1c7b359d6054552
+      id: 1725070628
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Muziek
+        ObjectType: 9
+      Path: Default Work Unit\Muziek
+      values:
+      - name: Dood
+        guid: 91eeeb15cad5c14190f5ebd1cfda1627
+        id: 1877847643
+        PathAndIcons:
+        - ElementName: Dood
+          ObjectType: 8
+      - name: Menu
+        guid: 60eacb6209f72342ba1522ba55e02e48
+        id: 2607556080
+        PathAndIcons:
+        - ElementName: Menu
+          ObjectType: 8
+      - name: None
+        guid: 1b96e0de2fa494448dd80f0d1c3887a9
+        id: 748895195
+        PathAndIcons:
+        - ElementName: None
+          ObjectType: 8
+      - name: Start
+        guid: f9ff82849319874cbcf5accac1099fea
+        id: 1281810935
+        PathAndIcons:
+        - ElementName: Start
+          ObjectType: 8
+      - name: Win
+        guid: 7d4245922e446a4095e274e9ab93f227
+        id: 979765101
+        PathAndIcons:
+        - ElementName: Win
+          ObjectType: 8
+  SwitchWwu:
+  - PhysicalPath: Switches\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: 7e85dbdba2a33d49880de0b9e6168d8c
+    m_lastTime: -8586542061430847657
+    List: []
+  TriggerWwu:
+  - PhysicalPath: Triggers\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: 2c1a47fc1d29f34b9df5eb8a60820695
+    m_lastTime: -8586542061430054033
+    List: []
+  ExpandedItems:
+  - /Gamejam preparations
+  - /Gamejam preparations/Events
+  - /Gamejam preparations/Events/Default Work Unit
+  - /Gamejam preparations/States
+  - /Gamejam preparations/States/Default Work Unit
+  autoPopulateEnabled: 1
+  CurrentPluginConfig: 

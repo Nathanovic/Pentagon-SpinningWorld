@@ -55,6 +55,7 @@ public class MenuScreen : MonoBehaviour {
 		for (int i = 0; i < buttons.Length; i++) {
 			GameManager.Instance.SetTextActive(textItems[i], i == selectedButtonIndex);
 		}
+	
 	}
 
 }
