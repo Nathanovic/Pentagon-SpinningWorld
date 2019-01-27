@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEditor;
 using UnityEngine;
@@ -65,7 +66,12 @@ public class Rocket : MonoBehaviour {
 
 	private void Launch() {
 		AkSoundEngine.PostEvent("Rocket_Launch", gameObject);
-		
+		StartCoroutine(launchAfterSeconds(2));
+	}
+
+
+	private IEnumerator launchAfterSeconds(float seconds) {
+		yield return new WaitForSeconds(seconds);
 		isLaunched = true;
 		transform.SetParent(null);
 	}
