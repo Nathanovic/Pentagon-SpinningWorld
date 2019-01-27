@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEditor;
@@ -101,6 +102,7 @@ public class Rocket : MonoBehaviour {
 
 	public void DeliverResource(Resource resource) {
 		ChangeHealth(resource.repairPower);
+		AkSoundEngine.PostEvent("Rocket_Repair", gameObject);
 	}
 
 	private void ChangeHealth(int change) {
@@ -113,6 +115,10 @@ public class Rocket : MonoBehaviour {
 		} else if (rocketHealth <= 0) {
 			rocketHealth = 0;
 			LoseGame();
+		}
+
+		if (change < 0) {
+			AkSoundEngine.PostEvent("Wagen_Destroyed", gameObject);
 		}
 
 		onHealthChanged?.Invoke(rocketHealth);

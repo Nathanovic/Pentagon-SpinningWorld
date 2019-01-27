@@ -51,7 +51,7 @@ MonoBehaviour:
   useOtherObject: 0
   data:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 90446838179d98a468cad123213117da,
+    WwiseObjectReference: {fileID: 11400000, guid: e8c8b9ac10d580245a292621cfd8e702,
       type: 2}
   decodeBank: 0
   loadAsynchronous: 0

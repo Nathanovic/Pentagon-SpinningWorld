@@ -125,7 +125,6 @@ public class GameManager : MonoBehaviour {
 		if(gameState != GameState.Playing) { return; }
 		deadPlayerCount++;
 		if (deadPlayerCount >= players.Count) {
-			AkSoundEngine.SetState("Muziek", "Dood");
 			EnterRestartState();
 		}
 	}
@@ -137,6 +136,7 @@ public class GameManager : MonoBehaviour {
 	private void EnterRestartState() {
 		if (gameState == GameState.Restart) { return; }
 		gameState = GameState.Restart;
+		AkSoundEngine.SetState("Muziek", "Dood");
 		restartScreen.Fade(0f, 1f, () => {
 			restartScreen.Activate();
 			AkSoundEngine.PostEvent("Stop_Geluid", gameObject);
