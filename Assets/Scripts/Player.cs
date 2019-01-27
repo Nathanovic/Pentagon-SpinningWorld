@@ -76,7 +76,6 @@ public class Player : MonoBehaviour {
 		Transform colliderCheckTransform = frontColliderCheck;
 		if (transform.localScale.x > 0 && currentSpeed < 0 || transform.localScale.x < 0 && currentSpeed > 0) {
 			colliderCheckTransform = backColliderCheck;
-			Debug.Log("CHeck  back");
 		}
 		if (collisionScript.IsCollidingFront(colliderCheckTransform)) {
 			currentSpeed = 0f;
@@ -102,7 +101,7 @@ public class Player : MonoBehaviour {
 			float moveSpeed = currentSpeed;
 			if (collidingRocket != null) {
 				moveSpeed = currentSpeed * rocketMoveSpeedFactor;
-				collidingRocket.transform.RotateAround(World.Position, Vector3.forward, currentSpeed * 2 * Time.deltaTime);
+				collidingRocket.transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);
 			}
 			transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);
 		}
@@ -118,8 +117,6 @@ public class Player : MonoBehaviour {
 			//AkSoundEngine.Postevent("Stop_Wagen_" + playerNumber, gameobject);
 			drivingSoundIsPlaying = false;
 		}
-		
-		transform.RotateAround(World.Position, Vector3.forward, currentSpeed * Time.deltaTime);
 	}
 
 	private void OnFrontColliderEnter(Collider2D collider) {
