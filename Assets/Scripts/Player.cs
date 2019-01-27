@@ -20,12 +20,14 @@ public class Player : MonoBehaviour {
 
 	public PlayerCollision collisionScript { get; private set; }
 	[SerializeField] private GameObject carVisual;
+	private new Collider2D collider;
 	[SerializeField] private ParticleSystem[] deadVFX;
 
 	public Rocket collidingRocket { get; private set; }
 
 	private void Awake() {
 		collisionScript = GetComponent<PlayerCollision>();
+		collider = GetComponent<Collider2D>();
 		collisionScript.onFallHit += OnFallHit;
 		collisionScript.onCollisionEnter += OnFrontColliderEnter;
 		collisionScript.onCollisionExit += OnFrontColliderExit;
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour {
 	public void Revive() {
 		isDead = false;
 		carVisual.SetActive(true);
+		collider.enabled = true;
 		currentSpeed = 0f;
 	}
 
@@ -115,13 +118,11 @@ public class Player : MonoBehaviour {
 	private void OnFrontColliderEnter(Collider2D collider) {
 		if (collider.tag == "Rocket") {
 			collidingRocket = collider.GetComponent<Rocket>();
-			collidingRocket.StartPlayerTouch(this);
 		}
 	}
 
 	private void OnFrontColliderExit(Collider2D collider) {
 		if(collider.tag == "Rocket") {
-			collidingRocket.StopPlayerTouch(this);
 			collidingRocket = null;
 		}
 	}
@@ -141,13 +142,10 @@ public class Player : MonoBehaviour {
 
 		isDead = true;
 		carVisual.SetActive(false);
+		collider.enabled = false;
 		Screenshake.instance.StartShakeHorizontal(2, 0.5f, 0.05f);
 		foreach (ParticleSystem deadEffect in deadVFX) {
 			deadEffect.Play();
-		}
-
-		if (collidingRocket != null) {
-			collidingRocket.StopPlayerTouch(this);
 		}
 		
 		AkSoundEngine.PostEvent("Wagen_Destroyed", gameObject);

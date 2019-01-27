@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour {
 
+	public static Rocket instance;
+
 	public Transform earth;
 
 	public float launchPower;
@@ -13,9 +15,15 @@ public class Rocket : MonoBehaviour {
 	private float currentSpeed;
 	private bool isLaunched;
 
-	private static List<Player> touchingPlayers = new List<Player>();
+	public float collisionYOffset = 1f;
+	public float collisionXOffset = 0.3f;
+	public LayerMask collisionLM;
 
-    private void Update() {
+	private void Awake() {
+		instance = this;
+	}
+
+	private void Update() {
 		if (Input.GetKeyUp(KeyCode.Space)) {
 			Launch();
 		}
@@ -33,29 +41,28 @@ public class Rocket : MonoBehaviour {
 		}
     }
 
-	public void StartPlayerTouch(Player player) {
-		if (touchingPlayers.Contains(player)) {
-			Debug.LogWarning("Player " + player.name + " is already added, aborting...");
-			return;
-		}
-
-		touchingPlayers.Add(player);
-	}
-
-	public static bool IsTouchedByTwoPlayers() {
-		return touchingPlayers.Count == 2;
-	}
-
-	public void StopPlayerTouch(Player player) {
-		touchingPlayers.Remove(player);
-	}
-
 	private void Launch() {
 		//AkSoundEngine.Postevent("Rocket_Launch", gameobject);
 		print("Sound effect: Rocket_Launch");
 		
 		isLaunched = true;
 		transform.SetParent(null);
+	}
+
+	public Collider2D CollideOther(Vector3 checkingPlayerPos, float checkDistance) {
+		Vector3 inverseTransformPos = transform.InverseTransformPoint(checkingPlayerPos);
+		float xMultiplier = (inverseTransformPos.x < 0f) ? 1f : -1f;
+		Vector2 startPos = transform.position + transform.up * collisionYOffset;
+		Vector2 collisionCheck = (startPos + (Vector2)transform.right * xMultiplier) - startPos;
+		startPos += collisionCheck.normalized * collisionXOffset;
+		Debug.DrawRay(startPos, collisionCheck.normalized * checkDistance, Color.yellow);
+		RaycastHit2D hitInfo = Physics2D.Raycast(startPos, collisionCheck, checkDistance, collisionLM);
+		return hitInfo.collider;
+	}
+
+	private void OnDrawGizmos() {
+		Gizmos.color = Color.grey;
+		Gizmos.DrawWireCube(transform.position + transform.up * collisionYOffset, new Vector3(0.2f, 0.1f));
 	}
 
 }
