@@ -68,6 +68,6 @@ public class Screenshake : MonoBehaviour {
     }
 
     private void CameraShake() {
-        transform.localPosition = new Vector3(xShake, yShake, transform.position.z);
+        transform.localPosition = new Vector3(xShake, yShake, 0);
     }
 }
