@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using DefaultNamespace;
+using UnityEditor;
 using UnityEngine;
 
 public class Rocket : MonoBehaviour {
@@ -18,9 +20,14 @@ public class Rocket : MonoBehaviour {
 	public float collisionYOffset = 1f;
 	public float collisionXOffset = 0.3f;
 	public LayerMask collisionLM;
+	private BoxCollider2D boxCollider;
 
 	private void Awake() {
 		instance = this;
+	}
+
+	private void Start() {
+		boxCollider = GetComponent<BoxCollider2D>();
 	}
 
 	private void Update() {
@@ -28,6 +35,17 @@ public class Rocket : MonoBehaviour {
 			Launch();
 		}
 
+		RaycastHit2D[] raycastHits = Physics2D.BoxCastAll(transform.position, new Vector2(boxCollider.size.x, boxCollider.size.y * 2), transform.rotation.eulerAngles.z, Vector2.zero, 1);
+		//RaycastHit2D[] raycastHits = Physics2D.CircleCastAll(transform.position, , 90, Vector2.zero, 2);
+		foreach (RaycastHit2D hit2D in raycastHits) {
+			if(hit2D.collider == boxCollider) continue;
+			if (hit2D.transform.CompareTag("Meteor")) {
+				Debug.Log("Collision with: " + hit2D.transform.tag + "!!!", hit2D.collider);
+				Time.timeScale = 0;
+				EditorApplication.isPaused = false;
+			}
+		}
+		
 		if (isLaunched) {
 			float acceleration = launchPower;
 			if (currentSpeed < finishLiftOffSpeed) {
@@ -63,6 +81,10 @@ public class Rocket : MonoBehaviour {
 	private void OnDrawGizmos() {
 		Gizmos.color = Color.grey;
 		Gizmos.DrawWireCube(transform.position + transform.up * collisionYOffset, new Vector3(0.2f, 0.1f));
+		
+		Gizmos.color = Color.red;
+		DebugUtils.DrawBoxCast2D(transform.position, new Vector2(boxCollider.size.x, boxCollider.size.y * 2), transform.rotation.eulerAngles.z, Vector2.zero, 1, Color.red);
+
 	}
 
 }

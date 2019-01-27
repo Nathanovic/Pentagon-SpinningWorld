@@ -59,11 +59,6 @@ public class Player : MonoBehaviour {
 		absSpeed -= slowDownForce * Time.deltaTime;
 		if (absSpeed < 0) {
 			absSpeed = 0f;
-			/*if (drivingSoundIsPlaying) {
-				print("Afremmen: Stop_Wagen_" + playerNumber);
-				//AkSoundEngine.Postevent("Stop_Wagen_" + playerNumber, gameobject);
-				drivingSoundIsPlaying = false;
-			}*/
 		}
 		if (currentSpeed < 0) {
 			currentSpeed = -absSpeed;
@@ -73,29 +68,18 @@ public class Player : MonoBehaviour {
 		
 		if (collisionScript.IsCollidingFront) {
 			currentSpeed = 0f;
-			print("Stop_Wagen_" + playerNumber);
-			/*if (drivingSoundIsPlaying) {
-				print("Stop_Wagen_" + playerNumber);
-				//AkSoundEngine.Postevent("Stop_Wagen_" + playerNumber, gameobject);
-				drivingSoundIsPlaying = false;
-			}*/
 		} else {
 			if (input != 0f) {
 			
 				currentSpeed += moveForce * input * Time.deltaTime;
 				currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
 				
-				/*if (!drivingSoundIsPlaying) {
-					print("Rijden_Wagen_" + playerNumber);
-					//AkSoundEngine.Postevent("Rijden_Wagen_" + playerNumber, gameobject);
-					drivingSoundIsPlaying = true;
-				}*/
 			}
 
 			float moveSpeed = currentSpeed;
 			if (collidingRocket != null) {
 				moveSpeed = currentSpeed * rocketMoveSpeedFactor;
-				collidingRocket.transform.RotateAround(World.Position, Vector3.forward, currentSpeed * 2 * Time.deltaTime);
+				collidingRocket.transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);
 			}
 			transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);
 		}
@@ -108,11 +92,10 @@ public class Player : MonoBehaviour {
 			}
 		} else if (drivingSoundIsPlaying) {
 			print("Stop_Wagen_" + playerNumber);
-			//AkSoundEngine.Postevent("Stop_Wagen_" + playerNumber, gameobject);
+			//AkSoundEngine.Postevent("Stop_Wagen_" + playerNumber, gameObject);
 			drivingSoundIsPlaying = false;
 		}
 		
-		transform.RotateAround(World.Position, Vector3.forward, currentSpeed * Time.deltaTime);
 	}
 
 	private void OnFrontColliderEnter(Collider2D collider) {
