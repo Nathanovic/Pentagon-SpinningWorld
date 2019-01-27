@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	public float maxSpeed = 3f;
 
 	public float rocketMoveSpeedFactor = 0.7f;
+	public float resourceWalkSpeedFactor = 0.8f;
 
 	public float currentSpeed;
 	public float moveForce = 5f;
@@ -75,14 +76,15 @@ public class Player : MonoBehaviour {
 		if (collisionScript.IsCollidingFront(colliderCheckTransform)) {
 			currentSpeed = 0f;
 		} else {
-			if (input != 0f) {
-			
+			if (input != 0f) {			
 				currentSpeed += moveForce * input * Time.deltaTime;
-				currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
-				
+				currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);				
 			}
 
 			float moveSpeed = currentSpeed;
+			if (GetComponent<ResourceGatherer>().hasResource) {
+				moveSpeed *= resourceWalkSpeedFactor;
+			}
 			if (collidingRocket != null) {
 				moveSpeed = currentSpeed * rocketMoveSpeedFactor;
 				collidingRocket.transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);

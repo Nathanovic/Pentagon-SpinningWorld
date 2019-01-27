@@ -18,8 +18,8 @@ public class ResourceGatherer : MonoBehaviour {
 
     private void Update() {
         if (hasResource) {
-            float dropResourceInput = Input.GetAxis("DropResource_" + player.playerNumber);
-            if (dropResourceInput > 0f || dropResourceInput < 0f) {
+            bool dropResource = Input.GetButton("DropResource_" + player.playerNumber);
+            if (dropResource) {
                 DropResource();
             }
         }
@@ -55,7 +55,6 @@ public class ResourceGatherer : MonoBehaviour {
     }
 
 	public void DeliverResource() {
-		Debug.Log("Deliver resource; " + currentResource.name);
 		Rocket.instance.DeliverResource(currentResource);
 		currentResource.Deliver();
 		currentResource = null;

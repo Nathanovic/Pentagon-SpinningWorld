@@ -30,7 +30,7 @@ public class MenuScreen : MonoBehaviour {
 	private void Update() {
 		if (!isActive) { return; }
 
-		if (Input.GetKeyDown(KeyCode.UpArrow)) {
+		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyUp("joystick button 5")) {
 			if (selectedButtonIndex > 0) {
 				selectedButtonIndex--;
 			} else if (selectedButtonIndex == 0) {
@@ -47,7 +47,7 @@ public class MenuScreen : MonoBehaviour {
 			AkSoundEngine.PostEvent("Scroll", gameObject);
 		}
 
-		if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Return)) {
+		if (Input.GetButtonUp("Submit")) {
 			buttons[selectedButtonIndex].InvokeAction();
 			AkSoundEngine.PostEvent("Select", gameObject);
 		}
