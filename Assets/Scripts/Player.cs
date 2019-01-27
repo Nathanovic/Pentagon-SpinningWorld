@@ -75,11 +75,9 @@ public class Player : MonoBehaviour {
 		if (collisionScript.IsCollidingFront(colliderCheckTransform)) {
 			currentSpeed = 0f;
 		} else {
-			if (input != 0f) {
-			
+			if (input != 0f) {			
 				currentSpeed += moveForce * input * Time.deltaTime;
-				currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
-				
+				currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);				
 			}
 
 			float moveSpeed = currentSpeed;
