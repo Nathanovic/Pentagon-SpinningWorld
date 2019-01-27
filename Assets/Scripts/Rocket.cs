@@ -34,16 +34,26 @@ public class Rocket : MonoBehaviour {
 	private ParticleSystem[] deadVFX;
 
 	public Action onInitialize;
+	private Vector3 startPos;
+	private Quaternion startRot;
 
 	private void Awake() {
 		instance = this;
+		startPos = transform.localPosition;
+		startRot = transform.localRotation;
 		deadVFX = deadVFXParent.GetComponentsInChildren<ParticleSystem>();
 	}
 
 	public void Initialize() {
+		isLaunched = false;
+		currentSpeed = 0f;
 		gameObject.SetActive(true);
 		rocketHealth = rocketStartHealth;
 		ChangeHealth(0);
+
+		transform.SetParent(World.Instance.transform);
+		transform.localPosition = startPos;
+		transform.localRotation = startRot;
 	}
 
 	private void Start() {

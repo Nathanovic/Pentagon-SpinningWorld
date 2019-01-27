@@ -2192,6 +2192,11 @@ PrefabInstance:
       propertyPath: endingAnimator
       value: 
       objectReference: {fileID: 4377167978614481420}
+    - target: {fileID: 646482690251351461, guid: d8ceb212fdd658f49bf40c3852226017,
+        type: 3}
+      propertyPath: cameraAnimator
+      value: 
+      objectReference: {fileID: 1829910171}
     - target: {fileID: 646482690342141312, guid: d8ceb212fdd658f49bf40c3852226017,
         type: 3}
       propertyPath: m_RootOrder

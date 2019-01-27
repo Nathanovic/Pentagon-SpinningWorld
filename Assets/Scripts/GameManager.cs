@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour {
 	public Animator endingAnimator;
 	public float returnToMainMenuDelay = 5f;
 
+	public Animator cameraAnimator;
+
 	public enum GameState {
 		Menu,
 		Playing,
@@ -174,6 +176,13 @@ public class GameManager : MonoBehaviour {
 		endingAnimator.enabled = true;
 		yield return new WaitForSeconds(returnToMainMenuDelay);
 		EnterMenu();
+
+		Meteor[] allMeteors = FindObjectsOfType<Meteor>();
+		foreach (Meteor meteor in allMeteors) {
+			Destroy(meteor.gameObject);
+		}
+
+		cameraAnimator.SetTrigger("returnToMenu");
 	}
 
 }
