@@ -19,15 +19,14 @@ public class Rocket : MonoBehaviour {
 	public float collisionXOffset = 0.3f;
 	public LayerMask collisionLM;
 
+	public int rocketMaxHealth = 100;
+	public int rocketHealth = 50;
+
 	private void Awake() {
 		instance = this;
 	}
 
 	private void Update() {
-		if (Input.GetKeyUp(KeyCode.Space)) {
-			Launch();
-		}
-
 		if (isLaunched) {
 			float acceleration = launchPower;
 			if (currentSpeed < finishLiftOffSpeed) {
@@ -58,6 +57,14 @@ public class Rocket : MonoBehaviour {
 		Debug.DrawRay(startPos, collisionCheck.normalized * checkDistance, Color.yellow);
 		RaycastHit2D hitInfo = Physics2D.Raycast(startPos, collisionCheck, checkDistance, collisionLM);
 		return hitInfo.collider;
+	}
+
+	public void DeliverResource(Resource resource) {
+		if(rocketHealth >= rocketMaxHealth) { return; }
+		rocketHealth += resource.repairPower;
+		if (rocketHealth >= rocketMaxHealth) {
+			Launch();
+		}
 	}
 
 	private void OnDrawGizmos() {
