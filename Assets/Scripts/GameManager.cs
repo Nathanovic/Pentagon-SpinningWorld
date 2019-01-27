@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private IEnumerator CameraMotionDelay() {
+		AkSoundEngine.PostEvent("Zoom_Uit", gameObject);
 		Animator cameraAnimator = GameObject.Find("CameraParent").GetComponent<Animator>();
 		cameraAnimator.SetTrigger("startCameraMotion");
 		menuScreen.Deactivate();
