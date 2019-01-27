@@ -28,12 +28,18 @@ public class Player : MonoBehaviour {
 	public Transform backColliderCheck;
 	public Rocket collidingRocket { get; private set; }
 
+	private Vector3 startPos;
+	private Vector3 startDir;
+
 	private void Awake() {
 		collisionScript = GetComponent<PlayerCollision>();
 		collider = GetComponent<Collider2D>();
 		collisionScript.onFallHit += OnFallHit;
 		collisionScript.onCollisionEnter += OnFrontColliderEnter;
 		collisionScript.onCollisionExit += OnFrontColliderExit;
+
+		startPos = World.Instance.transform.InverseTransformPoint(transform.position);
+		startDir = World.Instance.transform.InverseTransformDirection(transform.forward);
 	}
 
 	private void Start() {
@@ -45,6 +51,9 @@ public class Player : MonoBehaviour {
 		carVisual.SetActive(true);
 		collider.enabled = true;
 		currentSpeed = 0f;
+
+		transform.position = World.Instance.transform.TransformPoint(startPos);
+		transform.forward = World.Instance.transform.TransformDirection(startDir);
 	}
 
 	private void Update() {
