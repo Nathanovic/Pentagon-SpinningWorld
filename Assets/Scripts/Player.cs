@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 	[SerializeField] private GameObject carVisual;
 	[SerializeField] private ParticleSystem[] deadVFX;
 
-	private Rocket collidingRocket;
+	public Rocket collidingRocket { get; private set; }
 
 	private void Awake() {
 		collisionScript = GetComponent<PlayerCollision>();
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour {
 			float moveSpeed = currentSpeed;
 			if (collidingRocket != null) {
 				moveSpeed = currentSpeed * rocketMoveSpeedFactor;
-				collidingRocket.transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);
+				collidingRocket.transform.RotateAround(World.Position, Vector3.forward, currentSpeed * 2 * Time.deltaTime);
 			}
 			transform.RotateAround(World.Position, Vector3.forward, moveSpeed * Time.deltaTime);
 		}
