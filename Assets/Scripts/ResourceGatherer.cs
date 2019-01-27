@@ -55,6 +55,7 @@ public class ResourceGatherer : MonoBehaviour {
     }
 
 	public void DeliverResource() {
+		Debug.Log("Deliver resource; " + currentResource.name);
 		Rocket.instance.DeliverResource(currentResource);
 		currentResource.Deliver();
 		currentResource = null;

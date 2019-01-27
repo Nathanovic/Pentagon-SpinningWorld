@@ -27,7 +27,6 @@ public class PlayerCollision : MonoBehaviour {
 
 	public LayerMask defaultLM;
 	public LayerMask deathLM;
-	public LayerMask fromResourceLM;
 
 	private void Start() {
         resourceGatherer = GetComponent<ResourceGatherer>();
@@ -78,17 +77,12 @@ public class PlayerCollision : MonoBehaviour {
 		}
 		// Check if we hit something with our carried resource
 		else {
-			Debug.Log("Check resource collision");
 			CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
 			float circleCastRadius = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
 			RaycastHit2D[] circleCasts =
-				Physics2D.RaycastAll(myResourceCollider.transform.position, transform.right, circleCastRadius, fromResourceLM);
+				Physics2D.RaycastAll(myResourceCollider.transform.position, transform.right, circleCastRadius, defaultLM);
 			Debug.DrawRay(myResourceCollider.transform.position, transform.right * circleCastRadius, Color.black);
 			foreach (RaycastHit2D circleCast in circleCasts) {
-				if (circleCast.collider != null) {
-					Debug.Log("collide; " + circleCast.collider.name);
-				}
-
 				collidingMeteor = GetMeteor(circleCast, true);
 				if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
 					isCollidingFront = true;

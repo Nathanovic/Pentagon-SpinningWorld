@@ -2,7 +2,7 @@
 
 public class Resource : MonoBehaviour {
 	public int repairPower = 10;
-	private bool isHeld;
+	public bool isHeld { get; private set; }
 	private bool isDelivered;
 	public bool canPickUp {
 		get {

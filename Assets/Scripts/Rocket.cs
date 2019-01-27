@@ -42,9 +42,12 @@ public class Rocket : MonoBehaviour {
 		foreach (RaycastHit2D hit2D in raycastHits) {
 			if(hit2D.collider == boxCollider) continue;
 			if (hit2D.transform.CompareTag("Meteor")) {
-				Debug.Log("Collision with: " + hit2D.transform.tag + "!!!", hit2D.collider);
-				Time.timeScale = 0;
-				EditorApplication.isPaused = false;
+				Resource resource = hit2D.collider.GetComponent<Resource>();
+				if (resource == null || !resource.isHeld) {
+					Debug.Log("Collision with: " + hit2D.transform.tag + "!!!", hit2D.collider);
+					Time.timeScale = 0;
+					EditorApplication.isPaused = false;
+				}
 			}
 		}
 		
