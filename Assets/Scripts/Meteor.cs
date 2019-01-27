@@ -6,9 +6,7 @@ public class Meteor : MonoBehaviour {
     private WorldBody worldBody;
     public bool containsResource;
     public ParticleSystem vfxImpact;
-<<<<<<< HEAD
     public Light pointLight;
-=======
     public GameObject visuals;
 
     public Light light;
@@ -35,7 +33,6 @@ public class Meteor : MonoBehaviour {
         
         Quaternion randomRotation = Random.rotation;
         rotation = new Vector3(randomRotation.x, randomRotation.y, randomRotation.z);
->>>>>>> 2c5964bc371d53ac0eeaed2031aa25b10f6494b3
     }
 
     private void OnDisable() {

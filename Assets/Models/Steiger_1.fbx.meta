@@ -1,21 +1,16 @@
 fileFormatVersion: 2
-guid: bcd03f521ff289f4f924c937fb206160
+guid: 28f35fa0bb0721849b5963f2f1487964
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: mars_decimated1:Group30335
-    100004: pSolid2
-    400000: //RootNode
-    400002: mars_decimated1:Group30335
-    400004: pSolid2
+    100000: polySurface16
+    100002: //RootNode
+    400000: polySurface16
+    400002: //RootNode
     2100000: lambert2
-    2300000: mars_decimated1:Group30335
-    2300002: pSolid2
-    3300000: mars_decimated1:Group30335
-    3300002: pSolid2
-    4300000: mars_decimated1:Group30335
-    4300002: pSolid2
+    2300000: polySurface16
+    3300000: polySurface16
+    4300000: polySurface16
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -47,7 +42,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 310
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
