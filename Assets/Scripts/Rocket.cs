@@ -34,16 +34,26 @@ public class Rocket : MonoBehaviour {
 	private ParticleSystem[] deadVFX;
 
 	public Action onInitialize;
+	private Vector3 startPos;
+	private Quaternion startRot;
 
 	private void Awake() {
 		instance = this;
+		startPos = transform.localPosition;
+		startRot = transform.localRotation;
 		deadVFX = deadVFXParent.GetComponentsInChildren<ParticleSystem>();
 	}
 
 	public void Initialize() {
+		isLaunched = false;
+		currentSpeed = 0f;
 		gameObject.SetActive(true);
 		rocketHealth = rocketStartHealth;
 		ChangeHealth(0);
+
+		transform.SetParent(World.Instance.transform);
+		transform.localPosition = startPos;
+		transform.localRotation = startRot;
 	}
 
 	private void Start() {
@@ -82,6 +92,7 @@ public class Rocket : MonoBehaviour {
 		
 		isLaunched = true;
 		transform.SetParent(null);
+		GameManager.Instance.FinishGame();
 	}
 
 	public Collider2D CollideOther(Vector3 checkingPlayerPos, float checkDistance) {
@@ -96,6 +107,7 @@ public class Rocket : MonoBehaviour {
 	}
 
 	public void DeliverResource(Resource resource) {
+		if(resource == null) { return; }
 		ChangeHealth(resource.repairPower);
 	}
 
