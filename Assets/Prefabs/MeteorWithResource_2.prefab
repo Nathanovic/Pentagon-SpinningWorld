@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1858803503937094974}
   - component: {fileID: 745055002224599559}
   - component: {fileID: 7122885674669827295}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: vfx_meteorImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4725,7 +4725,7 @@ GameObject:
   - component: {fileID: 1180311430043794862}
   - component: {fileID: 2176721554542822242}
   - component: {fileID: 792871999979219098}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MeteorWithResource_2
   m_TagString: Meteor
   m_Icon: {fileID: 0}
@@ -4840,7 +4840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5990523816235700124}
   - component: {fileID: 6827065164458807851}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SpotLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4906,10 +4906,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1151467231363013811}
     m_Modifications:
-    - target: {fileID: 100002, guid: bf60b80a061070846b98e11eea054182, type: 3}
-      propertyPath: m_Name
-      value: visuals
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: bf60b80a061070846b98e11eea054182, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -4965,6 +4961,10 @@ PrefabInstance:
     - target: {fileID: 400002, guid: bf60b80a061070846b98e11eea054182, type: 3}
       propertyPath: m_LocalScale.z
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: bf60b80a061070846b98e11eea054182, type: 3}
+      propertyPath: m_Name
+      value: visuals
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf60b80a061070846b98e11eea054182, type: 3}

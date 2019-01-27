@@ -22,6 +22,7 @@ public class PlayerCollision : MonoBehaviour {
 	private List<Collider2D> currentColliders = new List<Collider2D>();
 	
 	private CircleCollider2D myCollider;
+	public float deathCastYOffset = 0.5f;
 
 	private bool isCollidingFront;
     public bool IsCollidingFront {
@@ -33,6 +34,7 @@ public class PlayerCollision : MonoBehaviour {
     private ResourceGatherer resourceGatherer;
 
 	public LayerMask defaultLM;
+	public LayerMask deathLM;
 
 	private void Start() {
         resourceGatherer = GetComponent<ResourceGatherer>();
@@ -89,11 +91,12 @@ public class PlayerCollision : MonoBehaviour {
             }
         }
 
-		Vector2 deadCheckPosition = transform.position + transform.TransformPoint(myCollider.offset);
-		RaycastHit2D meteorCast = Physics2D.CircleCast(deadCheckPosition, myCollider.radius, Vector2.zero, 100f, defaultLM);
+		Vector2 deadCheckPosition = transform.position + transform.up * deathCastYOffset;
+		RaycastHit2D meteorCast = Physics2D.CircleCast(deadCheckPosition, myCollider.radius, Vector2.zero, 100f, deathLM);
         Meteor meteor = GetMeteor(meteorCast, false);
         if (meteor != null) {
             if (meteor.canDamage) {
+				Debug.Log("Damage by : " + meteor.name);
                 onFallHit?.Invoke(meteor);
             }
         }
@@ -108,8 +111,14 @@ public class PlayerCollision : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
-        if (Application.IsPlaying(transform) && resourceGatherer.currentResource) {
-            Gizmos.color = Color.black;
+		if (!Application.isPlaying) { return; }
+
+		Gizmos.color = Color.grey;
+		Vector2 deadCheckPosition = transform.position + transform.up * deathCastYOffset;
+		Gizmos.DrawWireSphere(deadCheckPosition, myCollider.radius);
+
+		if (resourceGatherer.currentResource) {
+			Gizmos.color = Color.black;
             CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
             Gizmos.DrawWireSphere(myResourceCollider.transform.position,
                 myResourceCollider.radius * myResourceCollider.transform.localScale.x);

@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 7369126461944842816}
   - component: {fileID: 7498615683803427980}
   - component: {fileID: 9017881451012415348}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MeteorWithResource
   m_TagString: Meteor
   m_Icon: {fileID: 0}
@@ -4906,10 +4906,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8782018019960662877}
     m_Modifications:
-    - target: {fileID: 100002, guid: bf60b80a061070846b98e11eea054182, type: 3}
-      propertyPath: m_Name
-      value: visuals
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: bf60b80a061070846b98e11eea054182, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -4965,6 +4961,10 @@ PrefabInstance:
     - target: {fileID: 400002, guid: bf60b80a061070846b98e11eea054182, type: 3}
       propertyPath: m_LocalScale.z
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: bf60b80a061070846b98e11eea054182, type: 3}
+      propertyPath: m_Name
+      value: visuals
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf60b80a061070846b98e11eea054182, type: 3}

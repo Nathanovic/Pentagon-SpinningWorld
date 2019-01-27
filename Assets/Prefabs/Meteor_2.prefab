@@ -4725,7 +4725,7 @@ GameObject:
   - component: {fileID: 1622568324367591654}
   - component: {fileID: 2962378045472480120}
   - component: {fileID: 8351391415613289643}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Meteor_2
   m_TagString: Meteor
   m_Icon: {fileID: 0}
@@ -4807,6 +4807,7 @@ MonoBehaviour:
   rotationMultiplier: 1
   velocityMultiplier: 1
   canDamage: 0
+  impactSoundTrigger: Meteor_Impact
 --- !u!58 &8351391415613289643
 CircleCollider2D:
   m_ObjectHideFlags: 0
