@@ -15,18 +15,24 @@ public class GameManager : MonoBehaviour {
 
 	public CanvasGroup blackCanvasGroup;
 	public MenuScreen menuScreen;
-	public CanvasGroup restartCanvasGroup;
 	public MenuScreen restartScreen;
 	public Color textActive;
 	public Color textInActive;
 	public int fontSizeActive;
 	public int fontSizeInActive;
 
+	public float endingDelay = 3.5f;
+	public Animator endingAnimator;
+	public float returnToMainMenuDelay = 5f;
+
+	public Animator cameraAnimator;
+
 	public enum GameState {
 		Menu,
 		Playing,
 		Restart,
-		FadeInGame
+		FadeInGame,
+		Completed
 	}
 	private GameState gameState;
 	public bool IsPlaying { get { return gameState == GameState.Playing; } }
@@ -57,12 +63,16 @@ public class GameManager : MonoBehaviour {
 			ugleGGJImage.color = new Color(1,1,1, 1f - t);
 			yield return null;
 		}
+
+		StartCoroutine(FadeBlackGroup());
 		EnterMenu();
     }
 
 	private void EnterMenu() {
-		StartCoroutine(FadeBlackGroup());
-		menuScreen.Activate();
+		menuScreen.Fade(0f, 1f, () => { 
+			menuScreen.Activate();
+			gameState = GameState.Menu;
+		});
 	}
 
     private IEnumerator FadeBlackGroup() {
@@ -88,17 +98,17 @@ public class GameManager : MonoBehaviour {
     public void StartCameraMotion() {
 		if (gameState != GameState.Menu) { return; }
 		gameState = GameState.FadeInGame;
-		StartCoroutine(CameraMotionDelay());
-    }
+		menuScreen.Fade(1f, 0f, () => {
+			StartCoroutine(CameraMotionDelay());
+		});
+	}
 
 	private IEnumerator CameraMotionDelay() {
 		Animator cameraAnimator = GameObject.Find("CameraParent").GetComponent<Animator>();
 		cameraAnimator.SetTrigger("startCameraMotion");
 		menuScreen.Deactivate();
 		yield return new WaitForSeconds(4f);
-		menuScreen.Fade(1f, 0f, () => {
-			StartGame();
-		});
+		StartGame();
 	}
 
     public void StartGame() {
@@ -134,6 +144,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void EnterRestartState() {
+		if (gameState == GameState.Completed) { return; }
 		if (gameState == GameState.Restart) { return; }
 		gameState = GameState.Restart;
 		AkSoundEngine.SetState("Muziek", "Dood");
@@ -155,6 +166,26 @@ public class GameManager : MonoBehaviour {
 		restartScreen.Fade(1f, 0f, () => {
 			StartGame();
 		});
+	}
+
+	public void FinishGame() {
+		if (gameState == GameState.Completed) { return; }
+		gameState = GameState.Completed;
+		StartCoroutine(FinishGameRoutine());
+	}
+
+	private IEnumerator FinishGameRoutine() {
+		yield return new WaitForSeconds(endingDelay);
+		endingAnimator.enabled = true;
+		yield return new WaitForSeconds(returnToMainMenuDelay);
+		EnterMenu();
+
+		Meteor[] allMeteors = FindObjectsOfType<Meteor>();
+		foreach (Meteor meteor in allMeteors) {
+			Destroy(meteor.gameObject);
+		}
+
+		cameraAnimator.SetTrigger("returnToMenu");
 	}
 
 }
