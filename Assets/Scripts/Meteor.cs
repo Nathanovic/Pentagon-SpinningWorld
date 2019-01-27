@@ -59,6 +59,11 @@ public class Meteor : MonoBehaviour {
         }
     }
 
+	public void CollideRocket() {
+		ShowImpactParticles();
+		Destroy(gameObject);
+	}
+
     private void ShowImpactParticles() {
         if (vfxImpact != null) {
             vfxImpact.transform.parent = null;

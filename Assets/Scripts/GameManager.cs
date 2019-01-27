@@ -21,14 +21,16 @@ public class GameManager : MonoBehaviour {
 	public enum GameState {
 		Menu,
 		Playing,
-		Restart
+		Restart,
+		FadeInGame
 	}
 	private GameState gameState;
 	public bool IsPlaying { get { return gameState == GameState.Playing; } }
+	private bool isFading;
 
 	private List<Player> players = new List<Player>();
 	private int deadPlayerCount;
-	public float restartDuration = 1f;
+	public float fadeDuration = 1f;
 
 	private void Awake() {
 		Instance = this;
@@ -69,16 +71,20 @@ public class GameManager : MonoBehaviour {
     }
 
     public void StartCameraMotion() {
-        StartCoroutine(CameraMotionDelay());
+		if (gameState != GameState.Menu) { return; }
+		gameState = GameState.FadeInGame;
+		StartCoroutine(CameraMotionDelay());
     }
 
-    private IEnumerator CameraMotionDelay() {
-        Animator cameraAnimator = GameObject.Find("CameraParent").GetComponent<Animator>();
-        cameraAnimator.SetTrigger("startCameraMotion");
-        menuScreen.Deactivate();
-        yield return new WaitForSeconds(4f);
-        StartGame();
-    }
+	private IEnumerator CameraMotionDelay() {
+		Animator cameraAnimator = GameObject.Find("CameraParent").GetComponent<Animator>();
+		cameraAnimator.SetTrigger("startCameraMotion");
+		menuScreen.Deactivate();
+		yield return new WaitForSeconds(4f);
+		menuScreen.Fade(1f, 0f, () => {
+			StartGame();
+		});
+	}
 
     public void StartGame() {
 		deadPlayerCount = 0;
@@ -87,36 +93,53 @@ public class GameManager : MonoBehaviour {
 		restartScreen.Deactivate();
 	    
 		//AkSoundEngine.PostEvent("Restart", gameObject);
-	    AkSoundEngine.SetState("Muziek", "Start");
+		AkSoundEngine.SetState("Muziek", "Start");
 
 	    foreach (Player player in players) {
 			player.Revive();
 		}
+
+		Rocket.instance.Initialize();
+	}
+
+	public void QuitGame() {
+		Application.Quit();
 	}
 
 	public void NotifyPlayerDeath() {
+		if(gameState != GameState.Playing) { return; }
 		deadPlayerCount++;
 		if (deadPlayerCount >= players.Count) {
 			AkSoundEngine.SetState("Muziek", "Dood");
-			gameState = GameState.Restart;
+			EnterRestartState();
+		}
+	}
+
+	public void NotifyRocketDestroyed() {
+		EnterRestartState();
+	}
+
+	private void EnterRestartState() {
+		if (gameState == GameState.Restart) { return; }
+		gameState = GameState.Restart;
+		restartScreen.Fade(0f, 1f, () => {
 			restartScreen.Activate();
 			AkSoundEngine.PostEvent("Stop_Geluid", gameObject);
-		}
+		});
 	}
 
 	public void RestartGame() {
-		StartCoroutine(RestartOverTime());
-	}
+		if(gameState == GameState.FadeInGame) { return; }
+		gameState = GameState.FadeInGame;
 
-	private IEnumerator RestartOverTime() {
-		float t = 0f;
-		while (t < 1f) {
-			t += Time.deltaTime / restartDuration;
-			restartCanvasGroup.alpha = 1f - t;
-			yield return null;
+		Meteor[] allMeteors = FindObjectsOfType<Meteor>();
+		foreach (Meteor meteor in allMeteors) {
+			Destroy(meteor.gameObject);
 		}
 
-		StartGame();
+		restartScreen.Fade(1f, 0f, () => {
+			StartGame();
+		});
 	}
 
 }
