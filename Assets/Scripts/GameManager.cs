@@ -7,12 +7,6 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager Instance { get; private set; }
 
-	public int selectedItem = 0; //Debug public
-
-	public Image ugleGGJImage;
-	public float uglyGGJImageShowDuration = 1.5f;
-	public float uglyGGJImageFadeDuration = 0.5f;
-
 	public CanvasGroup blackCanvasGroup;
 	public MenuScreen menuScreen;
 	public MenuScreen restartScreen;
@@ -55,15 +49,7 @@ public class GameManager : MonoBehaviour {
 		players.Add(player);
 	}
 
-    private IEnumerator Start() {
-		yield return new WaitForSeconds(uglyGGJImageShowDuration);
-		float t = 0f;
-		while (t < 1f) {
-			t += Time.deltaTime / uglyGGJImageFadeDuration;
-			ugleGGJImage.color = new Color(1,1,1, 1f - t);
-			yield return null;
-		}
-
+    private void Start() {
 		StartCoroutine(FadeBlackGroup());
 		EnterMenu();
     }

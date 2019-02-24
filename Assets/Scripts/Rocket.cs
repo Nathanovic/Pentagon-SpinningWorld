@@ -32,6 +32,8 @@ public class Rocket : MonoBehaviour {
 	public int meteorDamage = 50;
 
 	public Transform deadVFXParent;
+	private Vector3 deadVFXLocalPosition;
+	private Quaternion deadVFXLocalRotation;
 	private ParticleSystem[] deadVFX;
 
 	public Action onInitialize;
@@ -43,6 +45,8 @@ public class Rocket : MonoBehaviour {
 		startPos = transform.localPosition;
 		startRot = transform.localRotation;
 		deadVFX = deadVFXParent.GetComponentsInChildren<ParticleSystem>();
+		deadVFXLocalPosition = deadVFXParent.localPosition;
+		deadVFXLocalRotation = deadVFXParent.localRotation;
 	}
 
 	public void Initialize() {
@@ -137,7 +141,12 @@ public class Rocket : MonoBehaviour {
 	}
 
 	private void LoseGame() {
-		deadVFXParent.SetParent(null);GameManager.Instance.NotifyRocketDestroyed();
+		deadVFXParent.SetParent(transform);
+		deadVFXParent.localPosition = deadVFXLocalPosition;
+		deadVFXParent.localRotation = deadVFXLocalRotation;
+		deadVFXParent.SetParent(null);
+
+		GameManager.Instance.NotifyRocketDestroyed();
 		foreach (ParticleSystem deadEffect in deadVFX) {
 			deadEffect.Play();
 		}
