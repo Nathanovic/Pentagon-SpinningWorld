@@ -157,7 +157,7 @@ MonoBehaviour:
   visuals: {fileID: 3521407606061281190}
   light: {fileID: 2926126018138891717}
   rotationMultiplier: 1
-  velocityMultiplier: 7
+  velocityMultiplier: 5
   canDamage: 0
   impactSoundTrigger: Meteor_Impact_Special
 --- !u!58 &7498615683803427980

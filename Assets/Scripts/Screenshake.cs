@@ -9,8 +9,11 @@ public class Screenshake : MonoBehaviour {
     private float xShake;
     private float yShake;
 
+    private float zPos;
+    
     private void Awake () {
         instance = this;
+        zPos = transform.localPosition.z;
     }
 
     private void LateUpdate() {
@@ -68,6 +71,6 @@ public class Screenshake : MonoBehaviour {
     }
 
     private void CameraShake() {
-        transform.localPosition = new Vector3(xShake, yShake, 0);
+        transform.localPosition = new Vector3(xShake, yShake, zPos);
     }
 }
