@@ -63,21 +63,24 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator FadeBlackGroup() {
         while (true) {
-			if (IsPlaying) { yield return null; }
-
-            float blackA = Random.Range(0.3f, 0.4f);
-            float timeA = Random.Range(1.3f, 2.1f);
-            float t = 0f;
-            while (t < 1f) {
-                t += Time.deltaTime / timeA;
-                blackCanvasGroup.alpha = t * blackA;
-                yield return null;
-            }
-            while (t > 0f) {
-                t -= Time.deltaTime / timeA;
-                blackCanvasGroup.alpha = t * blackA;
-                yield return null;
-            }
+			if (IsPlaying) {
+				yield return null;
+			}
+			else { 
+				float blackA = Random.Range(0.3f, 0.4f);
+				float timeA = Random.Range(1.3f, 2.1f);
+				float t = 0f;
+				while (t < 1f) {
+					t += Time.deltaTime / timeA;
+					blackCanvasGroup.alpha = t * blackA;
+					yield return null;
+				}
+				while (t > 0f) {
+					t -= Time.deltaTime / timeA;
+					blackCanvasGroup.alpha = t * blackA;
+					yield return null;
+				}
+			}
         }        
     }
 
