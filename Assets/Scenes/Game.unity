@@ -868,9 +868,9 @@ MonoBehaviour:
     type: 3}
   meteorPrefab2: {fileID: 4329303402749056334, guid: ad7be2963697ff84081411b54936828f,
     type: 3}
-  spawnChangeMeteor1: 0.9
-  spawnChangeMeteor2: 0.1
-  spawnInterval: 1
+  spawnChangeMeteor1: 0.8
+  spawnChangeMeteor2: 0.15
+  spawnInterval: 0.75
   offset: 25
   zOffset: -1.5
   timeTillSpawn: 0
@@ -1083,8 +1083,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1025
   rocketMaxHealth: 100
-  rocketStartHealth: 50
-  meteorDamage: 50
+  rocketStartHealth: 10
+  meteorDamage: 20
   deadVFXParent: {fileID: 1769075026}
 --- !u!61 &254548528
 BoxCollider2D:
