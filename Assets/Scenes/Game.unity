@@ -872,6 +872,7 @@ MonoBehaviour:
   spawnChangeMeteor2: 0.1
   spawnInterval: 1
   offset: 25
+  zOffset: -1.5
   timeTillSpawn: 0
   maxMeteorFallingSpeed: 2
   minMeteorFallingSpeed: 1
@@ -1883,22 +1884,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 100010, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100012, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100014, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100016, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -1912,6 +1897,22 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
@@ -2411,6 +2412,11 @@ PrefabInstance:
     - target: {fileID: 1837088464, guid: d8ceb212fdd658f49bf40c3852226017, type: 3}
       propertyPath: customAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartCameraMotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821678481676638575, guid: d8ceb212fdd658f49bf40c3852226017,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8ceb212fdd658f49bf40c3852226017, type: 3}

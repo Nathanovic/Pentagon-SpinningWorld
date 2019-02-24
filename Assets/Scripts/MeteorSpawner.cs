@@ -12,6 +12,7 @@ public class MeteorSpawner : MonoBehaviour {
 
     public float spawnInterval = 1;
     public float offset = 15.0f;
+	public float zOffset = -3f;
     public float timeTillSpawn = 0.0f;
     
     public float maxMeteorFallingSpeed = 50;
@@ -42,7 +43,7 @@ public class MeteorSpawner : MonoBehaviour {
 
     private void SpawnMeteor(GameObject meteorToSpawn) {
         int spawnAngle = Random.Range(0, 360);
-        GameObject meteor = Instantiate(meteorToSpawn, new Vector3(Mathf.Sin(spawnAngle) * offset, Mathf.Cos(spawnAngle) * offset, 1), Quaternion.identity);
+        GameObject meteor = Instantiate(meteorToSpawn, new Vector3(Mathf.Sin(spawnAngle) * offset, Mathf.Cos(spawnAngle) * offset, zOffset), Quaternion.identity);
         WorldBody worldBody = meteor.GetComponent<WorldBody>();
         float speed1 = Random.Range(minMeteorFallingSpeed, maxMeteorFallingSpeed);
         float speed2 = Random.Range(minMeteorFallingSpeed, maxMeteorFallingSpeed);
