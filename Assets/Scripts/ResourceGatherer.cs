@@ -12,7 +12,7 @@ public class ResourceGatherer : MonoBehaviour {
     void Start() {
         player = GetComponent<Player>();
         player.collisionScript.onFrontResourceHit += ResourceHit;
-        player.collisionScript.onRocketChargePlateHit += OnRocketChargePlateHit;
+        player.collisionScript.onRocketCollisionEnter += OnRocketHit;
         player.collisionScript.onFallHit += OnFallHit;
     }
 
@@ -41,7 +41,7 @@ public class ResourceGatherer : MonoBehaviour {
         currentResource = null;
     }
 
-    void OnRocketChargePlateHit(Transform transform) {
+    void OnRocketHit() {
         if(!hasResource) return;
         
         Destroy(currentResource.gameObject);

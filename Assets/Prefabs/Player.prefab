@@ -114,6 +114,7 @@ MonoBehaviour:
   playerNumber: 1
   maxSpeed: 60
   rocketMoveSpeedFactor: 0.6
+  resourceWalkSpeedFactor: 0.8
   currentSpeed: 0
   moveForce: 220
   slowDownForce: 75
@@ -155,11 +156,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dda4e08706690e4ab074ef45aebb19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noseCollisionOffset: 0.1
+  noseCollisionRadius: 0.1
   deathCastYOffset: 0.4
-  defaultLM:
+  resourceLM:
     serializedVersion: 2
-    m_Bits: 2049
+    m_Bits: 1
+  rocketLM:
+    serializedVersion: 2
+    m_Bits: 2048
   deathLM:
     serializedVersion: 2
     m_Bits: 1
@@ -346,54 +350,6 @@ PrefabInstance:
       value: Vehicle_blue_1
       objectReference: {fileID: 0}
     - target: {fileID: 100024, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100010, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100012, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100014, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100016, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100008, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100018, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100020, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100022, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}

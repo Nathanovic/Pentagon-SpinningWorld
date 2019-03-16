@@ -37,8 +37,8 @@ public class Player : MonoBehaviour {
 		collisionScript = GetComponent<PlayerCollision>();
 		collider = GetComponent<Collider2D>();
 		collisionScript.onFallHit += OnFallHit;
-		collisionScript.onCollisionEnter += OnFrontColliderEnter;
-		collisionScript.onCollisionExit += OnFrontColliderExit;
+		collisionScript.onRocketCollisionEnter += OnRocketCollisionEnter;
+		collisionScript.onRocketCollisionExit += OnRocketCollisionExit;
 
 		startPos = World.Instance.transform.InverseTransformPoint(transform.position);
 		startDir = World.Instance.transform.InverseTransformDirection(transform.forward);
@@ -128,16 +128,12 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	private void OnFrontColliderEnter(Collider2D collider) {
-		if (collider.tag == "Rocket") {
-			collidingRocket = collider.GetComponent<Rocket>();
-		}
+	private void OnRocketCollisionEnter() {
+		collidingRocket = Rocket.instance;
 	}
 
-	private void OnFrontColliderExit(Collider2D collider) {
-		if(collider.tag == "Rocket") {
-			collidingRocket = null;
-		}
+	private void OnRocketCollisionExit() {
+		collidingRocket = null;
 	}
 
 	private void SetFacingDirection(float input) {

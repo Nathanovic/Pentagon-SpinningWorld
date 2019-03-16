@@ -51,10 +51,9 @@ public class Meteor : MonoBehaviour {
         onImpact?.Invoke();
         
         AkSoundEngine.PostEvent(impactSoundTrigger, gameObject);
-        print("Sound effect: " + impactSoundTrigger);
 
         if (!containsResource) {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             //TODO: show destroy meteor particles
         }
     }

@@ -373,6 +373,11 @@ PrefabInstance:
       propertyPath: layermask.m_Bits
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7141378799432911054, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: defaultLM.m_Bits
+      value: 2049
+      objectReference: {fileID: 0}
     - target: {fileID: 1679609697869018888, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
       propertyPath: m_RootOrder
@@ -869,15 +874,15 @@ MonoBehaviour:
   meteorPrefab2: {fileID: 4329303402749056334, guid: ad7be2963697ff84081411b54936828f,
     type: 3}
   spawnChangeMeteor1: 0.8
-  spawnChangeMeteor2: 0.15
-  spawnInterval: 0.75
+  spawnChangeMeteor2: 0.2
+  spawnInterval: 1.5
   offset: 25
   zOffset: -1.5
   timeTillSpawn: 0
   maxMeteorFallingSpeed: 2
   minMeteorFallingSpeed: 1
   minMeteorRotationMultiplier: 1
-  maxMeteorRotationMultiplier: 4
+  maxMeteorRotationMultiplier: 3
   minMeteorScale: 0.75
   maxMeteorScale: 1.5
 --- !u!1001 &210978817
@@ -1309,7 +1314,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1829910170}
@@ -3300,6 +3305,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 652419782869966204, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 652419782869966204, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7141378799432911054, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: noseCollisionRadius
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7141378799432911054, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: deathCastYOffset
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7141378799432911054, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: defaultLM.m_Bits
+      value: 2049
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}
