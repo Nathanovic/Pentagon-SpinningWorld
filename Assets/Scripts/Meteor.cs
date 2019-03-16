@@ -1,15 +1,14 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Meteor : MonoBehaviour {
     private WorldBody worldBody;
     public bool containsResource;
     public ParticleSystem vfxImpact;
-    public new Light pointLight;
+    public Light pointLight;
     public GameObject visuals;
 
-    public Light light;
+    public new Light light;
     public delegate void ImpactFunction();
     public event ImpactFunction onImpact;
 
@@ -17,8 +16,8 @@ public class Meteor : MonoBehaviour {
     public float rotationMultiplier = 1.0f;
     public float velocityMultiplier = 1.0f;
 
-    public bool canDamage;// { private set; get; }
-    public String impactSoundTrigger = "Meteor_Impact";
+    public bool canDamage { private set; get; }
+    public string impactSoundTrigger = "Meteor_Impact";
     
     private void Start() {
         canDamage = true;
@@ -27,8 +26,6 @@ public class Meteor : MonoBehaviour {
         worldBody.maxSpeed *= velocityMultiplier;
 
         worldBody.onTouchGround += OnWorldImpact;
-        onImpact += ShowImpactParticles;
-        onImpact += DestroyLight;
         containsResource = GetComponent<Resource>() != null;
         
         Quaternion randomRotation = Random.rotation;
@@ -40,23 +37,27 @@ public class Meteor : MonoBehaviour {
     }
 
     private void Update() {
-        if(!worldBody.isGrounded)
-            visuals.transform.Rotate(rotation * rotationMultiplier);
+		if (worldBody.isGrounded) { return; }
+		visuals.transform.Rotate(rotation * rotationMultiplier);
     }
 
     private void OnWorldImpact() {
         canDamage = false;
-        //TODO: play meteor impact sound
-        //TODO: show impact particles
-        onImpact?.Invoke();
         
         AkSoundEngine.PostEvent(impactSoundTrigger, gameObject);
 
         if (!containsResource) {
             Destroy(gameObject);
-            //TODO: show destroy meteor particles
         }
-    }
+
+		if (light != null) {
+			Destroy(light);
+		}
+
+		ShowImpactParticles();
+
+		onImpact?.Invoke();
+	}
 
 	public void CollideRocket() {
 		ShowImpactParticles();
@@ -71,9 +72,4 @@ public class Meteor : MonoBehaviour {
         }
     }
 
-    private void DestroyLight() {
-        if(light != null) {
-            Destroy(light);
-        }
-    }
 }

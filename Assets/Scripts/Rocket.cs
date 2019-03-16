@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
-using UnityEditor;
 using UnityEngine;
 
 public class Rocket : MonoBehaviour {
@@ -155,6 +152,7 @@ public class Rocket : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 
+#if UNITY_EDITOR
 	private void OnDrawGizmos() {
 		Gizmos.color = Color.grey;
 		Gizmos.DrawWireCube(transform.position + transform.up * collisionYOffset, new Vector3(0.2f, 0.1f));
@@ -162,7 +160,8 @@ public class Rocket : MonoBehaviour {
 		if(boxCollider == null) { return; }
 		Gizmos.color = Color.red;
 		Vector2 meteorCheckPosition = transform.position + transform.up * boxCollider.offset.y;
-		DebugUtils.DrawBoxCast2D(meteorCheckPosition, boxCollider.size, transform.rotation.eulerAngles.z, Vector2.zero, 0f, Color.red);
+		DefaultNamespace.DebugUtils.DrawBoxCast2D(meteorCheckPosition, boxCollider.size, transform.rotation.eulerAngles.z, Vector2.zero, 0f, Color.red);
 	}
+#endif
 
 }
