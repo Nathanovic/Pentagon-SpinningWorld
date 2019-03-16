@@ -4655,7 +4655,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 906391847b84e7c438d89133f3988168, type: 2}
+  - {fileID: 2100000, guid: 0ab361085d2b92a4ea9b164bbec2af26, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4831,18 +4831,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3929356068001380965}
     m_Modifications:
-    - target: {fileID: 100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
-      propertyPath: m_Name
-      value: visuals
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -4898,6 +4886,18 @@ PrefabInstance:
     - target: {fileID: 400000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
       propertyPath: m_LocalScale.z
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
+      propertyPath: m_Name
+      value: visuals
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
