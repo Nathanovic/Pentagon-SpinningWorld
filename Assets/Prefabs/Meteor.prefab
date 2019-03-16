@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 959830211660397143}
   - component: {fileID: 3699760501238256845}
   - component: {fileID: 8075340893517652772}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: vfx_meteorImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4725,7 +4725,7 @@ GameObject:
   - component: {fileID: 1622568324367591654}
   - component: {fileID: 2962378045472480120}
   - component: {fileID: 8351391415613289643}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Meteor
   m_TagString: Meteor
   m_Icon: {fileID: 0}
@@ -4834,6 +4834,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
       propertyPath: m_Name
       value: visuals
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
       propertyPath: m_LocalPosition.x
