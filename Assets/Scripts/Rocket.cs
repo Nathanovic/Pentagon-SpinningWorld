@@ -79,10 +79,11 @@ public class Rocket : MonoBehaviour {
 				continue;
 			}
 
-			if (meteor.isGrounded && groundedResourceCollision) { continue; }
-
 			Resource resource = collider.GetComponent<Resource>();
 			if (resource == null) { continue; }
+
+			if (groundedResourceCollision && meteor.isGrounded && !resource.isHeld) { continue; }
+
 			DeliverResource (resource);
 			resource.Deliver();
 		}
