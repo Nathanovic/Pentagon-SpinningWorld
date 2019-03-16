@@ -4721,7 +4721,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3929356068001380965}
   - component: {fileID: 9202927796035233542}
-  - component: {fileID: 4472797883804109122}
   - component: {fileID: 1622568324367591654}
   - component: {fileID: 2962378045472480120}
   - component: {fileID: 8351391415613289643}
@@ -4756,19 +4755,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8308253850022020214}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &4472797883804109122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8308253850022020214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d4b089972aacda4cb8e9e52708e884b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGrounded: 0
 --- !u!114 &1622568324367591654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4805,8 +4791,8 @@ MonoBehaviour:
   pointLight: {fileID: 0}
   visuals: {fileID: 8904767949720783140}
   light: {fileID: 0}
-  rotationMultiplier: 1
   velocityMultiplier: 1
+  canDamage: 1
   impactSoundTrigger: Meteor_Impact
 --- !u!58 &8351391415613289643
 CircleCollider2D:
@@ -4831,6 +4817,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3929356068001380965}
     m_Modifications:
+    - target: {fileID: 100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
+      propertyPath: m_Name
+      value: visuals
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -4886,18 +4884,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
       propertyPath: m_LocalScale.z
       value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
-      propertyPath: m_Name
-      value: visuals
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
-      propertyPath: m_Layer
-      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efafa9caa4d99864eac680f9ee077f2c, type: 3}
