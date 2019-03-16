@@ -9,5 +9,5 @@
   <SoundbankPath>Audio/GeneratedSoundBanks</SoundbankPath>
   <WwiseInstallationPathMac />
   <WwiseInstallationPathWindows>C:\Program Files (x86)\Audiokinetic\Wwise 2018.1.2.6762</WwiseInstallationPathWindows>
-  <WwiseProjectPath>../../Gamejam preparations/Gamejam preparations.wproj</WwiseProjectPath>
+  <WwiseProjectPath>../../_Gamejam_Audio/Gamejam preparations/Gamejam preparations.wproj</WwiseProjectPath>
 </WwiseSettings>
