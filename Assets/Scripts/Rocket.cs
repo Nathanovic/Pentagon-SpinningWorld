@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
-using UnityEditor;
 using UnityEngine;
 
 public class Rocket : MonoBehaviour {
@@ -31,6 +28,7 @@ public class Rocket : MonoBehaviour {
 	public int rocketHealth { get; private set; }
 	public int meteorDamage = 50;
 
+	public LayerMask meteorLM;
 	public Transform deadVFXParent;
 	private Vector3 deadVFXLocalPosition;
 	private Quaternion deadVFXLocalRotation;
@@ -66,18 +64,20 @@ public class Rocket : MonoBehaviour {
 	}
 
 	private void Update() {
-		RaycastHit2D[] raycastHits = Physics2D.BoxCastAll(transform.position, new Vector2(boxCollider.size.x, boxCollider.size.y * 2), transform.rotation.eulerAngles.z, Vector2.zero, 1);
-		foreach (RaycastHit2D hit2D in raycastHits) {
-			if(hit2D.collider == boxCollider) continue;
-			if (hit2D.transform.CompareTag("Meteor")) {
-				Resource resource = hit2D.collider.GetComponent<Resource>();
-				if (resource == null || !resource.isHeld) {
-					hit2D.collider.GetComponent<Meteor>().CollideRocket();
-					ChangeHealth(-meteorDamage);
-				}
-			}
+		// Check for meteor damage
+		Vector2 meteorCheckPosition = transform.position + transform.up * boxCollider.offset.y;
+		Collider2D[] overlappingMeteors = Physics2D.OverlapBoxAll(meteorCheckPosition, boxCollider.size, transform.rotation.eulerAngles.z, meteorLM);
+		foreach (Collider2D collider in overlappingMeteors) {
+			if (!collider.CompareTag("Meteor")) { continue; }
+			Meteor meteor = collider.GetComponent<Meteor>();
+			if (meteor == null) { continue; }
+			if (!meteor.canDamage) { continue; }
+			
+			meteor.CollideRocket();
+			ChangeHealth(-meteorDamage);
 		}
 		
+		// Check for rocket launch
 		if (isLaunched) {
 			float acceleration = launchPower;
 			if (currentSpeed < finishLiftOffSpeed) {
@@ -95,7 +95,6 @@ public class Rocket : MonoBehaviour {
 		AkSoundEngine.PostEvent("Rocket_Launch", gameObject);
 		StartCoroutine(launchAfterSeconds(2));
 	}
-
 
 	private IEnumerator launchAfterSeconds(float seconds) {
 		yield return new WaitForSeconds(seconds);
@@ -153,13 +152,16 @@ public class Rocket : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 
+#if UNITY_EDITOR
 	private void OnDrawGizmos() {
 		Gizmos.color = Color.grey;
 		Gizmos.DrawWireCube(transform.position + transform.up * collisionYOffset, new Vector3(0.2f, 0.1f));
 		
+		if(boxCollider == null) { return; }
 		Gizmos.color = Color.red;
-		//DefaultNamespace.DebugUtils.DrawBoxCast2D(transform.position, new Vector2(boxCollider.size.x, boxCollider.size.y * 2), transform.rotation.eulerAngles.z, Vector2.zero, 1, Color.red);
-
+		Vector2 meteorCheckPosition = transform.position + transform.up * boxCollider.offset.y;
+		DefaultNamespace.DebugUtils.DrawBoxCast2D(meteorCheckPosition, boxCollider.size, transform.rotation.eulerAngles.z, Vector2.zero, 0f, Color.red);
 	}
+#endif
 
 }

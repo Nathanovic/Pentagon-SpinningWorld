@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class PlayerCollision : MonoBehaviour {
 
@@ -14,9 +13,10 @@ public class PlayerCollision : MonoBehaviour {
     public event CollisionFunction onFrontResourceHit;
     public event CollisionFunction onFallHit;
 
-	public delegate void RocketCollisionDelegate();
-	public event RocketCollisionDelegate onRocketCollisionEnter;
-	public event RocketCollisionDelegate onRocketCollisionExit;
+	public delegate void CollisionFrontDelegate(bool collideFront);
+	public event CollisionFrontDelegate onRocketCollisionEnter;
+	public delegate void CollisionDelegate();
+	public event CollisionDelegate onRocketCollisionExit;
 
 	private bool didTouchRocket;
 
@@ -67,41 +67,54 @@ public class PlayerCollision : MonoBehaviour {
 				onFrontResourceHit?.Invoke(resource);
 			}
 		}
-		
+
 		// Check if we collide with the rocket
-		if (!isCarryingResource) {
+		if (isCarryingResource) {
+			CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
+			float resourceSize = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
+			Collider2D rocketCollider = Physics2D.OverlapCircle(myResourceCollider.transform.position, resourceSize, rocketLM);
+			isTouchingRocket = TryRocketCollision(rocketCollider);
+			if (isTouchingRocket && isCarryingResource) {
+				resourceGatherer.DeliverResource();
+			}
+		}
+		else {
 			Collider2D rocketCollider = Physics2D.OverlapCircle(frontChecker.position, noseCollisionRadius, rocketLM);
 			isTouchingRocket = TryRocketCollision(rocketCollider);
 			if (isTouchingRocket) {
-				playRocketPushSound();
+				PlayRocketPushSound();
 				Collider2D touchedCollider = Rocket.instance.CollideOther(transform.position, noseCollisionRadius);
 				if (touchedCollider != null) {
 					isCollidingFront = true;
 				}
 			}
 		}
-		else {// Check if we hit anything with our carried resource
+
+		// Check if we collide with our resource
+		if (isCarryingResource) {
 			CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
-			float circleCastRadius = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
-			RaycastHit2D[] circleCasts = Physics2D.RaycastAll(myResourceCollider.transform.position, transform.right, circleCastRadius, defaultLM);
-			Debug.DrawRay(myResourceCollider.transform.position, transform.right * circleCastRadius, Color.black);
-			foreach (RaycastHit2D circleCast in circleCasts) {
-				Meteor collidingMeteor = GetResource(circleCast.collider);
-				isTouchingRocket = TryRocketCollision(circleCast.collider);
+			float resourceSize = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
+			Collider2D[] overlappingColliders = Physics2D.OverlapCircleAll(myResourceCollider.transform.position, resourceSize, defaultLM);
+			foreach (Collider2D collider in overlappingColliders) {
+				if(myResourceCollider == collider) { continue; }
+				Meteor collidingMeteor = GetResource(collider);
 				if (collidingMeteor != null && collidingMeteor.transform != myResourceCollider.transform) {
 					isCollidingFront = true;
-				} else if (isTouchingRocket) {
-					resourceGatherer.DeliverResource();					
-					playRocketPushSound();
 				}
 			}
 		}
 
-		if (didTouchRocket != isTouchingRocket) {
-			if (!didTouchRocket) {
-				onRocketCollisionEnter?.Invoke();
-			}else {
-				onRocketCollisionExit?.Invoke();
+		if (isCheckingFront) {
+			if (didTouchRocket != isTouchingRocket) {
+				//Debug.Log("Did-touch-rocket changed to: " + isTouchingRocket, transform);
+				if (isTouchingRocket) {
+					onRocketCollisionEnter?.Invoke(isCheckingFront);
+				}
+				else {
+					onRocketCollisionExit?.Invoke();
+				}
+
+				didTouchRocket = isTouchingRocket;
 			}
 		}
 
@@ -116,7 +129,7 @@ public class PlayerCollision : MonoBehaviour {
 		return meteor;
 	}
 
-	private void playRocketPushSound() {
+	private void PlayRocketPushSound() {
 		if (!isPlayingRocketLaunchSound) {
 			AkSoundEngine.PostEvent("Push_Rocket", gameObject);
 			isPlayingRocketLaunchSound = true;
@@ -151,7 +164,6 @@ public class PlayerCollision : MonoBehaviour {
     }
 
 	private bool TryRocketCollision(Collider2D collider) {
-		if (didTouchRocket) { return false; }
 		if (collider == null) { return false; }
 		if (!collider.CompareTag(TAG_ROCKET)) { return false; }
 		return true;

@@ -1,6 +1,4 @@
-﻿using System;
-using DefaultNamespace;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour {
 	
@@ -128,7 +126,8 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	private void OnRocketCollisionEnter() {
+	private void OnRocketCollisionEnter(bool isFrontCollision) {
+		if (!isFrontCollision) { return; }
 		collidingRocket = Rocket.instance;
 	}
 

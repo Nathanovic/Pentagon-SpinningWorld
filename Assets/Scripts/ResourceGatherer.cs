@@ -41,10 +41,11 @@ public class ResourceGatherer : MonoBehaviour {
         currentResource = null;
     }
 
-    void OnRocketHit() {
-        if(!hasResource) return;
-        
-        Destroy(currentResource.gameObject);
+    void OnRocketHit(bool isFrontCollision) {
+		if (!hasResource) { return; }
+		if (!isFrontCollision) { return; }
+
+		Destroy(currentResource.gameObject);
         currentResource = null;
     }
     
