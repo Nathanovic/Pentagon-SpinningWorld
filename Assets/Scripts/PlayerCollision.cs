@@ -25,10 +25,8 @@ public class PlayerCollision : MonoBehaviour {
 
     private ResourceGatherer resourceGatherer;
 	
-	public LayerMask resourceLM;
+	public LayerMask meteorLM;
 	public LayerMask rocketLM;
-	public LayerMask defaultLM;
-	public LayerMask deathLM;
 
 	private bool isPlayingRocketLaunchSound = false;
 
@@ -43,7 +41,7 @@ public class PlayerCollision : MonoBehaviour {
     public void EarlyUpdate() {
 		// Check for fall damage
 		Vector2 deadCheckPosition = transform.position + transform.up * deathCastYOffset;
-		Collider2D meteorCollider = Physics2D.OverlapCircle(deadCheckPosition, myCollider.radius, deathLM);
+		Collider2D meteorCollider = Physics2D.OverlapCircle(deadCheckPosition, myCollider.radius, meteorLM);
         if (meteorCollider != null && meteorCollider.CompareTag(TAG_METEOR)) {
 			Meteor meteor = meteorCollider.GetComponent<Meteor>();
 			if (meteor.canDamage) {
@@ -61,7 +59,7 @@ public class PlayerCollision : MonoBehaviour {
 
 		// Check if we can pick up resources
 		if (isCheckingFront && !isCarryingResource) {
-			Collider2D resourceCollider = Physics2D.OverlapCircle(frontChecker.position, noseCollisionRadius, resourceLM);
+			Collider2D resourceCollider = Physics2D.OverlapCircle(frontChecker.position, noseCollisionRadius, meteorLM);
 			Meteor resource = GetResource(resourceCollider);
 			if (resource != null && isCheckingFront) {
 				onFrontResourceHit?.Invoke(resource);
@@ -94,7 +92,7 @@ public class PlayerCollision : MonoBehaviour {
 		if (isCarryingResource) {
 			CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
 			float resourceSize = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
-			Collider2D[] overlappingColliders = Physics2D.OverlapCircleAll(myResourceCollider.transform.position, resourceSize, defaultLM);
+			Collider2D[] overlappingColliders = Physics2D.OverlapCircleAll(myResourceCollider.transform.position, resourceSize, meteorLM);
 			foreach (Collider2D collider in overlappingColliders) {
 				if(myResourceCollider == collider) { continue; }
 				Meteor collidingMeteor = GetResource(collider);

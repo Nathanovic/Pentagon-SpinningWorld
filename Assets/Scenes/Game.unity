@@ -378,6 +378,11 @@ PrefabInstance:
       propertyPath: defaultLM.m_Bits
       value: 2049
       objectReference: {fileID: 0}
+    - target: {fileID: 7141378799432911054, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: meteorLM.m_Bits
+      value: 4096
+      objectReference: {fileID: 0}
     - target: {fileID: 1679609697869018888, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
       propertyPath: m_RootOrder
@@ -1067,6 +1072,9 @@ MonoBehaviour:
   rocketMaxHealth: 100
   rocketStartHealth: 10
   meteorDamage: 20
+  meteorLM:
+    serializedVersion: 2
+    m_Bits: 4096
   deadVFXParent: {fileID: 1769075026}
 --- !u!61 &254548528
 BoxCollider2D:
@@ -1177,18 +1185,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noseCollisionRadius: 0.05
   deathCastYOffset: 0.2
-  resourceLM:
+  meteorLM:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4096
   rocketLM:
     serializedVersion: 2
     m_Bits: 2048
-  defaultLM:
-    serializedVersion: 2
-    m_Bits: 2049
-  deathLM:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!114 &274505143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25841,18 +25843,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noseCollisionRadius: 0.1
   deathCastYOffset: 0.4
-  resourceLM:
+  meteorLM:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4096
   rocketLM:
     serializedVersion: 2
     m_Bits: 2048
-  defaultLM:
-    serializedVersion: 2
-    m_Bits: 2049
-  deathLM:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!114 &909667447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47237,6 +47233,11 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultLM.m_Bits
       value: 2049
+      objectReference: {fileID: 0}
+    - target: {fileID: 7141378799432911054, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: meteorLM.m_Bits
+      value: 4096
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}
