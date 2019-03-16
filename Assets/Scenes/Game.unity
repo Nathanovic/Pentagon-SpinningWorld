@@ -3250,10 +3250,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab1: {fileID: 8308253850022020214, guid: 3e2066fe5eb129a4dbd72345e0323877,
     type: 3}
-  meteorPrefab2: {fileID: 8594143552847923080, guid: 490fe2c8a23b987459f4729ec3dffba1,
+  meteorPrefab2: {fileID: 4329303402749056334, guid: 2a5fdd4fc423d0d4890d6e6fa22c5fec,
     type: 3}
-  spawnChangeMeteor1: 0.8
-  spawnChangeMeteor2: 0.2
+  spawnChangeMeteor1: 0.5
+  spawnChangeMeteor2: 0.5
   spawnInterval: 1.5
   offset: 25
   zOffset: -1.5

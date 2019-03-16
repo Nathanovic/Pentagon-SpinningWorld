@@ -2,6 +2,7 @@
 using Random = UnityEngine.Random;
 
 public class Meteor : MonoBehaviour {
+    private MeteorTrail meteorTrailScr;
     private WorldBody worldBody;
     public bool containsResource;
     public ParticleSystem vfxImpact;
@@ -20,6 +21,9 @@ public class Meteor : MonoBehaviour {
     public string impactSoundTrigger = "Meteor_Impact";
     
     private void Start() {
+        if(GetComponent<MeteorTrail>() != null) {
+            meteorTrailScr = GetComponent<MeteorTrail>();
+        }
         worldBody = GetComponent<WorldBody>();
         worldBody.minSpeed *= velocityMultiplier;
         worldBody.maxSpeed *= velocityMultiplier;
@@ -52,6 +56,10 @@ public class Meteor : MonoBehaviour {
 		if (light != null) {
 			Destroy(light);
 		}
+
+        if(meteorTrailScr != null) {
+            meteorTrailScr.OnWorldImpact();
+        }
 
 		ShowImpactParticles();
 
