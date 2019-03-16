@@ -1107,7 +1107,7 @@ MonoBehaviour:
   collisionXOffset: 0.3
   collisionLM:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 5121
   rocketMaxHealth: 100
   rocketStartHealth: 10
   meteorDamage: 20
@@ -1115,6 +1115,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   deadVFXParent: {fileID: 1323943145807652755}
+  groundedResourceCollision: 1
 --- !u!61 &254548528
 BoxCollider2D:
   m_ObjectHideFlags: 0

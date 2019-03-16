@@ -38,6 +38,8 @@ public class Rocket : MonoBehaviour {
 	private Vector3 startPos;
 	private Quaternion startRot;
 
+	public bool groundedResourceCollision = true;
+
 	private void Awake() {
 		instance = this;
 		startPos = transform.localPosition;
@@ -76,6 +78,8 @@ public class Rocket : MonoBehaviour {
 				ChangeHealth(-meteorDamage);
 				continue;
 			}
+
+			if (meteor.isGrounded && groundedResourceCollision) { continue; }
 
 			Resource resource = collider.GetComponent<Resource>();
 			if (resource == null) { continue; }
