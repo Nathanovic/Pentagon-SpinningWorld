@@ -89,7 +89,7 @@ public class PlayerCollision : MonoBehaviour {
 		}
 
 		// Check if we collide with our resource
-		if (isCarryingResource) {
+		if (isCarryingResource && isCheckingFront) {
 			CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
 			float resourceSize = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
 			Collider2D[] overlappingColliders = Physics2D.OverlapCircleAll(myResourceCollider.transform.position, resourceSize, meteorLM);

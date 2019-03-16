@@ -12,15 +12,14 @@ public class Meteor : MonoBehaviour {
     public delegate void ImpactFunction();
     public event ImpactFunction onImpact;
 
-    private Vector3 rotation;
-    public float rotationMultiplier = 1.0f;
+    private Vector3 rotateDirection;
+    private float rotationMultiplier = 1.0f;
     public float velocityMultiplier = 1.0f;
 
-    public bool canDamage { private set; get; }
+	public bool canDamage = true;
     public string impactSoundTrigger = "Meteor_Impact";
     
     private void Start() {
-        canDamage = true;
         worldBody = GetComponent<WorldBody>();
         worldBody.minSpeed *= velocityMultiplier;
         worldBody.maxSpeed *= velocityMultiplier;
@@ -29,7 +28,7 @@ public class Meteor : MonoBehaviour {
         containsResource = GetComponent<Resource>() != null;
         
         Quaternion randomRotation = Random.rotation;
-        rotation = new Vector3(randomRotation.x, randomRotation.y, randomRotation.z);
+        rotateDirection = new Vector3(randomRotation.eulerAngles.x, randomRotation.eulerAngles.y, randomRotation.eulerAngles.z);
     }
 
     private void OnDisable() {
@@ -38,7 +37,7 @@ public class Meteor : MonoBehaviour {
 
     private void Update() {
 		if (worldBody.isGrounded) { return; }
-		visuals.transform.Rotate(rotation * rotationMultiplier);
+		visuals.transform.Rotate(rotateDirection * rotationMultiplier * Time.deltaTime);
     }
 
     private void OnWorldImpact() {
@@ -57,6 +56,10 @@ public class Meteor : MonoBehaviour {
 		ShowImpactParticles();
 
 		onImpact?.Invoke();
+	}
+
+	public void SetRotateMultiplier(float rotationMultiplier) {
+		this.rotationMultiplier = rotationMultiplier;
 	}
 
 	public void CollideRocket() {

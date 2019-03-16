@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class MeteorSpawner : MonoBehaviour {
@@ -57,6 +56,9 @@ public class MeteorSpawner : MonoBehaviour {
         meteorComponent.onImpact += () => {
             Screenshake.instance.StartShakeVertical(2, 0.02f * size * (speed2 + 5), 0.003f * size * (speed2 + 5));
         };
-        meteorComponent.rotationMultiplier = Random.Range(minMeteorRotationMultiplier, maxMeteorRotationMultiplier);
+
+		float rotateMultiplier = Random.Range(minMeteorRotationMultiplier, maxMeteorRotationMultiplier);
+		meteorComponent.SetRotateMultiplier(rotateMultiplier);
     }
+
 }

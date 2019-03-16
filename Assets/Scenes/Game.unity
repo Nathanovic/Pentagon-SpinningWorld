@@ -487,6 +487,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3663796909114355214, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -503,20 +508,15 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 3663796909114355214, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+    - target: {fileID: 1245031642381390902, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1029893335184748161, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1245031642381390902, guid: 70d6a3f5d74fe4d40bba923900e243c2,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1245031642381420566, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
@@ -3250,7 +3250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab1: {fileID: 8308253850022020214, guid: 3e2066fe5eb129a4dbd72345e0323877,
     type: 3}
-  meteorPrefab2: {fileID: 4329303402749056334, guid: 2a5fdd4fc423d0d4890d6e6fa22c5fec,
+  meteorPrefab2: {fileID: 8594143552847923080, guid: 490fe2c8a23b987459f4729ec3dffba1,
     type: 3}
   spawnChangeMeteor1: 0.8
   spawnChangeMeteor2: 0.2
@@ -3260,8 +3260,8 @@ MonoBehaviour:
   timeTillSpawn: 0
   maxMeteorFallingSpeed: 2
   minMeteorFallingSpeed: 1
-  minMeteorRotationMultiplier: 1
-  maxMeteorRotationMultiplier: 3
+  minMeteorRotationMultiplier: 0.5
+  maxMeteorRotationMultiplier: 1.5
   minMeteorScale: 0.75
   maxMeteorScale: 1.5
 --- !u!4 &1323943145807652755
