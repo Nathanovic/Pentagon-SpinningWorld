@@ -13,13 +13,13 @@ public class Player : MonoBehaviour {
 	public float slowDownForce = 10f;
 
 	private bool isFacingLeft = true;
-	private bool isDead;
+	public bool isDead { get; private set; }
 
 	private bool drivingSoundIsPlaying = false;
 
 	public PlayerCollision collisionScript { get; private set; }
 	[SerializeField] private GameObject carVisual;
-	private new Collider2D collider;
+	[SerializeField] private GameObject deadVisuals;
 	[SerializeField] private ParticleSystem[] deadVFX;
 
 	public Transform frontColliderCheck;
@@ -33,7 +33,6 @@ public class Player : MonoBehaviour {
 
 	private void Awake() {
 		collisionScript = GetComponent<PlayerCollision>();
-		collider = GetComponent<Collider2D>();
 		collisionScript.onFallHit += OnFallHit;
 		collisionScript.onRocketCollisionEnter += OnRocketCollisionEnter;
 		collisionScript.onRocketCollisionExit += OnRocketCollisionExit;
@@ -42,18 +41,20 @@ public class Player : MonoBehaviour {
 		startDir = World.Instance.transform.InverseTransformDirection(transform.forward);
 	}
 
-	private void Start(){
+	private void Start() {
 		GameManager.Instance.InitializePlayer(this);
 	}
 
-	public void Revive() {
+	public void Revive(bool isGameRestart) {
 		isDead = false;
 		carVisual.SetActive(true);
-		collider.enabled = true;
+		deadVisuals.SetActive(false);
 		currentSpeed = 0f;
 
-		transform.position = World.Instance.transform.TransformPoint(startPos);
-		transform.forward = World.Instance.transform.TransformDirection(startDir);
+		if (isGameRestart) {
+			transform.position = World.Instance.transform.TransformPoint(startPos);
+			transform.forward = World.Instance.transform.TransformDirection(startDir);
+		}
 	}
 
 	private void Update() {
@@ -152,7 +153,7 @@ public class Player : MonoBehaviour {
 		AkSoundEngine.PostEvent("Stop_Wagen_" + playerNumber, gameObject);
 		isDead = true;
 		carVisual.SetActive(false);
-		collider.enabled = false;
+		deadVisuals.SetActive(true);
 		Screenshake.instance.StartShakeHorizontal(2, 0.5f, 0.05f);
 		foreach (ParticleSystem deadEffect in deadVFX) {
 			deadEffect.Play();

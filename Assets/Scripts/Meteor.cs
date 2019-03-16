@@ -18,6 +18,7 @@ public class Meteor : MonoBehaviour {
     public float velocityMultiplier = 1.0f;
 
 	public bool canDamage = true;
+	public bool isGrounded { get; private set; }
     public string impactSoundTrigger = "Meteor_Impact";
     
     private void Start() {
@@ -46,8 +47,9 @@ public class Meteor : MonoBehaviour {
 
     private void OnWorldImpact() {
         canDamage = false;
-        
-        AkSoundEngine.PostEvent(impactSoundTrigger, gameObject);
+		isGrounded = true;
+
+		AkSoundEngine.PostEvent(impactSoundTrigger, gameObject);
 
         if (!containsResource) {
             Destroy(gameObject);

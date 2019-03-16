@@ -6,7 +6,8 @@ public class PlayerCollision : MonoBehaviour {
 	private const string TAG_ROCKET = "Rocket";
 
 	private Player player;
-	public float noseCollisionRadius = 0.2f;
+	public float resourceCollisionRadius = 0.2f;
+	public float rocketCollisionRadius = 0.05f;
 
     public delegate void CollisionFunction(Meteor meteor);
 
@@ -27,10 +28,13 @@ public class PlayerCollision : MonoBehaviour {
 	
 	public LayerMask meteorLM;
 	public LayerMask rocketLM;
+	public LayerMask playerLM;
 
 	private bool isPlayingRocketLaunchSound = false;
 
 	private bool isCarryingResource { get { return resourceGatherer.hasResource; } }
+
+	private Vector3 GIZ_frontCheckPosition;
 
 	private void Start() {
         resourceGatherer = GetComponent<ResourceGatherer>();
@@ -54,14 +58,13 @@ public class PlayerCollision : MonoBehaviour {
 		bool isCheckingFront = frontChecker.name.Contains("front");
 		bool isCollidingFront = false;
 		bool isTouchingRocket = false;
-
-		Debug.DrawRay(frontChecker.position, frontChecker.up * noseCollisionRadius, Color.red);
+		GIZ_frontCheckPosition = frontChecker.position;
 
 		// Check if we can pick up resources
 		if (isCheckingFront && !isCarryingResource) {
-			Collider2D resourceCollider = Physics2D.OverlapCircle(frontChecker.position, noseCollisionRadius, meteorLM);
+			Collider2D resourceCollider = Physics2D.OverlapCircle(frontChecker.position, resourceCollisionRadius, meteorLM);
 			Meteor resource = GetResource(resourceCollider);
-			if (resource != null && isCheckingFront) {
+			if (resource != null && isCheckingFront && resource.isGrounded) {
 				onFrontResourceHit?.Invoke(resource);
 			}
 		}
@@ -70,18 +73,21 @@ public class PlayerCollision : MonoBehaviour {
 		if (isCarryingResource) {
 			CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
 			float resourceSize = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
-			Collider2D rocketCollider = Physics2D.OverlapCircle(myResourceCollider.transform.position, resourceSize, rocketLM);
-			isTouchingRocket = TryRocketCollision(rocketCollider);
-			if (isTouchingRocket && isCarryingResource) {
-				resourceGatherer.DeliverResource();
+			Collider2D playerCollider = Physics2D.OverlapCircle(myResourceCollider.transform.position, resourceSize, playerLM);
+			if (playerCollider != null) {
+				Player otherPlayer = playerCollider.GetComponent<Player>();
+				if (otherPlayer.isDead) {
+					otherPlayer.Revive(false);
+					resourceGatherer.currentResource.Deliver();
+				}
 			}
 		}
 		else {
-			Collider2D rocketCollider = Physics2D.OverlapCircle(frontChecker.position, noseCollisionRadius, rocketLM);
+			Collider2D rocketCollider = Physics2D.OverlapCircle(frontChecker.position, rocketCollisionRadius, rocketLM);
 			isTouchingRocket = TryRocketCollision(rocketCollider);
 			if (isTouchingRocket) {
 				PlayRocketPushSound();
-				Collider2D touchedCollider = Rocket.instance.CollideOther(transform.position, noseCollisionRadius);
+				Collider2D touchedCollider = Rocket.instance.CollideOther(transform.position, rocketCollisionRadius);
 				if (touchedCollider != null) {
 					isCollidingFront = true;
 				}
@@ -115,7 +121,7 @@ public class PlayerCollision : MonoBehaviour {
 				didTouchRocket = isTouchingRocket;
 			}
 		}
-
+		
 		return isCollidingFront;
 	}
 
@@ -134,7 +140,23 @@ public class PlayerCollision : MonoBehaviour {
 		}
 	}
 
-    private void OnDrawGizmos() {
+	private Meteor GetMeteor(RaycastHit2D hitInfo, bool resourceOnly) {
+		if (hitInfo.collider != null && hitInfo.collider.CompareTag("Meteor")) {
+			Meteor meteor = hitInfo.collider.GetComponent<Meteor>();
+			if (!resourceOnly || meteor.containsResource) { return meteor; }
+		}
+
+		return null;
+	}
+
+	private bool TryRocketCollision(Collider2D collider) {
+		if (collider == null) { return false; }
+		if (!collider.CompareTag(TAG_ROCKET)) { return false; }
+		return true;
+	}
+
+#if UNITY_EDITOR
+	private void OnDrawGizmos() {
 		if (!Application.isPlaying) { return; }
 
 		Gizmos.color = Color.grey;
@@ -142,7 +164,7 @@ public class PlayerCollision : MonoBehaviour {
 		Gizmos.DrawWireSphere(deadCheckPosition, myCollider.radius);
 
 		Gizmos.color = Color.green;
-
+		Gizmos.DrawWireSphere(GIZ_frontCheckPosition, resourceCollisionRadius);
 
 		if (resourceGatherer.currentResource) {
 			Gizmos.color = Color.black;
@@ -151,20 +173,6 @@ public class PlayerCollision : MonoBehaviour {
                 myResourceCollider.radius * myResourceCollider.transform.localScale.x);
         }
     }
-
-    private Meteor GetMeteor(RaycastHit2D hitInfo, bool resourceOnly) {
-        if (hitInfo.collider != null && hitInfo.collider.CompareTag("Meteor")) {
-            Meteor meteor = hitInfo.collider.GetComponent<Meteor>();
-            if (!resourceOnly || meteor.containsResource) { return meteor; }
-        }
-
-        return null;
-    }
-
-	private bool TryRocketCollision(Collider2D collider) {
-		if (collider == null) { return false; }
-		if (!collider.CompareTag(TAG_ROCKET)) { return false; }
-		return true;
-	}
+#endif
 
 }

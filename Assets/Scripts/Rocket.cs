@@ -64,17 +64,23 @@ public class Rocket : MonoBehaviour {
 	}
 
 	private void Update() {
-		// Check for meteor damage
+		// Check for meteor damage & for falling resources
 		Vector2 meteorCheckPosition = transform.position + transform.up * boxCollider.offset.y;
 		Collider2D[] overlappingMeteors = Physics2D.OverlapBoxAll(meteorCheckPosition, boxCollider.size, transform.rotation.eulerAngles.z, meteorLM);
 		foreach (Collider2D collider in overlappingMeteors) {
 			if (!collider.CompareTag("Meteor")) { continue; }
 			Meteor meteor = collider.GetComponent<Meteor>();
 			if (meteor == null) { continue; }
-			if (!meteor.canDamage) { continue; }
-			
-			meteor.CollideRocket();
-			ChangeHealth(-meteorDamage);
+			if (meteor.canDamage) {
+				meteor.CollideRocket();
+				ChangeHealth(-meteorDamage);
+				continue;
+			}
+
+			Resource resource = collider.GetComponent<Resource>();
+			if (resource == null) { continue; }
+			DeliverResource (resource);
+			resource.Deliver();
 		}
 		
 		// Check for rocket launch

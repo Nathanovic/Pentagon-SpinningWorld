@@ -33,15 +33,17 @@ public class ResourceGatherer : MonoBehaviour {
         
         currentResource = resource;
         currentResource.PickUp(transform);
-        holdResourceCollider = currentResource.GetComponent<CircleCollider2D>();
+		currentResource.onDeliver += OnResourceDelivered;
+		holdResourceCollider = currentResource.GetComponent<CircleCollider2D>();
     }
 
     private void DropResource() {
-        currentResource.Drop();
+		currentResource.onDeliver -= OnResourceDelivered;
+		currentResource.Drop();
         currentResource = null;
     }
 
-    void OnRocketHit(bool isFrontCollision) {
+    private void OnRocketHit(bool isFrontCollision) {
 		if (!hasResource) { return; }
 		if (!isFrontCollision) { return; }
 
@@ -55,9 +57,8 @@ public class ResourceGatherer : MonoBehaviour {
         }
     }
 
-	public void DeliverResource() {
-		Rocket.instance.DeliverResource(currentResource);
-		currentResource.Deliver();
+	private void OnResourceDelivered() {
+		currentResource.onDeliver -= OnResourceDelivered;
 		currentResource = null;
 	}
 
