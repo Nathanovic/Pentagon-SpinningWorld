@@ -159,9 +159,10 @@ public class Rocket : MonoBehaviour {
 		Gizmos.color = Color.grey;
 		Gizmos.DrawWireCube(transform.position + transform.up * collisionYOffset, new Vector3(0.2f, 0.1f));
 		
+		if(boxCollider == null) { return; }
 		Gizmos.color = Color.red;
-		//DefaultNamespace.DebugUtils.DrawBoxCast2D(transform.position, new Vector2(boxCollider.size.x, boxCollider.size.y * 2), transform.rotation.eulerAngles.z, Vector2.zero, 1, Color.red);
-
+		Vector2 meteorCheckPosition = transform.position + transform.up * boxCollider.offset.y;
+		DebugUtils.DrawBoxCast2D(meteorCheckPosition, boxCollider.size, transform.rotation.eulerAngles.z, Vector2.zero, 0f, Color.red);
 	}
 
 }
