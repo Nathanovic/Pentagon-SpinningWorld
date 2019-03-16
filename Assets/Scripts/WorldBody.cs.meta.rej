@@ -1,8 +1,0 @@
-diff a/Assets/Scripts/WorldBody.cs.meta b/Assets/Scripts/WorldBody.cs.meta	(rejected hunks)
-@@ -1,5 +1,5 @@
- fileFormatVersion: 2
--guid: ca9bb6856723a70439c316a72780c0aa
-+guid: 464bd7b74bc6c674ba805716f8e6dea5
- MonoImporter:
-   externalObjects: {}
-   serializedVersion: 2
