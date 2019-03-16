@@ -1,0 +1,8 @@
+diff a/Assets/Scripts/Player.cs.meta b/Assets/Scripts/Player.cs.meta	(rejected hunks)
+@@ -1,5 +1,5 @@
+ fileFormatVersion: 2
+-guid: d2c2ec103faf48e4a9af3e52d9df96c4
++guid: 444c157c96e259f428039db56102ce9c
+ MonoImporter:
+   externalObjects: {}
+   serializedVersion: 2

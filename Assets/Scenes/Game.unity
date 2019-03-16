@@ -788,9 +788,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af49a06771f116749bdaa00977db10b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meteorPrefab1: {fileID: 8308253850022020214, guid: 400d2913b0aec8442ac08fcb6bb8bf3f,
+  meteorPrefab1: {fileID: 8308253850022020214, guid: 3e2066fe5eb129a4dbd72345e0323877,
     type: 3}
-  meteorPrefab2: {fileID: 4329303402749056334, guid: ad7be2963697ff84081411b54936828f,
+  meteorPrefab2: {fileID: 4329303402749056334, guid: 2a5fdd4fc423d0d4890d6e6fa22c5fec,
     type: 3}
   spawnChangeMeteor1: 0.8
   spawnChangeMeteor2: 0.2
@@ -46605,7 +46605,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1962445566
