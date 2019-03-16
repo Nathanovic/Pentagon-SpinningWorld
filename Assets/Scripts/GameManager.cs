@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour {
 	private bool isFading;
 
 	private List<Player> players = new List<Player>();
-	private int deadPlayerCount;
 	public float fadeDuration = 1f;
 
 	private void Awake() {
@@ -102,7 +101,6 @@ public class GameManager : MonoBehaviour {
 	}
 
     public void StartGame() {
-		deadPlayerCount = 0;
 		gameState = GameState.Playing;
 		menuScreen.Deactivate();
 		restartScreen.Deactivate();
@@ -111,7 +109,7 @@ public class GameManager : MonoBehaviour {
 		AkSoundEngine.SetState("Muziek", "Start");
 
 	    foreach (Player player in players) {
-			player.Revive();
+			player.Revive(true);
 		}
 
 		Rocket.instance.Initialize();
@@ -123,10 +121,12 @@ public class GameManager : MonoBehaviour {
 
 	public void NotifyPlayerDeath() {
 		if(gameState != GameState.Playing) { return; }
-		deadPlayerCount++;
-		if (deadPlayerCount >= players.Count) {
-			EnterRestartState();
+
+		foreach(Player player in players) {
+			if (!player.isDead) { return; }
 		}
+
+		EnterRestartState();
 	}
 
 	public void NotifyRocketDestroyed() {

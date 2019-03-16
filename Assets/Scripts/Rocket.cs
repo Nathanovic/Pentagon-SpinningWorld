@@ -79,7 +79,7 @@ public class Rocket : MonoBehaviour {
 
 			Resource resource = collider.GetComponent<Resource>();
 			if (resource == null) { continue; }
-			DeliverResource(resource);
+			DeliverResource (resource);
 			resource.Deliver();
 		}
 		

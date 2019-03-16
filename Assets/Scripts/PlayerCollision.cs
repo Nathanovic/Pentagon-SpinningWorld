@@ -28,6 +28,7 @@ public class PlayerCollision : MonoBehaviour {
 	
 	public LayerMask meteorLM;
 	public LayerMask rocketLM;
+	public LayerMask playerLM;
 
 	private bool isPlayingRocketLaunchSound = false;
 
@@ -63,13 +64,25 @@ public class PlayerCollision : MonoBehaviour {
 		if (isCheckingFront && !isCarryingResource) {
 			Collider2D resourceCollider = Physics2D.OverlapCircle(frontChecker.position, resourceCollisionRadius, meteorLM);
 			Meteor resource = GetResource(resourceCollider);
-			if (resource != null && isCheckingFront) {
+			if (resource != null && isCheckingFront && resource.isGrounded) {
 				onFrontResourceHit?.Invoke(resource);
 			}
 		}
 
 		// Check if we collide with the rocket
-		if (!isCarryingResource) {
+		if (isCarryingResource) {
+			CircleCollider2D myResourceCollider = resourceGatherer.holdResourceCollider;
+			float resourceSize = myResourceCollider.radius * myResourceCollider.transform.localScale.x;
+			Collider2D playerCollider = Physics2D.OverlapCircle(myResourceCollider.transform.position, resourceSize, playerLM);
+			if (playerCollider != null) {
+				Player otherPlayer = playerCollider.GetComponent<Player>();
+				if (otherPlayer.isDead) {
+					otherPlayer.Revive(false);
+					resourceGatherer.currentResource.Deliver();
+				}
+			}
+		}
+		else {
 			Collider2D rocketCollider = Physics2D.OverlapCircle(frontChecker.position, rocketCollisionRadius, rocketLM);
 			isTouchingRocket = TryRocketCollision(rocketCollider);
 			if (isTouchingRocket) {
