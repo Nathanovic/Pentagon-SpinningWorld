@@ -511,7 +511,7 @@ PrefabInstance:
     - target: {fileID: 1245031642381390902, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1029893335184748161, guid: 70d6a3f5d74fe4d40bba923900e243c2,
         type: 3}
@@ -1299,12 +1299,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424366834}
   m_CullTransparentMesh: 0
---- !u!1 &513082179 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1245031642381420566, guid: 70d6a3f5d74fe4d40bba923900e243c2,
-    type: 3}
-  m_PrefabInstance: {fileID: 7913547617020514774}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2826,7 +2820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 71dce66d39d2fb64f8a3ca4a52c9051b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17794,10 +17788,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 7913547616771107981, guid: 70d6a3f5d74fe4d40bba923900e243c2,
-        type: 3}
-      propertyPath: carVisual
-      value: 
-      objectReference: {fileID: 513082179}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}

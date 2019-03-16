@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8053162271868228259}
   - component: {fileID: 8520883568059974844}
   m_Layer: 12
-  m_Name: Resource
+  m_Name: MeteorResource
   m_TagString: Meteor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.27
+  m_Radius: 0.4
 --- !u!1001 &5960692813033370669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -160,15 +160,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: af6ebfcd581c910459acdbe5d9eba518, type: 3}
       propertyPath: m_LocalScale.x
-      value: 130
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: af6ebfcd581c910459acdbe5d9eba518, type: 3}
       propertyPath: m_LocalScale.y
-      value: 130
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: af6ebfcd581c910459acdbe5d9eba518, type: 3}
       propertyPath: m_LocalScale.z
-      value: 130
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: af6ebfcd581c910459acdbe5d9eba518, type: 3}
       propertyPath: m_Materials.Array.data[0]

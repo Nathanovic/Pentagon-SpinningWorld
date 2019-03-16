@@ -14,6 +14,9 @@ public class Resource : MonoBehaviour {
 
     private WorldBody worldBody;
 
+	public delegate void OnDeliverDelegate();
+	public event OnDeliverDelegate onDeliver;
+
     private void Awake() {
         worldBody = GetComponent<WorldBody>();
     }
@@ -35,5 +38,6 @@ public class Resource : MonoBehaviour {
 		Drop();
 		isDelivered = true;
 		Destroy(gameObject);
+		onDeliver?.Invoke();
 	}
 }

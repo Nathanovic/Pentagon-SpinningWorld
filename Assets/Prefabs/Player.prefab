@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4483594013654310692}
   m_LocalRotation: {x: -0, y: -0, z: 0.7485608, w: 0.66306627}
-  m_LocalPosition: {x: -0.76, y: 0.22, z: 0}
+  m_LocalPosition: {x: -0.542, y: 0.302, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7913547616771107978}
@@ -118,7 +118,7 @@ MonoBehaviour:
   currentSpeed: 0
   moveForce: 220
   slowDownForce: 75
-  carVisual: {fileID: 0}
+  carVisual: {fileID: 1245031642381420566}
   deadVFX:
   - {fileID: 8769004862243016023}
   - {fileID: 8769004862680682099}
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dda4e08706690e4ab074ef45aebb19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noseCollisionRadius: 0.05
+  noseCollisionRadius: 0.2
   deathCastYOffset: 0.2
   meteorLM:
     serializedVersion: 2
@@ -14369,10 +14369,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: vehicle_red_1
       objectReference: {fileID: 0}
-    - target: {fileID: 100024, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -14419,6 +14415,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
+--- !u!1 &1245031642381420566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100024, guid: 4aacd977383d1aa45b9ce2afd992435f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1245031642381520558}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1245031642381390902 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400024, guid: 4aacd977383d1aa45b9ce2afd992435f,
