@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 161172660}
   - component: {fileID: 161172664}
   m_Layer: 9
-  m_Name: World
+  m_Name: Mars
   m_TagString: World
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1799,7 +1799,7 @@ GameObject:
   - component: {fileID: 531406410}
   - component: {fileID: 531406412}
   - component: {fileID: 531406411}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Vehicle_blue_1_pCylinder11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40768,6 +40768,83 @@ Transform:
   m_Father: {fileID: 254548526}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1542332114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1542332115}
+  - component: {fileID: 1542332117}
+  - component: {fileID: 1542332116}
+  m_Layer: 0
+  m_Name: mars_decimated1:Group30335 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1542332115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542332114}
+  m_LocalRotation: {x: 0.033961732, y: 0.00016947462, z: -0.0044006105, w: 0.9994135}
+  m_LocalPosition: {x: 0, y: 0, z: -1.04}
+  m_LocalScale: {x: 0.95, y: 0.95, z: -0.95}
+  m_Children: []
+  m_Father: {fileID: 506235595}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 3.8930001, y: 0.002, z: -0.504}
+--- !u!23 &1542332116
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542332114}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4b5c37af0a59763468d5981e2a47f11e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1542332117
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542332114}
+  m_Mesh: {fileID: 4300000, guid: bcd03f521ff289f4f924c937fb206160, type: 3}
 --- !u!1001 &1625062624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40780,6 +40857,10 @@ PrefabInstance:
       value: vehicle_red_1
       objectReference: {fileID: 0}
     - target: {fileID: 100024, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100026, guid: 4aacd977383d1aa45b9ce2afd992435f, type: 3}
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
@@ -46952,6 +47033,11 @@ PrefabInstance:
         type: 3}
       propertyPath: meteorLM.m_Bits
       value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 3663796909113930284, guid: 70d6a3f5d74fe4d40bba923900e243c2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d6a3f5d74fe4d40bba923900e243c2, type: 3}
