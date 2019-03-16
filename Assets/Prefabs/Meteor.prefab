@@ -4655,7 +4655,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 12fa7af424c2f1e449300e53f3c4a487, type: 2}
+  - {fileID: 2100000, guid: 906391847b84e7c438d89133f3988168, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4807,7 +4807,6 @@ MonoBehaviour:
   light: {fileID: 0}
   rotationMultiplier: 1
   velocityMultiplier: 1
-  canDamage: 0
   impactSoundTrigger: Meteor_Impact
 --- !u!58 &8351391415613289643
 CircleCollider2D:
